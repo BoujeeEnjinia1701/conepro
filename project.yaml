@@ -1,0 +1,17 @@
+# Card metadata consumed by https://amishchadha.com
+name: ConePro
+slug: conepro
+area: Situational Field Hardware
+status: concept          # concept | design | prototype | tested | released
+shortlisted: false
+pitch: >-
+  Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.
+problem: >-
+  Early site assessments need soil bearing data, but lab geotech is slow.
+budget_usd: 400
+difficulty: 3  # 1 easiest, 5 hardest
+hero_image: media/hero.png
+licenses:
+  hardware: CERN-OHL-S-2.0
+  software: MIT
+tags: [situational-field-hardware, open-hardware, cern-ohl-s]
