@@ -6,29 +6,33 @@
 
 Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.
 
+![ConePro concept](media/hero.png)
+
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+
 ## Problem
 
-Early site assessments need soil bearing data, but lab geotech is slow.
+Early site assessments need soil bearing data, but lab geotech is slow. The manual dynamic cone penetrometer (ASTM D6951) is fast and cheap but needs two people, a rule and hand-written records, and existing instrumented penetrometers are closed and costly. Full problem statement: [docs/01-problem.md](docs/01-problem.md)
 
 ## Concept
 
-Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.
+Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows with a Hall-effect sensor at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. Estimated at about 15 kg and about $296 in parts. Results are for screening, not foundation design.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
 ## Key components
 
-- Hardened steel rod and cone
-- 8 kg drop hammer
-- Linear encoder or laser rangefinder
-- Hall-effect blow counter
-- BLE logger
+- Hardened 20 mm, 60 degree cone and 16 mm steel rods
+- 8 kg drop hammer with a 575 mm drop
+- Draw-wire depth sensor on a ground reference plate (laser rangefinder as the fallback)
+- Hall-effect blow sensor at the anvil
+- BLE logger on three AA cells
 
 The working bill of materials is in [bom/bom.csv](bom/bom.csv).
 
 ## Safety
 
-> Confirm utility locates before driving any rod into the ground.
+> **Safety:** Confirm utility locates before driving any rod into the ground. The 8 kg hammer can crush fingers, so keep hands on the handle only; wear safety glasses and hearing protection. ConePro results are indicative and must not be used on their own for foundation design. See the safety section of [docs/02-concept.md](docs/02-concept.md).
 
 ## Repository layout
 
