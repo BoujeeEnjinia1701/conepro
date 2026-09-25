@@ -2,12 +2,21 @@
 name: ConePro
 slug: conepro
 area: Situational Field Hardware
-trl: 2                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
+trl: 3                   # Technology Readiness Level, see .kit/STANDARDS.md section 9
 trl_target: 3
 trl_evidence:
   - docs/01-problem.md
   - docs/02-concept.md
   - docs/03-requirements.md
+  - docs/decisions/0001-trl2-review-decisions.md
+  - docs/04-calcs/01-sizing.md
+  - docs/04-calcs/sizing.py
+  - cad/src/model.py
+  - cad/step/conepro-assembly.step
+  - cad/stl/conepro-assembly.stl
+  - cad/drawings/CNP-DWG-001.svg
+  - cad/drawings/CNP-DWG-001.pdf
+  - bom/bom.csv
 shortlisted: false
 pitch: >-
   Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.

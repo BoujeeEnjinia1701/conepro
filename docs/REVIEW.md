@@ -63,3 +63,63 @@ Requirements not met or at risk:
 ### Recommended next step
 
 Review this note and the media, then decide items 1 to 3. If approved, run `/advance-trl3` to calculate the draw-wire error budget, anvil shock, blow energy transfer and mass roll-up, and to produce the parametric model and drawing sheet.
+
+## Session 2026-09-25: TRL 3
+
+Amish approved the TRL 2 review on 2026-09-25 ("proceed with all of your recommendations across all batches. Make sure we don't proceed to TRL 4 on any of them."). This session ran `/advance-trl3` and stopped at TRL 3.
+
+### What was done
+
+- `docs/decisions/0001-trl2-review-decisions.md` (CNP-DDR-001 v0.1): the eight TRL 2 items with a recommendation recorded as "Decided by Amish, 2026-09-25: go with recommendation" (D1 to D8); the co-design partner (O1) left open.
+- `docs/04-calcs/01-sizing.md` (CNP-CAL-001 v0.1) and `docs/04-calcs/sizing.py`: geometry, blow energy, mass, range, draw-wire error budget, tilt error, wire slack dynamics, magnet field, shock, tilt, storage, test time, extraction force, power and cost, with a results table for R1 to R15. The script imports the model and the BOM and prints every number the note quotes.
+- `cad/src/model.py`: parametric build123d model (ASTM geometry, derived hammer length and upper rod, plate, reel, clamp and arm, band-clamped sensor pad, logger, cable). Exports `cad/step/` and `cad/stl/` for `conepro-assembly`, `hammer-assembly`, `drive-train` and `sensor-set`.
+- `cad/src/sheets.py` and `cad/drawings/CNP-DWG-001.svg`, `.pdf`, `.png`: general arrangement at Rev P1, front, top and right views at 1:20, detail A (anvil, sensor pad and clamp) at 1:5, isometric view and a dimension table, marked "CONCEPT, NOT FOR FABRICATION" and "PRELIMINARY, NOT FOR FABRICATION". The concept sheet keeps CNP-DWG-010, so DWG-001 was free.
+- `bom/bom.csv`: 15 lines, all priced, with supplier types; `bom/bom-notes.md` updated.
+- `cad/src/concept_media.py` now renders from `model.py`; `media/` refreshed (hero, blueprint, exploded, flow with the new energy split, GLB and viewer). All images were inspected; no `media/_views*` folders remain.
+- CNP-PRB-001, CNP-PRC-001 and CNP-REQ-001 revised to v0.3; `project.yaml` at `trl: 3`, `trl_target: 3` with the evidence files; `README.md` updated. Pitch, problem and `budget_usd` ($400) unchanged, since the review recommended no change to them.
+- Citations checked online: ASTM D6951 geometry and the CBR correlations, Scala (1956), Webster, Grau and Williams (GL-92-3, DTIC ADA251960), ORN 8 and PANDA were confirmed. Kleyn's report number was wrong (L2/74); it is L2/75, now corrected. The ORN 8 title and publisher (TRRL) were corrected. Scala's volume and issue number were not confirmed. Commercial prices for instrumented penetrometers are still unchecked.
+
+### Requirements summary (CNP-CAL-001)
+
+7 met, 2 at risk, 2 not met, 4 not verifiable at TRL 3.
+
+| ID | Status | Key number |
+| --- | --- | --- |
+| **R5** | **Not met** (1,000 mm clause) | 938 mm stroke, 850 mm usable; no extension rod in the BOM |
+| **R10** | **Not met** (total mass) | 16.7 kg carried in the bag against 16 kg; heaviest piece 9.8 kg and packed length 1.08 m are met |
+| R2 | At risk | Bench error ±0.98 mm worst case, ±0.49 mm RSS against ±1 mm; a 2 degree lean adds up to 1.8 mm at 850 mm |
+| R11 | At risk | About 1,400 to 5,400 g mean at the anvil; about 533 g on the isolated pad; cable and connector fatigue not calculated |
+| R1, R4, R6, R8, R9, R12, R13 | Met | 8.00 kg and 575 mm; record at 0.21 s; tilt ±0.3 degree; 830 tests; 8.1 to 11.7 min; 40 h; $321 |
+| R3, R7, R14, R15 | Not verifiable at TRL 3 | Blow sequence, app and retrofit fit need hardware |
+
+Other findings: about 27.6 J reaches the cone, not 33 J as estimated at TRL 2; the impact at the anvil is thousands of g, not hundreds; the draw-wire goes slack for 5 to 36 ms after each blow, and with a rigid eye the snap tension could reach 291 N at 50 mm per blow, near or above the breaking load of the wire.
+
+### Decisions recorded (CNP-DDR-001)
+
+D1 accelerometer tilt sensing with a bubble level backup; D2 optional lever extraction, outside the BOM total; D3 sensor set designed to fit standard DCPs, complete instrument for the prototype; D4 draw-wire depth with a time-of-flight fallback; D5 standard 8 kg geometry; D6 Hall blow detection with cross-checks; D7 electronics on the plate; D8 three AA cells. The SwapCell cross-cutting decisions do not apply (ConePro uses AA cells).
+
+### Proposed, awaiting Amish
+
+1. **First co-design partner and user group (O1).** No recommendation; to be picked per area later.
+2. **R10 mass (new).** (a) a 0.40 kg bag, an aluminum clamp and arm, and a 6 mm plate, giving about 15.7 kg; (b) redefine R10 to exclude the bag (15.9 kg); (c) relax R10 to 17 kg. Recommendation: (a).
+3. **R5 extension rod (new).** (a) add a 500 mm extension rod (about $15, 0.79 kg; total 16.4 kg even with item 2a, so R10 fails again); (b) relax R5 to 850 mm per rod and offer the extension rod as a separately carried accessory; (c) a longer lower rod (breaks the 1.1 m packed length). Recommendation: (b).
+4. **Draw-wire reel details (new).** A metal single-layer grooved drum, a groove keeper and a preloaded eye spring (8 N, 2 N/mm), already in BOM line 8, and a usable range of 850 mm because of the tilt error near the end of the stroke. Recommendation: accept; the alternative is the bought industrial draw-wire sensor at higher cost.
+5. **Stiff ground extraction (new).** The upper bound on the pull force is 5.5 kN at 5 mm per blow, beyond the 3 kN lever. Recommendation: note the disposable-cone practice for stiff ground in the user guidance; no hardware change now.
+
+### Safety concerns
+
+- Buried services struck by the rod: utility locate before every test.
+- Crushed fingers between the hammer and the anvil; the sensor pad sits 8 mm under the hammer overhang, a new pinch point.
+- Chipping and spalling of hardened steel faces under impacts of thousands of g: eye protection and face inspection.
+- Strong magnets in the hammer (implanted medical devices) and a draw-wire that can whip if it breaks.
+- Impact noise (level not estimated), back strain from lifting, and extraction forces that can exceed 3 kN in stiff ground.
+- Misuse of indicative CBR results for foundation design.
+
+### Problems and gaps
+
+- No existing TRL 4 material was found (no tests, build procedures or firmware); `build-log/README.md` is the scaffold only.
+- R3, R7, R14 and R15 cannot be shown on paper. The magnet field ignores the steel hammer, and the restitution, isolator and wire-stretch values are assumptions.
+
+### Recommended next step
+
+TRL 4 is on hold by Amish's instruction; do not start it. The next step is for Amish to decide items 1 to 5 above, after which CNP-REQ-001 and the BOM can be revised within TRL 3. For the record, TRL 4 would need: a bench build of the instrument, a test plan and report (TST, `environment: lab`) covering the draw-wire error against a steel rule, a 200-blow detection sequence, a 10,000-blow drop count on the sensor pad, tilt accuracy, battery life and timed trials, a firmware and app sketch, and build log entries.

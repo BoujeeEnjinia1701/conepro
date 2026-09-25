@@ -1,14 +1,14 @@
 # ConePro
 
-![TRL 2](https://img.shields.io/badge/TRL-2%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
+![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827)
 
-**Area:** Situational Field Hardware · **TRL:** 2 of 9 (concept formulated) · **Prototype budget:** about $400 USD · **Difficulty:** 3 of 5
+**Area:** Situational Field Hardware · **TRL:** 3 of 9 (proof of concept on paper) · **Prototype budget:** about $400 USD · **Difficulty:** 3 of 5
 
 Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.
 
 ![ConePro concept](media/hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [Review note](docs/REVIEW.md)
+[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CNP-DWG-001 (PDF)](cad/drawings/CNP-DWG-001.pdf) · [Calculations](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
 ## Problem
 
@@ -16,7 +16,7 @@ Early site assessments need soil bearing data, but lab geotech is slow. The manu
 
 ## Concept
 
-Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows with a Hall-effect sensor at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. Estimated at about 15 kg and about $296 in parts. Results are for screening, not foundation design.
+Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows and reads rod tilt with a clamp-on Hall and accelerometer pad at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. The sensor set is designed to fit existing standard penetrometers too. TRL 3 calculations give about 28 J at the cone, 850 mm per rod, about 40 h on three AA cells and $321 in parts; the instrument carried in its bag is about 16.7 kg, over the 16 kg target, and depth accuracy and shock survival are at risk. Results are for screening, not foundation design.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
@@ -25,14 +25,15 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 - Hardened 20 mm, 60 degree cone and 16 mm steel rods
 - 8 kg drop hammer with a 575 mm drop
 - Draw-wire depth sensor on a ground reference plate (laser rangefinder as the fallback)
-- Hall-effect blow sensor at the anvil
+- Clamp-on sensor pad at the anvil: Hall-effect blow switch and tilt accelerometer on an isolator
 - BLE logger on three AA cells
+- Optional lever rod puller, carried separately
 
-The working bill of materials is in [bom/bom.csv](bom/bom.csv).
+The priced bill of materials is in [bom/bom.csv](bom/bom.csv). Parametric geometry is in [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step/` and `cad/stl/`.
 
 ## Safety
 
-> **Safety:** Confirm utility locates before driving any rod into the ground. The 8 kg hammer can crush fingers, so keep hands on the handle only; wear safety glasses and hearing protection. ConePro results are indicative and must not be used on their own for foundation design. See the safety section of [docs/02-concept.md](docs/02-concept.md).
+> **Safety:** Confirm utility locates before driving any rod into the ground. The 8 kg hammer can crush fingers, so keep hands on the handle only; wear safety glasses and hearing protection. The hammer carries strong magnets; keep it away from implanted medical devices. ConePro results are indicative and must not be used on their own for foundation design. See the safety section of [docs/02-concept.md](docs/02-concept.md).
 
 ## Repository layout
 

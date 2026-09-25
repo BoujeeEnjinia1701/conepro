@@ -3,7 +3,7 @@ doc_id: CNP-PRB-001
 title: ConePro problem statement
 project: ConePro
 doc_type: Problem statement
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Populate to TRL 2 (users, context, constraints, prior work, open questions)
+- version: "0.3"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Citations checked online and corrected (Kleyn report number, ORN 8 title); retrofit question closed by CNP-DDR-001 (D3)
 ---
 
 # ConePro problem statement
@@ -25,11 +29,11 @@ Early site assessments need soil strength data within the hour, but laboratory g
 
 ## The problem
 
-The DCP is a simple, well-established field test. An 8 kg hammer dropped 575 mm drives a 20 mm, 60 degree cone into the ground on a 16 mm steel rod, and the penetration per blow (the DCP index, in mm per blow) gives a profile of soil strength with depth. ASTM D6951/D6951M standardizes the apparatus and method for shallow pavement applications and gives correlations from the DCP index to the California Bearing Ratio (CBR) ([ASTM D6951/D6951M-18](https://www.astm.org/d6951_d6951m-18.html)). The method goes back to Scala's cone penetrometer for pavement design in Australia (Scala 1956, "Simple methods of flexible pavement design using cone penetrometers," *New Zealand Engineering* 11 (2)), was developed for road assessment in South Africa (Kleyn 1975, Transvaal Roads Department report L2/74), and was adopted by the US Army Corps of Engineers for rapid airfield and road assessment (Webster, Grau and Williams 1992, *Description and Application of Dual Mass Dynamic Cone Penetrometer*, USACE Waterways Experiment Station, Instruction Report GL-92-3). The UK Transport Research Laboratory published a DCP analysis method for low-volume roads in developing countries (TRL Overseas Road Note 8, 1990).
+The DCP is a simple, well-established field test. An 8 kg hammer dropped 575 mm drives a 20 mm, 60 degree cone into the ground on a 16 mm steel rod, and the penetration per blow (the DCP index, in mm per blow) gives a profile of soil strength with depth. ASTM D6951/D6951M standardizes the apparatus and method for shallow pavement applications and gives correlations from the DCP index to the California Bearing Ratio (CBR) ([ASTM D6951/D6951M-18](https://www.astm.org/d6951_d6951m-18.html)). The method goes back to Scala's cone penetrometer for pavement design in Australia (Scala 1956, "Simple methods of flexible pavement design using cone penetrometers," *New Zealand Engineering* 11 (2); [Informit record](https://search.informit.org/doi/10.3316/informit.218423931293630)), was developed for road assessment in South Africa (Kleyn 1975, *The use of the Dynamic Cone Penetrometer (DCP)*, in Afrikaans, Transvaal Roads Department, Pretoria, Report L2/75), and was adopted by the US Army Corps of Engineers for rapid airfield and road assessment (Webster, Grau and Williams 1992, *Description and Application of Dual Mass Dynamic Cone Penetrometer*, USACE Waterways Experiment Station, Instruction Report GL-92-3, [DTIC ADA251960](https://apps.dtic.mil/sti/tr/pdf/ADA251960.pdf)). The UK Transport and Road Research Laboratory published a program and manual for analyzing DCP data for roads in developing countries (Overseas Road Note 8, *A users manual for a program to analyse dynamic cone penetrometer data*, TRRL, 1990; [record](https://transport-links.com/fcdo-publications/orn8-a-users-manual-for-a-program-to-analyse-dynamic-cone-penetrometer-data-dos-version)).
 
 The weak point is the reading. In the manual method, one person drops the hammer and a second reads the rod position against a separate rule after each blow or set of blows, then the record is typed up and reduced by hand or in a spreadsheet. That makes the test slow, needs two trained people, and introduces reading and transcription errors, which matter most in stiff layers where the penetration is only a few millimeters per blow.
 
-Instrumented and automated penetrometers exist. Examples include variable-energy penetrometers that record the energy and penetration of every blow (the PANDA penetrometer developed at Blaise Pascal University and sold by Sol Solution, France) and vehicle- or trailer-mounted automated DCPs. They are built for professional survey teams, are closed, and cost many times the $400 prototype budget (estimate; prices were not checked in this session). There is no open, low-cost, standard-geometry DCP with automatic depth and blow logging that a small contractor, NGO engineer or student can build, audit and repair.
+Instrumented and automated penetrometers exist. Examples include variable-energy penetrometers that record the energy and penetration of every blow (the PANDA variable-energy penetrometer developed at Blaise Pascal University and sold by Sol Solution, France; [manufacturer literature](https://www.insitutek.com/products/panda-instrumented-dcp/)) and vehicle- or trailer-mounted automated DCPs. They are built for professional survey teams, are closed, and cost many times the $400 prototype budget (estimate; prices were not checked in this session). There is no open, low-cost, standard-geometry DCP with automatic depth and blow logging that a small contractor, NGO engineer or student can build, audit and repair.
 
 ## Users and context
 
@@ -61,6 +65,6 @@ ConePro gives a DCP index profile and an **indicative** CBR profile from the pub
 
 ## Open questions
 
-- Which user group to co-design with first (small contractors, an NGO shelter or water team, or a low-volume road agency)? Proposed, awaiting Amish.
-- Build complete instruments, or also offer the sensor set as a retrofit for existing ASTM DCPs? Proposed, awaiting Amish (see CNP-PRC-001).
-- Which prior work and prices to confirm first at TRL 3: the sources above were cited from the literature without an online check in this session.
+- Which user group to co-design with first (small contractors, an NGO shelter or water team, or a low-volume road agency)? Proposed, awaiting Amish; co-design partners are to be picked per area later.
+- Build complete instruments, or also offer the sensor set as a retrofit? Decided by Amish, 2026-09-25 (CNP-DDR-001, D3): design the sensor set to fit standard DCPs, and build the complete instrument for the prototype.
+- The sources above were checked online on 2026-09-25 (ASTM D6951 geometry and correlations, Scala, Kleyn, Webster and others, ORN 8, PANDA). Commercial prices for instrumented penetrometers are still unchecked.
