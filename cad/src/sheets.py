@@ -1,4 +1,4 @@
-"""ConePro general arrangement sheet CNP-DWG-001, Rev P1 (TRL 3).
+"""ConePro general arrangement sheet CNP-DWG-001, Rev P2 (TRL 3).
 
 Run from the repo root:  python cad/src/sheets.py
 Writes cad/drawings/CNP-DWG-001.svg, .pdf and .png from the parametric model in
@@ -89,10 +89,11 @@ def main():
     asm = Compound(children=[v[1] for v in parts.values()])
     bb = asm.bounding_box()
     views = views_of(asm, work)
-    s = Sheet(project="ConePro", title="General arrangement", dwg_no="CNP-DWG-001", rev="P1",
+    s = Sheet(project="ConePro", title="General arrangement", dwg_no="CNP-DWG-001", rev="P2",
               author="Amish Chadha", date=DATE, scale=None, theme="technical",
-              material="Steel rods, anvil, hammer; aluminum plate; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
-              revisions=[("P1", "Preliminary GA for TRL 3 (from cad/src/model.py)", DATE, "AC")])
+              material="Steel rods, anvil, hammer; aluminum plate and clamp; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
+              revisions=[("P1", "Preliminary GA for TRL 3 (from cad/src/model.py)", DATE, "AC"),
+                         ("P2", "6 mm plate, aluminum clamp, 15.7 kg (CNP-DDR-002)", DATE, "AC")])
     s.add_ortho(views)
     k = s.scale
     c = ortho_cells(s, views)
@@ -147,10 +148,10 @@ def main():
         f"Upper rod {D['upper_L']:.0f}; stop collar {P['stop_d']:.0f} x {P['stop_h']:.0f}; T-handle {P['handle_w']:.0f} wide",
         f"Plate {P['plate']:.0f} x {P['plate']:.0f} x {P['plate_t']:.0f} Al; {P['plate_hole']:.0f} hole, {P['slot_w']:.0f} slot",
         f"Draw-wire exit at X {P['reel_xy'][0]:.0f}, Y {P['reel_xy'][1]:.0f}; {P['drum_d']:.0f} grooved drum, single layer",
-        f"Clamp collar {P['collar_d']:.0f} on the rod, {P['collar_gap']:.0f} below the anvil",
+        f"Aluminum clamp collar {P['collar_d']:.0f} on the rod, {P['collar_gap']:.0f} below the anvil",
         f"Sensor pad on a band clamp (50 to 80 anvils), {P['pad_gap']:.0f} below anvil top",
         f"Stroke {D['travel']:.0f}, limited by the {D['travel_by']}",
-        "About 16.7 kg with bag; heaviest piece 9.8 kg (CNP-CAL-001)",
+        "About 15.7 kg with bag; heaviest piece 9.8 kg (CNP-CAL-001)",
         "Third-angle; front view from -Y; ground at Z 0",
     ], x=290, y=138, width=132)
     out = s.save(ROOT / "cad" / "drawings" / "CNP-DWG-001")

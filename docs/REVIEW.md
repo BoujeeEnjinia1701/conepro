@@ -35,6 +35,8 @@ Requirements not met or at risk:
 
 ### Proposed, awaiting Amish
 
+Status update: items 1 to 8 were Decided by Amish, 2026-09-25: go with recommendation (CNP-DDR-001, D1 to D8). Item 9 has no recommendation and remains Proposed, awaiting Amish.
+
 1. **Verticality (R6).** (a) accelerometer in the anvil sensor pad; (b) bubble level on the handle; (c) accept no tilt sensing. Recommendation: (a) with (b) as a backup.
 2. **Rod extraction.** (a) optional lever or farm jack with a rod clamp, about $40 to $60, carried separately; (b) upward hammer blows; (c) two-person pull. Recommendation: (a), outside the BOM total. Adding it would bring parts to about $336 to $356, still within budget.
 3. **Complete instrument or also a retrofit sensor kit** for existing 16 mm ASTM DCPs (about $86 of sensing and logging parts). Recommendation: design the sensor set to fit standard DCPs and build the complete instrument for the prototype. This widens the pitch slightly; `project.yaml` is unchanged.
@@ -100,6 +102,8 @@ D1 accelerometer tilt sensing with a bubble level backup; D2 optional lever extr
 
 ### Proposed, awaiting Amish
 
+Status update: items 2 to 5 are now Decided by Amish, 2026-09-25: go with recommendation (CNP-DDR-002, D9 to D12; see the next session). Item 1 has no recommendation and remains Proposed, awaiting Amish.
+
 1. **First co-design partner and user group (O1).** No recommendation; to be picked per area later.
 2. **R10 mass (new).** (a) a 0.40 kg bag, an aluminum clamp and arm, and a 6 mm plate, giving about 15.7 kg; (b) redefine R10 to exclude the bag (15.9 kg); (c) relax R10 to 17 kg. Recommendation: (a).
 3. **R5 extension rod (new).** (a) add a 500 mm extension rod (about $15, 0.79 kg; total 16.4 kg even with item 2a, so R10 fails again); (b) relax R5 to 850 mm per rod and offer the extension rod as a separately carried accessory; (c) a longer lower rod (breaks the 1.1 m packed length). Recommendation: (b).
@@ -123,3 +127,50 @@ D1 accelerometer tilt sensing with a bubble level backup; D2 optional lever extr
 ### Recommended next step
 
 TRL 4 is on hold by Amish's instruction; do not start it. The next step is for Amish to decide items 1 to 5 above, after which CNP-REQ-001 and the BOM can be revised within TRL 3. For the record, TRL 4 would need: a bench build of the instrument, a test plan and report (TST, `environment: lab`) covering the draw-wire error against a steel rule, a 200-blow detection sequence, a 10,000-blow drop count on the sensor pad, tilt accuracy, battery life and timed trials, a firmware and app sketch, and build log entries.
+
+## Session 2026-09-25: recommendations accepted
+
+Amish wrote on 2026-09-25: "i accept all your recommendations, go with them across all repos." Every open item with a recommendation is now Decided by Amish, 2026-09-25: go with recommendation, recorded in `docs/decisions/0002-recommendations-accepted.md` (CNP-DDR-002 v0.1). The work stayed at TRL 3.
+
+### Decisions applied and what changed
+
+| # | Decision | Before | After |
+| --- | --- | --- | --- |
+| D9 | R10 mass, option (a): 6 mm plate, aluminum clamp and arm, 0.40 kg bag | 16.7 kg carried (plate 1.72 kg, steel clamp 0.34 kg, bag 0.80 kg); R10 not met | 15.7 kg carried (plate 1.29 kg, aluminum clamp 0.12 kg, bag 0.40 kg); R10 met, thin |
+| D10 | R5, option (b): 850 mm per rod, extension rod as a separate accessory | R5 required 1,000 mm with an extension rod; no rod in the BOM; not met | R5 restated to 850 mm per rod; BOM line 16, optional 500 mm rod ($15, 0.79 kg); met |
+| D11 | Draw-wire reel details and 850 mm usable range | Proposed | Accepted; BOM line 8 unchanged |
+| D12 | Stiff-ground extraction: disposable-cone practice in user guidance | Proposed | Stated in CNP-PRC-001 (How it works, Safety); no hardware change |
+
+Knock-on numbers from CNP-CAL-001 v0.2: instrument cost $321 to $319 (kit with lever and extension rod $384); stroke 938 to 940 mm; driven mass 5.35 to 5.12 kg; energy at the cone 27.6 to 28.0 J; isolated pad peak 533 to 543 g; `budget_usd` stays $400 (no change was recommended).
+
+Files changed: `cad/src/model.py` (plate 6 mm, aluminum clamp), `cad/step/`, `cad/stl/`, `cad/src/sheets.py` and `cad/drawings/CNP-DWG-001.*` (Rev P1 to P2), `cad/src/concept_media.py` and `media/`, `docs/04-calcs/sizing.py` and CNP-CAL-001 v0.2, CNP-REQ-001 v0.4, CNP-PRC-001 v0.4, CNP-DDR-001 v0.2, new CNP-DDR-002 v0.1, `bom/bom.csv` (16 lines), `bom/bom-notes.md`, `project.yaml` (evidence list only), `README.md`, `docs/pdf/`.
+
+README: added "Concept rationale", "Burning platform", "Where it could be used" and "What sparked the idea" before "Problem". The inspiration point is the Mn/ROAD test road construction in Minnesota (more than 700 DCP tests, two-person crew recording each blow on a form, per the Mn/DOT DCP user guide). `docs/01-problem.md` did not attribute the idea to any review, so it was left unchanged. PDFs, drawings and media were regenerated with the designmolecule.com footer.
+
+### Requirement status (CNP-REQ-001 v0.4)
+
+9 met, 2 at risk, 0 not met, 4 not verifiable at TRL 3 (was 7 met, 2 at risk, 2 not met, 4 not verifiable).
+
+| ID | Status | Key number |
+| --- | --- | --- |
+| R2 | At risk | Bench ±0.98 mm worst case against ±1 mm; up to 1.8 mm more at 850 mm with a 2 degree lean |
+| R11 | At risk | About 543 g at the isolated pad; cable, connector and isolator fatigue not calculated |
+| R1, R4, R5, R6, R8, R9, R10, R12, R13 | Met | R5: 850 mm per rod; R10: 15.7 kg; R13: $319 |
+| R3, R7, R14, R15 | Not verifiable at TRL 3 | Need hardware or the app |
+
+### Still Proposed, awaiting Amish
+
+1. **First co-design partner and user group (O1).** No recommendation; to be picked per area later.
+
+### Cross-repo actions
+
+None. No ConePro decision needs a change in another repo.
+
+### TRL 4
+
+TRL 4 remains on hold by Amish's instruction. The TRL 4 work these decisions imply (weighing the kit, fitting the extension rod and checking re-zero, stiff-ground extraction trials, plus the bench tests listed in the previous session) is decided in principle but not started.
+
+### Safety
+
+No new hazards. The extension rod adds one more joint to check before driving; the stiff-ground guidance tells the operator to stop rather than force the lever.
+

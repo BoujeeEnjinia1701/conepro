@@ -30,12 +30,12 @@ PARAMS = {
     "drop": 575.0,                   # free drop, anvil top to hammer lower face at the stop
     "stop_d": 44.0, "stop_h": 18.0,  # top stop collar under the handle
     "handle_w": 260.0, "handle_tube": (26.0, 2.5), "handle_stem": 34.0,
-    # sensor set (decisions D1, D3, D4, D6, D7 in CNP-DDR-001)
-    "plate": 300.0, "plate_t": 8.0, "plate_hole": 60.0, "slot_w": 60.0,
+    # sensor set (decisions D1, D3, D4, D6, D7 in CNP-DDR-001; plate and clamp lightened per CNP-DDR-002)
+    "plate": 300.0, "plate_t": 6.0, "plate_hole": 60.0, "slot_w": 60.0,   # 6 mm plate (DDR-002, R10)
     "reel_xy": (105.0, 40.0),        # wire exit point on the plate
     "reel_box": (60.0, 56.0, 60.0),  # housing x, y, z
     "drum_d": 60.0,                  # grooved aluminum drum, single layer
-    "collar_d": 40.0, "collar_h": 22.0, "collar_gap": 4.0,   # clamp collar below the anvil
+    "collar_d": 40.0, "collar_h": 22.0, "collar_gap": 4.0,   # aluminum clamp collar below the anvil (DDR-002)
     "arm_section": (16.0, 12.0),
     "pad": (22.0, 30.0, 30.0),       # sensor pad radial, tangential, height
     "pad_gap": 8.0,                  # pad top below the anvil top (hammer overhang clearance)
@@ -130,7 +130,7 @@ def build_parts(p=PARAMS):
     arm = (Pos(0, 0, D["arm_under"]) * Rot(0, 0, ang)
            * Pos(D["arm_len"] / 2 + 4, 0, 0) * Box(D["arm_len"] + 8, aw, ah, align=(Align.CENTER, Align.CENTER, Align.MIN)))
     collar = cyl(p["collar_d"] / 2, p["collar_h"], D["collar_top"] - p["collar_h"]) - cyl(rr, p["collar_h"] + 2, D["collar_top"] - p["collar_h"] - 1)
-    parts["clamp"] = ("Anvil clamp and wire arm", collar + arm, 9, "#D4A017")
+    parts["clamp"] = ("Anvil clamp and wire arm, aluminum", collar + arm, 9, "#D4A017")
     # 10 blow and tilt sensor pad (Hall switch plus accelerometer) on a band clamp round the anvil
     pr, pt, ph = p["pad"]
     ra = p["anvil_d"] / 2

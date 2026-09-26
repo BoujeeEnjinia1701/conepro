@@ -3,7 +3,7 @@ doc_id: CNP-DDR-001
 title: ConePro TRL 2 review decisions
 project: ConePro
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
 date: '2026-09-25'
 author: Amish Chadha
@@ -13,6 +13,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's decisions on the TRL 2 review items and the items that remain open
+- version: "0.2"
+  date: '2026-09-25'
+  author: Amish Chadha
+  change: Recommendations accepted by Amish (DDR-002); TRL 3 items now decided in CNP-DDR-002
 ---
 
 # 0001: TRL 2 review decisions
@@ -56,4 +60,4 @@ The options for each item are those listed in `docs/REVIEW.md` (session 2026-09-
 - `project.yaml`: `budget_usd` stays $400 (no change was recommended). Pitch and problem lines are unchanged.
 - CNP-PRB-001, CNP-PRC-001 and CNP-REQ-001 are revised to v0.3. R6 is now met by design (D1). R9 now assumes the lever puller (D2). A new requirement, R15, carries D3: the sensor set must fit standard DCPs without machining. No target is relaxed.
 - The BOM gains the accelerometer (line 10), the bubble level (line 6) and the optional extraction lever (line 15, excluded from the instrument total). The anvil loses its sensor pocket, because the pad now clamps on (D3).
-- CNP-CAL-001 checks every requirement against the decided design. New issues it raised (R10 mass with the bag, the R5 extension-rod clause, wire slack at the draw-wire reel) are proposed in `docs/REVIEW.md`, not decided here.
+- CNP-CAL-001 checks every requirement against the decided design. The new issues it raised (R10 mass with the bag, the R5 extension-rod clause, the draw-wire reel details and stiff-ground extraction) are now Decided by Amish, 2026-09-25: go with recommendation, and recorded in CNP-DDR-002 (D9 to D12).

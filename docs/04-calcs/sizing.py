@@ -57,8 +57,9 @@ A = {
     # bought-part masses, kg
     "mass_bought": {"8 draw-wire reel and housing": 0.30, "10 sensor pad and band": 0.06,
                     "11 logger with 3 AA cells": 0.35, "12 coiled cable": 0.12,
-                    "13 canvas roll bag": 0.80, "14 hardware, cone cover, spare cone": 0.08},
+                    "13 lightweight roll bag": 0.40, "14 hardware, cone cover, spare cone": 0.08},
     "extractor_kg": 3.0,
+    "ext_rod_L": 500.0,            # optional extension rod, carried separately (DDR-002, R5)
 }
 
 # ---------------------------------------------------------------- A. geometry (R1)
@@ -74,7 +75,8 @@ req("R1", f"8.00 kg, {D['drop_check']:.0f} mm, 16 mm rod, 20 mm 60 deg cone [A1 
 # ---------------------------------------------------------------- C. masses (R10), done first for the driven mass
 masses = {}
 dens = {"cone": STEEL, "lower_rod": STEEL, "anvil": STEEL, "hammer": STEEL, "upper_rod": STEEL, "handle": STEEL,
-        "plate": ALU, "clamp": STEEL}
+        "plate": ALU, "clamp": ALU}
+bag = A["mass_bought"]["13 lightweight roll bag"]
 for k, rho in dens.items():
     masses[f"{parts[k][2]} {parts[k][0]}"] = parts[k][1].volume * rho
 masses.update(A["mass_bought"])
@@ -112,20 +114,23 @@ for p_mm in (2, 10, 15, 25):
 out("C1", "part masses, kg: " + "; ".join(f"{k} {v:.2f}" for k, v in masses.items()))
 total = sum(masses.values())
 heavy = sum(parts[k][1].volume * STEEL for k in ("hammer", "upper_rod", "handle"))
-out("C2", f"instrument as carried (items 1 to 14, bag and cells included): {total:.1f} kg; without the bag {total - 0.8:.1f} kg")
+out("C2", f"instrument as carried (items 1 to 14, bag and cells included): {total:.1f} kg; without the bag {total - bag:.1f} kg")
 out("C3", f"heaviest piece, hammer captive on the upper rod with the handle: {heavy:.2f} kg; hammer alone {m_hammer:.2f} kg")
 long_rod = P["lower_rod_L"] + D["z_rod"]
 hammer_asm = D["height"] - D["z_anvil_top"]
 out("C4", f"longest pieces: lower rod with cone {long_rod:.0f} mm; hammer assembly {hammer_asm:.0f} mm; plate {P['plate']:.0f} mm; "
           f"bag about 1,080 mm")
 out("C5", f"optional extraction lever {A['extractor_kg']:.1f} kg, carried separately; kit with lever {total + A['extractor_kg']:.1f} kg")
-clamp_al = parts["clamp"][1].volume * ALU
-plate6 = masses["7 Reference plate, slotted"] * 6.0 / P["plate_t"]
-opt_a = total - (0.80 - 0.40) - (masses["9 Anvil clamp and wire arm"] - clamp_al) - (masses["7 Reference plate, slotted"] - plate6)
-out("C6", f"R10 option (a): 0.40 kg bag, aluminum clamp and arm ({clamp_al:.2f} kg), 6 mm plate ({plate6:.2f} kg): {opt_a:.1f} kg")
-ext_rod = math.pi / 4 * P["rod_d"] ** 2 * 500 * STEEL
-out("C7", f"500 mm extension rod for the R5 1,000 mm clause: {ext_rod:.2f} kg; total with it {total + ext_rod:.1f} kg, "
-          f"or {opt_a + ext_rod:.1f} kg with option (a)")
+clamp_st = parts["clamp"][1].volume * STEEL
+plate8 = masses["7 Reference plate, slotted"] * 8.0 / P["plate_t"]
+before = total + (0.80 - bag) + (clamp_st - masses["9 Anvil clamp and wire arm, aluminum"]) \
+    + (plate8 - masses["7 Reference plate, slotted"])
+out("C6", f"DDR-002 mass savings: 0.40 kg bag (was 0.80), aluminum clamp and arm "
+          f"{masses['9 Anvil clamp and wire arm, aluminum']:.2f} kg (steel {clamp_st:.2f}), 6 mm plate "
+          f"{masses['7 Reference plate, slotted']:.2f} kg (8 mm {plate8:.2f}); carried mass {before:.1f} kg before, {total:.1f} kg after")
+ext_rod = math.pi / 4 * P["rod_d"] ** 2 * A["ext_rod_L"] * STEEL
+out("C7", f"optional {A['ext_rod_L']:.0f} mm extension rod {ext_rod:.2f} kg, carried separately with the lever (DDR-002); "
+          f"instrument plus both accessories {total + ext_rod + A['extractor_kg']:.1f} kg")
 req("R10", f"{total:.1f} kg total, {heavy:.1f} kg heaviest, about 1.08 m packed [C2 to C4]",
     "16 kg, 10 kg, 1.1 m", "Met, thin margins" if total <= 16 and heavy <= 10 else "Not met")
 
@@ -134,8 +139,8 @@ for k, v in D["limits"].items():
     out("D1", f"travel to contact, {k}: {v:.0f} mm")
 out("D2", f"penetration range per lower rod {D['travel']:.0f} mm, limited by the {D['travel_by']}; "
           f"usable range set at 850 mm to keep the tilt error small (E4)")
-req("R5", f"{D['travel']:.0f} mm stroke, 850 mm usable; no extension rod in the BOM [D1, D2]",
-    "850 mm per rod; 1,000 mm with extension and re-zero", "Not met (1,000 mm part): no extension rod")
+req("R5", f"{D['travel']:.0f} mm stroke, 850 mm usable per rod [D1, D2]; optional extension rod in the BOM [C7]",
+    "850 mm per rod; extension rod as a separate accessory", "Met (850 mm per rod; re-zero with the extension not verifiable)")
 
 # ---------------------------------------------------------------- E. depth measurement (R2, R4)
 circ = math.pi * P["drum_d"]
@@ -318,9 +323,9 @@ rows = list(csv.DictReader((ROOT / "bom" / "bom.csv").open()))
 inst = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if "Optional" not in r["notes"])
 opt = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if "Optional" in r["notes"])
 budget_usd = yaml.safe_load((ROOT / "project.yaml").read_text())["budget_usd"]
-out("L1", f"BOM {len(rows)} lines, all priced; instrument (lines 1 to 14) ${inst:.0f}; optional extraction lever ${opt:.0f}; "
-          f"kit with lever ${inst + opt:.0f}; budget ${budget_usd}")
-req("R13", f"${inst:.0f} instrument; ${inst + opt:.0f} with the lever [L1]", f"${budget_usd} or less", "Met")
+out("L1", f"BOM {len(rows)} lines, all priced; instrument (lines 1 to 14) ${inst:.0f}; optional accessories (lever, extension rod) "
+          f"${opt:.0f}; kit with accessories ${inst + opt:.0f}; budget ${budget_usd}")
+req("R13", f"${inst:.0f} instrument; ${inst + opt:.0f} with the optional lever and extension rod [L1]", f"${budget_usd} or less", "Met")
 
 # ---------------------------------------------------------------- M. retrofit fit (R15)
 out("M1", f"sensor set interfaces: clamp collar bore {P['rod_d']:.0f} mm; band clamp 50 to 80 mm anvils; pad top "

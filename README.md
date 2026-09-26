@@ -10,13 +10,53 @@ Portable dynamic cone penetrometer with a digital depth encoder and blow counter
 
 [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CNP-DWG-001 (PDF)](cad/drawings/CNP-DWG-001.pdf) · [Calculations](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
+## Concept rationale
+
+The dynamic cone penetrometer is already the cheapest credible way to profile soil strength in the field, and decades of published correlations depend on its exact geometry. ConePro therefore changes nothing about the hammer, drop, rod or cone and adds only what the manual test lacks: an automatic depth reading, a blow count, a tilt check and a clean digital record. That lets one person do what took two, and keeps every result comparable with existing DCP data.
+
+It is open and garage-buildable because the users who most need fast soil screening, such as small contractors, NGO engineers and rural road agencies, are the least able to buy or repair closed instrumented penetrometers. The steel parts are simple machined pieces any local shop can make, the electronics are off-the-shelf modules on three AA cells, and the sensor set is designed to clamp onto penetrometers people already own.
+
+## Burning platform
+
+Roads, shelters and water points all sit on ground whose strength is usually guessed rather than measured. The World Bank estimates that about [one billion rural people, one in eight people worldwide, live more than 2 km from an all-season road](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/), and a 2026 dataset of 50 African countries and regions found an [average paved rate of only 17.4 %](https://essd.copernicus.org/articles/18/267/2026/) (Liu et al., *Earth System Science Data* 18, 267). Most of the roads still to be built or upgraded are low-volume gravel and earth roads, whose design rests on the strength of the subgrade.
+
+Laboratory CBR testing is slow and far from most of these sites, so engineers fall back on the DCP. Even a well-resourced agency runs it as a two-person, pencil-and-form test: Minnesota's user guide describes one person on the hammer and a second reading and recording [the penetration for each blow](https://mdl.mndot.gov/items/m14731). Removing that second person and the transcription step is what lets more points be tested per day where it matters.
+
+## Where it could be used
+
+### By industry
+
+| Industry | Use |
+| --- | --- |
+| Low-volume and rural roads | Subgrade and gravel layer strength along a route, for DCP-based pavement design and maintenance planning |
+| Humanitarian shelter and WASH | Screening ground for shelters, water tanks, latrines and access tracks where no lab is within reach |
+| Utilities and civil contracting | Checking compaction of trench backfill and pipe bedding before reinstatement |
+| Building and site preparation | A first look at pad and footing areas to decide where a geotechnical engineer should investigate |
+| Mining and agriculture haul roads | Rapid checks of unsealed haul and farm roads after rain |
+| Teaching and research | An open instrument and data format for soil mechanics courses and correlation studies |
+
+### By country or region
+
+| Country or region | Why it matters there |
+| --- | --- |
+| Burkina Faso | A Rural Access Index of [23.8 in 2020](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/): only about one in four rural people live near a road usable year-round |
+| Zambia and Kenya | Rural access ranges from [17 % in Zambia (2011) to 56 % in Kenya (2009)](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/), so many earth and gravel roads are still to be built or upgraded |
+| South Africa | Home of DCP-based road design since the Transvaal Roads Department work of the 1970s (Kleyn 1975, Report L2/75; see [docs/01-problem.md](docs/01-problem.md)) |
+| Bangladesh | High rural road access ([about 87 % in the 2016 pilot](https://documents1.worldbank.org/curated/en/543621569435525309/pdf/World-Measuring-Rural-Access-Update-2017-18.pdf)) on a dense network of embankment roads that need regular strength checks |
+| United States | Minnesota has used the DCP as an [acceptance tool for edge drain trench compaction since 1993](https://mdl.mndot.gov/items/m14731), a high-income example of routine, repeated field testing |
+| Australia | Where Scala developed the cone penetrometer method for pavement design in 1956 ([Informit](https://search.informit.org/doi/10.3316/informit.218423931293630)); large unsealed rural networks still rely on field checks |
+
+## What sparked the idea
+
+The starting point was the construction of the Minnesota Road Research Project (Mn/ROAD) test road on Interstate 94 near Albertville, where the Minnesota Department of Transportation ran more than 700 DCP tests to characterize the pavement foundations. That work led the department to write a [user guide to the dynamic cone penetrometer](https://mdl.mndot.gov/index.php/_flysystem/fedora/2023-08/1993mrrdoc002.pdf) ([catalog record](https://mdl.mndot.gov/items/m14731)). The guide shows both why the DCP spread and where it stalls: the instrument was valued for its portability and ease of use, yet the method it describes still needs a two-person crew, one on the hammer and one reading the rod against a reference and writing each blow on a standard form. ConePro takes that documented workflow and asks what it would take for one person to run it with the reading and the form done automatically.
+
 ## Problem
 
 Early site assessments need soil bearing data, but lab geotech is slow. The manual dynamic cone penetrometer (ASTM D6951) is fast and cheap but needs two people, a rule and hand-written records, and existing instrumented penetrometers are closed and costly. Full problem statement: [docs/01-problem.md](docs/01-problem.md)
 
 ## Concept
 
-Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows and reads rod tilt with a clamp-on Hall and accelerometer pad at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. The sensor set is designed to fit existing standard penetrometers too. TRL 3 calculations give about 28 J at the cone, 850 mm per rod, about 40 h on three AA cells and $321 in parts; the instrument carried in its bag is about 16.7 kg, over the 16 kg target, and depth accuracy and shock survival are at risk. Results are for screening, not foundation design.
+Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows and reads rod tilt with a clamp-on Hall and accelerometer pad at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. The sensor set is designed to fit existing standard penetrometers too. TRL 3 calculations give about 28 J at the cone, 850 mm per rod, about 40 h on three AA cells and $319 in parts; the instrument carried in its bag is about 15.7 kg, within the 16 kg target, and a 500 mm extension rod is an optional accessory for deeper tests. Depth accuracy and shock survival are still at risk. Results are for screening, not foundation design.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 
@@ -27,7 +67,7 @@ Full design precis: [docs/02-concept.md](docs/02-concept.md)
 - Draw-wire depth sensor on a ground reference plate (laser rangefinder as the fallback)
 - Clamp-on sensor pad at the anvil: Hall-effect blow switch and tilt accelerometer on an isolator
 - BLE logger on three AA cells
-- Optional lever rod puller, carried separately
+- Optional lever rod puller and 500 mm extension rod, carried separately
 
 The priced bill of materials is in [bom/bom.csv](bom/bom.csv). Parametric geometry is in [cad/src/model.py](cad/src/model.py), with STEP and STL exports in `cad/step/` and `cad/stl/`.
 
@@ -58,4 +98,4 @@ Controlled documents follow the portfolio [documentation standard](.kit/STANDARD
 - **Hardware** (CAD, drawings, BOM, electronics): [CERN-OHL-S v2](LICENSE)
 - **Software** (firmware, scripts, notebooks): [MIT](LICENSE-SOFTWARE)
 
-Part of the open hardware portfolio at [amishchadha.com](https://amishchadha.com).
+A project of the [Design Molecule](https://designmolecule.com) lab.
