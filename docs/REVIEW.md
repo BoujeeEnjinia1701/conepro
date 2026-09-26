@@ -174,3 +174,19 @@ TRL 4 remains on hold by Amish's instruction. The TRL 4 work these decisions imp
 
 No new hazards. The extension rod adds one more joint to check before driving; the stiff-ground guidance tells the operator to stop rather than force the lever.
 
+
+## Session 2026-09-26: sources strengthened
+
+Amish asked for the weaker sources in the README to be fixed. Every link kept or added was fetched and checked against the claim. No controlled document changed; `docs/01-problem.md` did not share any of the replaced sources.
+
+| Where | Old source | New source |
+| --- | --- | --- |
+| Burning platform, subgrade sentence | Uncited claim that most roads to be built are gravel and earth | Rewritten to what Liu et al. (*Earth System Science Data* 18, 267) state: most unpaved roads are dirt |
+| Burning platform, lab testing sentence | Uncited claim that CBR testing is slow and far away | Scala (1956) abstract on why road authorities skip strength tests, [TRID record](https://trid.trb.org/View/1194062) |
+| Burning platform and United States row | Mn/DOT catalog page (does not carry the quoted text) | Mn/DOT *User Guide to the Dynamic Cone Penetrometer* PDF itself |
+| South Africa row | Uncited (Kleyn 1975 report, no online record found) | Row replaced by Peru: Rural Access Index 37.2 %, World Bank *Measuring Rural Access: Update 2017/18* |
+| Bangladesh row | World Bank 2017/18 update, plus an uncited claim about embankment roads | Same World Bank report, row limited to what it states (87 % in the 2016 pilot, highest of the pilot countries) |
+| Australia row | Informit record alone, plus an uncited claim about unsealed networks | Row reframed as Australia and New Zealand; TRID record of the 1956 conference paper added beside Informit; unsealed-network claim removed |
+| What sparked the idea | Mn/DOT guide only, with the I-94 and Albertville location unsupported by it | MnDOT MnROAD page added for the location; "to characterize the pavement foundations" trimmed to "during construction", as the guide states |
+
+The inspiration event (Mn/ROAD construction and the Mn/DOT DCP user guide) is unchanged. No budget change.

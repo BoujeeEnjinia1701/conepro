@@ -18,9 +18,9 @@ It is open and garage-buildable because the users who most need fast soil screen
 
 ## Burning platform
 
-Roads, shelters and water points all sit on ground whose strength is usually guessed rather than measured. The World Bank estimates that about [one billion rural people, one in eight people worldwide, live more than 2 km from an all-season road](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/), and a 2026 dataset of 50 African countries and regions found an [average paved rate of only 17.4 %](https://essd.copernicus.org/articles/18/267/2026/) (Liu et al., *Earth System Science Data* 18, 267). Most of the roads still to be built or upgraded are low-volume gravel and earth roads, whose design rests on the strength of the subgrade.
+Roads, shelters and water points all sit on ground whose strength is usually guessed rather than measured. The World Bank estimates that about [one billion rural people, one in eight people worldwide, live more than 2 km from an all-season road](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/), and a 2026 dataset of 50 African countries and regions found an [average paved rate of only 17.4 %](https://essd.copernicus.org/articles/18/267/2026/) (Liu et al., *Earth System Science Data* 18, 267). The same authors note that most unpaved roads are dirt, and building or upgrading such a road starts from the strength of the ground beneath it.
 
-Laboratory CBR testing is slow and far from most of these sites, so engineers fall back on the DCP. Even a well-resourced agency runs it as a two-person, pencil-and-form test: Minnesota's user guide describes one person on the hammer and a second reading and recording [the penetration for each blow](https://mdl.mndot.gov/items/m14731). Removing that second person and the transcription step is what lets more points be tested per day where it matters.
+Laboratory strength testing has long been skipped for reasons of time and cost: in 1956 Scala wrote that "very few road authorities use a strength test in evaluating the subgrade of a road" and proposed quick static and dynamic cone tests instead ([TRID record](https://trid.trb.org/View/1194062)). The DCP descends from that work. Even a well-resourced agency runs it as a two-person, pencil-and-form test: Minnesota's user guide describes one person on the hammer and a second reading and recording [the penetration for each blow](https://mdl.mndot.gov/index.php/_flysystem/fedora/2023-08/1993mrrdoc002.pdf). Removing that second person and the transcription step is what lets more points be tested per day where it matters.
 
 ## Where it could be used
 
@@ -41,14 +41,14 @@ Laboratory CBR testing is slow and far from most of these sites, so engineers fa
 | --- | --- |
 | Burkina Faso | A Rural Access Index of [23.8 in 2020](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/): only about one in four rural people live near a road usable year-round |
 | Zambia and Kenya | Rural access ranges from [17 % in Zambia (2011) to 56 % in Kenya (2009)](https://datatopics.worldbank.org/sdgatlas/goal-9-industry-innovation-and-infrastructure/), so many earth and gravel roads are still to be built or upgraded |
-| South Africa | Home of DCP-based road design since the Transvaal Roads Department work of the 1970s (Kleyn 1975, Report L2/75; see [docs/01-problem.md](docs/01-problem.md)) |
-| Bangladesh | High rural road access ([about 87 % in the 2016 pilot](https://documents1.worldbank.org/curated/en/543621569435525309/pdf/World-Measuring-Rural-Access-Update-2017-18.pdf)) on a dense network of embankment roads that need regular strength checks |
-| United States | Minnesota has used the DCP as an [acceptance tool for edge drain trench compaction since 1993](https://mdl.mndot.gov/items/m14731), a high-income example of routine, repeated field testing |
-| Australia | Where Scala developed the cone penetrometer method for pavement design in 1956 ([Informit](https://search.informit.org/doi/10.3316/informit.218423931293630)); large unsealed rural networks still rely on field checks |
+| Peru | A Rural Access Index of [37.2 % in the 2017/18 update](https://documents1.worldbank.org/curated/en/543621569435525309/pdf/World-Measuring-Rural-Access-Update-2017-18.pdf), above 50 % in some Andean departments but below 5 % in Amazon regions, so many rural roads are still to be built on untested ground |
+| Bangladesh | Rural access of [87 % in the World Bank's 2016 pilot](https://documents1.worldbank.org/curated/en/543621569435525309/pdf/World-Measuring-Rural-Access-Update-2017-18.pdf), the highest of the pilot countries, so much of the rural network already exists and the work shifts to checking and maintaining it |
+| United States | Minnesota has used the DCP as an [acceptance tool for edge drain trench compaction since 1993](https://mdl.mndot.gov/index.php/_flysystem/fedora/2023-08/1993mrrdoc002.pdf), a high-income example of routine, repeated field testing |
+| Australia and New Zealand | Scala's 1956 paper to the second Australia New Zealand Conference on Soil Mechanics and Foundation Engineering set out the quick cone tests from which the DCP descends ([TRID record](https://trid.trb.org/View/1194062); [Informit record](https://search.informit.org/doi/10.3316/informit.218423931293630)), a lineage ConePro keeps by leaving the hammer, rod and cone unchanged |
 
 ## What sparked the idea
 
-The starting point was the construction of the Minnesota Road Research Project (Mn/ROAD) test road on Interstate 94 near Albertville, where the Minnesota Department of Transportation ran more than 700 DCP tests to characterize the pavement foundations. That work led the department to write a [user guide to the dynamic cone penetrometer](https://mdl.mndot.gov/index.php/_flysystem/fedora/2023-08/1993mrrdoc002.pdf) ([catalog record](https://mdl.mndot.gov/items/m14731)). The guide shows both why the DCP spread and where it stalls: the instrument was valued for its portability and ease of use, yet the method it describes still needs a two-person crew, one on the hammer and one reading the rod against a reference and writing each blow on a standard form. ConePro takes that documented workflow and asks what it would take for one person to run it with the reading and the form done automatically.
+The starting point was the construction of the Minnesota Road Research Project (Mn/ROAD) test road on Interstate 94 near Albertville ([MnDOT MnROAD](https://www.dot.state.mn.us/mnroad/)), where the Minnesota Department of Transportation ran more than 700 DCP tests during construction. That work led the department to write a [user guide to the dynamic cone penetrometer](https://mdl.mndot.gov/index.php/_flysystem/fedora/2023-08/1993mrrdoc002.pdf) ([catalog record](https://mdl.mndot.gov/items/m14731)). The guide shows both why the DCP spread and where it stalls: the instrument was valued for its portability and ease of use, yet the method it describes still needs a two-person crew, one on the hammer and one reading the rod against a reference and writing each blow on a standard form. ConePro takes that documented workflow and asks what it would take for one person to run it with the reading and the form done automatically.
 
 ## Problem
 
@@ -92,6 +92,12 @@ The priced bill of materials is in [bom/bom.csv](bom/bom.csv). Parametric geomet
 ## Documentation
 
 Controlled documents follow the portfolio [documentation standard](.kit/STANDARDS.md). Each carries a document ID (CNP-PRC-001 for the precis), a version and a revision history. Branded PDFs are built with `python .kit/render.py` and attached to GitHub Releases when a document is tagged, for example `CNP-PRC-001/v1.0`.
+
+## Credits
+
+Designed by Amish Chadha. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for roles. To cite this design, use [CITATION.cff](CITATION.cff) (GitHub shows it as "Cite this repository").
+
+AI assistance (Claude) was used to accelerate concept renders, prototype documentation and first-pass sizing calculations. Design direction and all decisions are Amish Chadha's, recorded in this repository's decision records (`docs/decisions/`).
 
 ## Licenses
 
