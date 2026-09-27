@@ -6,9 +6,9 @@
 
 Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.
 
-![ConePro concept](media/hero.png)
+![ConePro: digital dynamic cone penetrometer that logs soil strength to a phone, product render](media/render-hero.png)
 
-[Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CNP-DWG-001 (PDF)](cad/drawings/CNP-DWG-001.pdf) · [Calculations](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
+[Exploded render](media/render-exploded.png) · [Detail render](media/render-detail.png) · [Interactive 3D model](media/viewer.html) · [Concept blueprint (PDF)](media/concept-blueprint.pdf) · [General arrangement CNP-DWG-001 (PDF)](cad/drawings/CNP-DWG-001.pdf) · [Calculations](docs/04-calcs/01-sizing.md) · [Review note](docs/REVIEW.md)
 
 ## Concept rationale
 

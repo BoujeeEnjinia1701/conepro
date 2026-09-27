@@ -190,3 +190,41 @@ Amish asked for the weaker sources in the README to be fixed. Every link kept or
 | What sparked the idea | Mn/DOT guide only, with the I-94 and Albertville location unsupported by it | MnDOT MnROAD page added for the location; "to characterize the pavement foundations" trimmed to "during construction", as the guide states |
 
 The inspiration event (Mn/ROAD construction and the Mn/DOT DCP user guide) is unchanged. No budget change.
+
+
+## Session 2026-09-26: product appearance model and photoreal renders
+
+Amish chose this repo for the first batch of product renders on 2026-09-26. This session adds an appearance model for photoreal renders; the render images themselves (`media/render-hero.png`, `media/render-exploded.png` and a detail view) are produced later from it.
+
+### What was done
+
+- `cad/src/product_model.py` (new): `product_parts()` returns 52 appearance parts (39 shell, 5 internal, 2 accessory, 6 context), with color, material, BOM line, group and explode offset for each, plus `TITLE` and three `RENDER_VIEWS` (hero, exploded, detail). It imports `PARAMS`, `derived()` and `build_parts()` from `cad/src/model.py`, so every main dimension and interface is unchanged. It adds:
+  - filleted and chamfered steel parts: hardened cone, anvil with its coupler seam, top stop collar with its set screw;
+  - rod graduations every 10 mm (heavier every 100 mm) on the lower rod;
+  - a painted teal drop hammer with bare steel strike faces, six grip grooves, the ring of 16 magnets in the lower face and an "8.0 kg" label patch;
+  - a powder-coated T-handle with a tee, ribbed rubber grips and a bubble level with a clear vial;
+  - an anodized reference plate with rounded corners, zero-depth ticks round the hole and a nameplate;
+  - a two-part draw-wire reel housing with a parting line, lid screws, a clear window onto a grooved drum, the wire exit eyelet and the wire;
+  - a split clamp collar with its clamp screw, a filleted wire arm, the wire eye and the preload spring;
+  - a potted sensor pad on an elastomer isolator, with the stainless band clamp and its worm housing;
+  - a logger box with a parting line, lid screws, a clear lid window onto three AA cells in a holder, a teal button, a lit green status LED, a cable gland and a label;
+  - a coiled sensor cable with a strain relief;
+  - a spare cone and rubber cone cover (accessory, exploded view only);
+  - context: a compact patch of soil with a few pebbles, and a phone lying on the ground showing a penetration curve.
+- Self-check previews with the kit's matplotlib renderer (clear parts left out): `/tmp/conepro-prod/prev-hero.png`, `prev-exploded.png`, `prev-detail.png` (scratch files, not in the repo).
+- `README.md`: hero image now points to `media/render-hero.png`, and an "Exploded render" link opens the links line.
+
+### Where the appearance model differs from model.py
+
+Each item is Proposed, awaiting Amish.
+
+1. **Draw-wire drum drawn at 48 mm, not 60 mm.** A 60 mm drum (`drum_d`) cannot fit inside the 60 x 56 x 60 mm reel housing (`reel_box`) once it has walls, so the render shows a 48 mm drum. The calculations need the 60 mm drum (0.046 mm per count). Recommendation: keep the 60 mm drum and grow the housing to about 72 x 60 x 72 mm; that raises the reel top by 12 mm and cuts the stroke from 940 mm to about 928 mm, which still clears the 850 mm usable range.
+2. **Reel housing and logger lid windows.** Both housings get a clear window so the drum and cells show in the renders. Recommendation: keep them as render features only and use opaque parts in the design unless Amish wants inspection windows, since each window adds a seal to an IP65 box.
+3. **Hammer grip grooves and magnet pockets.** Six shallow grooves and 16 magnet pockets change the hammer mass slightly. Recommendation: accept; the BOM already says the mass is trimmed to 8.0 kg, so length is set at machining.
+4. **Rubber grips on the T-handle.** Grips of about 33 mm diameter over the 26 mm tube are not in BOM line 6. The overall 260 mm width is unchanged. Recommendation: add grips to the BOM line 6 spec (a few dollars).
+5. **Coiled cable path.** The cable keeps the model's end points and bend point but is drawn as a tight coil near the pad and a stretched coil below, and ends in a gland on the logger lid. Recommendation: accept as drawn.
+6. **No cable from the reel to the logger.** Neither `model.py` nor the BOM shows how the angle sensor board in the reel reaches the logger, so none is drawn. Recommendation: add a short cable (or a connector on the plate) to BOM line 12 and to the model at the next update.
+
+### TRL
+
+This is an appearance model only: no tolerances, no fabrication detail, nothing past TRL 3. `trl` stays 3, and TRL 4 remains on hold.
