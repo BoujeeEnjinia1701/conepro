@@ -3,9 +3,9 @@ doc_id: CNP-PRC-001
 title: ConePro design precis
 project: ConePro
 doc_type: Design precis
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-27'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,11 +25,15 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002); 6 mm plate, aluminum clamp and lighter bag (15.7 kg), optional extension rod, reel details accepted, stiff-ground guidance; numbers from CNP-CAL-001 v0.2; CNP-DWG-001 Rev P2
+- version: "0.5"
+  date: '2026-09-27'
+  author: Amish Chadha
+  change: Reel housing 72 x 60 x 72 mm round the 60 mm drum (CNP-DDR-003, decided by Amish on 2026-09-27); stroke 928 mm, 850 mm usable; numbers from CNP-CAL-001 v0.3; CNP-DWG-001 Rev P3
 ---
 
 # ConePro design precis
 
-ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.2) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $319 in parts, within the $400 budget. With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
+ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.3) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $319 in parts, within the $400 budget. With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trims the stroke from 940 mm to 928 mm and still clears the 850 mm usable range. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -101,7 +105,7 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 | --- | --- | --- |
 | Resolution | 0.046 mm per count [E1] | R2 resolution met |
 | Bench error over 1,000 mm, vertical rod | ±0.98 mm worst case; ±0.49 mm root sum square [E3] | R2 (±1 mm) at risk |
-| Extra error from rod lean at 850 mm, after tilt correction | 0.94 mm at 1 degree; 1.77 mm at 2 degrees [E4] | Why the usable range stops at 850 mm (accepted, D11) |
+| Extra error from rod lean at 850 mm, after tilt correction | 1.07 mm at 1 degree; 2.02 mm at 2 degrees [E4] | Why the usable range stops at 850 mm (accepted, D11) |
 | DCP index error, 10 blows at 2 mm per blow | ±4.9 % RSS (±9.8 % worst); CBR ±5.5 % [E8] | |
 | Wire slack after a blow | 1.9 to 17 mm for 5 to 35 ms [E5] | Groove keeper and preloaded eye spring needed |
 | Record latency | 0.21 s after impact [E6] | R4 met |
@@ -111,7 +115,7 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 
 | Quantity | Estimate | Requirement |
 | --- | --- | --- |
-| Stroke per lower rod | 940 mm, limited by the wire arm meeting the reel; 850 mm usable [D1, D2]; optional 500 mm extension rod [C7] | R5 (restated, D10) met |
+| Stroke per lower rod | 928 mm, limited by the wire arm meeting the reel housing (72 x 60 x 72 mm round the 60 mm drum, CNP-DDR-003); 850 mm usable [D1, D2]; optional 500 mm extension rod [C7] | R5 (restated, D10) met |
 | Assembled height | 1,867 mm [A3] | |
 | Mass as carried in the bag | 15.7 kg (was 16.7 kg); 15.3 kg without the bag [C2, C6] | R10 (16 kg) met, thin |
 | Heaviest piece | 9.82 kg, hammer captive on the upper rod [C3] | R10 (10 kg) met |

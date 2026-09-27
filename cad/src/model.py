@@ -33,7 +33,7 @@ PARAMS = {
     # sensor set (decisions D1, D3, D4, D6, D7 in CNP-DDR-001; plate and clamp lightened per CNP-DDR-002)
     "plate": 300.0, "plate_t": 6.0, "plate_hole": 60.0, "slot_w": 60.0,   # 6 mm plate (DDR-002, R10)
     "reel_xy": (105.0, 40.0),        # wire exit point on the plate
-    "reel_box": (60.0, 56.0, 60.0),  # housing x, y, z
+    "reel_box": (72.0, 60.0, 72.0),  # housing x, y, z; sized round the 60 mm drum (CNP-DDR-003)
     "drum_d": 60.0,                  # grooved aluminum drum, single layer
     "collar_d": 40.0, "collar_h": 22.0, "collar_gap": 4.0,   # aluminum clamp collar below the anvil (DDR-002)
     "arm_section": (16.0, 12.0),

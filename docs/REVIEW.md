@@ -228,3 +228,34 @@ Each item is Proposed, awaiting Amish.
 ### TRL
 
 This is an appearance model only: no tolerances, no fabrication detail, nothing past TRL 3. `trl` stays 3, and TRL 4 remains on hold.
+
+
+## Session 2026-09-27: owner decision applied
+
+Amish asked on 2026-09-27 to "resolve the challenges for ConePro, BridgePulse, Grainguard and WellSense". For ConePro that is item 1 of the 2026-09-26 session: the draw-wire drum drawn at 48 mm because the 60 mm drum did not fit its housing. Decided by Amish on 2026-09-27: keep the 60 mm drum and grow the reel housing to about 72 x 60 x 72 mm, accepting about 12 mm less stroke. Recorded in `docs/decisions/0003-reel-housing-size.md` (CNP-DDR-003 v0.1, new, added to `trl_evidence` in `project.yaml`).
+
+### What changed
+
+- `cad/src/model.py`: `reel_box` 60 x 56 x 60 mm to 72 x 60 x 72 mm. The reel exit point and every other dimension and interface are unchanged.
+- `cad/src/product_model.py`: the 48 mm `DRUM_SHOWN` stand-in is removed; the drum is drawn from `drum_d` (60 mm) inside the larger housing, with the drum axis, window, window bezel and lid parting line resized to suit. 52 parts, all valid; no interference between drum and housing.
+- `cad/step/`, `cad/stl/` regenerated; `cad/src/sheets.py` and `cad/drawings/CNP-DWG-001.*` Rev P2 to P3; `media/` concept media regenerated (`hero.png`, `concept-blueprint.*`, `exploded.png`, `flow.png`, `model.glb`, `viewer.html`).
+- CNP-CAL-001 v0.3 (`docs/04-calcs/01-sizing.md`), CNP-REQ-001 v0.5, CNP-PRC-001 v0.5, `bom/bom.csv` line 8 (housing size stated), `bom/bom-notes.md`, `docs/pdf/` rebuilt.
+
+### Result
+
+- Reel top 66 to 78 mm above the ground. Stroke per lower rod 940 to 928 mm, still limited by the wire arm on the reel housing; the 850 mm usable range holds with a 78 mm margin [D1, D2]. R5 stays met.
+- Knock-on from the shorter free wire: lean error at 850 mm after tilt correction 0.94 to 1.07 mm at 1 degree and 1.77 to 2.02 mm at 2 degrees [E4]; rigid-eye snap tension 41 to 283 N became 44 to 304 N, still limited to 9 to 35 N by the preloaded eye spring [E5]. R2 stays at risk.
+- Cost ($319), carried mass (15.7 kg) and `budget_usd` ($400) unchanged. Requirement count unchanged: 9 met, 2 at risk (R2, R11), 4 not verifiable at TRL 3.
+
+### Renders
+
+The photoreal renders (`media/render-hero.png`, `media/render-exploded.png`, `media/render-detail.png`) need regenerating: YES, all three views. The reel housing is larger in every view, and the drum is now 60 mm (visible through the window in the hero and detail views and as a separate part in the exploded view). The render images were not regenerated in this session.
+
+### Still Proposed, awaiting Amish
+
+- Items 2 to 6 of the 2026-09-26 session (render-only windows, hammer grooves and magnet pockets, T-handle grips in BOM line 6, coiled cable path, reel-to-logger cable).
+- O1: first co-design partner and user group.
+
+### TRL
+
+`trl` stays 3; TRL 4 remains on hold. No fabrication detail was added. No new safety concerns.

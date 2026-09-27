@@ -3,9 +3,9 @@ doc_id: CNP-CAL-001
 title: ConePro sizing calculations
 project: ConePro
 doc_type: Calculation
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-09-27'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,17 +17,21 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002); rerun for the 6 mm plate, aluminum clamp, lighter bag and optional extension rod; R5 and R10 now met
+- version: "0.3"
+  date: '2026-09-27'
+  author: Amish Chadha
+  change: Reel housing grown to 72 x 60 x 72 mm round the 60 mm drum (CNP-DDR-003, decided by Amish on 2026-09-27); rerun; stroke 940 to 928 mm, 850 mm usable range still met; tilt error at 850 mm slightly larger
 ---
 
 # ConePro sizing calculations
 
-On paper, ConePro meets nine of its fifteen requirements, has two at risk and has four that cannot be verified at TRL 3; none is now not met. Version 0.2 applies Amish's decisions in CNP-DDR-002: a 6 mm plate, an aluminum clamp and arm and a 0.40 kg bag bring the carried mass from 16.7 kg to 15.7 kg, so R10 is met with a thin margin, and R5 is restated as 850 mm per rod with a 500 mm extension rod as a separately carried accessory, so R5 is met. The two at risk are depth accuracy (R2), where the bench error budget uses the whole ±1 mm and rod lean adds more near the end of the stroke, and shock survival (R11), where the isolated sensor pad sees about 540 g but cable and connector fatigue are not calculated. The calculations also corrected two TRL 2 estimates: about 28 J, not 33 J, reaches the cone, and the impact at the anvil is thousands of g, not hundreds. They also found that the draw-wire goes slack for a few milliseconds after each blow, which the reel design must allow for. Every number in this note is printed by `docs/04-calcs/sizing.py`; the tag in brackets, for example [B4], is the line of that script's output that carries it.
+On paper, ConePro meets nine of its fifteen requirements, has two at risk and has four that cannot be verified at TRL 3; none is now not met. Version 0.2 applies Amish's decisions in CNP-DDR-002: a 6 mm plate, an aluminum clamp and arm and a 0.40 kg bag bring the carried mass from 16.7 kg to 15.7 kg, so R10 is met with a thin margin, and R5 is restated as 850 mm per rod with a 500 mm extension rod as a separately carried accessory, so R5 is met. Version 0.3 applies Amish's 2026-09-27 decision in CNP-DDR-003: the reel housing grows to 72 x 60 x 72 mm round the 60 mm drum, the stroke falls from 940 mm to 928 mm and the 850 mm usable range still holds. The two at risk are depth accuracy (R2), where the bench error budget uses the whole ±1 mm and rod lean adds more near the end of the stroke, and shock survival (R11), where the isolated sensor pad sees about 540 g but cable and connector fatigue are not calculated. The calculations also corrected two TRL 2 estimates: about 28 J, not 33 J, reaches the cone, and the impact at the anvil is thousands of g, not hundreds. They also found that the draw-wire goes slack for a few milliseconds after each blow, which the reel design must allow for. Every number in this note is printed by `docs/04-calcs/sizing.py`; the tag in brackets, for example [B4], is the line of that script's output that carries it.
 
 > **Safety:** These are first-principles estimates for a paper proof of concept. They are not test data and do not show that any part is safe to use. ConePro drops an 8 kg hammer about 45 J per blow onto a steel anvil and drives a steel rod into the ground; utility locates, eye and hearing protection and the precautions in CNP-PRC-001, Safety, apply to any use.
 
 ## Scope and method
 
-The note checks every requirement in CNP-REQ-001 v0.4 against the design in CNP-PRC-001 v0.4, the decisions in CNP-DDR-001 and CNP-DDR-002 and the parametric model `cad/src/model.py`. The script imports the model's `PARAMS`, derived dimensions and solids, so the masses, travel limits and interfaces used here are those in the STEP files and in drawing CNP-DWG-001. It also reads `bom/bom.csv` and `budget_usd` in `project.yaml`. Run it from the repo root with `python docs/04-calcs/sizing.py`.
+The note checks every requirement in CNP-REQ-001 v0.5 against the design in CNP-PRC-001 v0.5, the decisions in CNP-DDR-001, CNP-DDR-002 and CNP-DDR-003 and the parametric model `cad/src/model.py`. The script imports the model's `PARAMS`, derived dimensions and solids, so the masses, travel limits and interfaces used here are those in the STEP files and in drawing CNP-DWG-001. It also reads `bom/bom.csv` and `budget_usd` in `project.yaml`. Run it from the repo root with `python docs/04-calcs/sizing.py`.
 
 The reference test is the one in CNP-REQ-001: one test point driven to 850 mm in a medium-stiff soil at about 15 mm per blow (57 blows), by one person, on level ground.
 
@@ -77,7 +81,7 @@ The instrument as carried, in its bag with cells, weighs about 15.7 kg; without 
 
 ## D. Penetration range (R5)
 
-As the rod goes down, the first contact is the wire arm landing on the reel housing after 940 mm; the clamp collar would reach the plate at 990 mm and the anvil at 1,016 mm [D1]. The 6 mm plate adds 2 mm to each figure. The usable range is set at 850 mm, because the tilt error in section E grows quickly as the wire gets short [D2]; Amish accepted this range (CNP-DDR-002, D11). Version 0.1 found the 1,000 mm clause of R5 not met because no extension rod was in the BOM. Amish chose option (b) (CNP-DDR-002, D10): R5 is restated as 850 mm per lower rod, and a 500 mm extension rod (0.79 kg, $15, BOM line 16) is a separately carried accessory for deeper tests [C7]. **R5 is now met.** Automatic re-zero after adding a rod is a firmware function and is not verifiable at TRL 3.
+As the rod goes down, the first contact is the wire arm landing on the reel housing after 928 mm; the clamp collar would reach the plate at 990 mm and the anvil at 1,016 mm [D1]. The 6 mm plate adds 2 mm to each figure. Version 0.3 grows the reel housing from 60 x 56 x 60 mm to 72 x 60 x 72 mm so the 60 mm drum fits inside it with walls (CNP-DDR-003, decided by Amish on 2026-09-27); the reel top rises by 12 mm and the stroke falls from 940 mm to 928 mm, which still clears the 850 mm usable range by 78 mm. The usable range is set at 850 mm, because the tilt error in section E grows quickly as the wire gets short [D2]; Amish accepted this range (CNP-DDR-002, D11). Version 0.1 found the 1,000 mm clause of R5 not met because no extension rod was in the BOM. Amish chose option (b) (CNP-DDR-002, D10): R5 is restated as 850 mm per lower rod, and a 500 mm extension rod (0.79 kg, $15, BOM line 16) is a separately carried accessory for deeper tests [C7]. **R5 is now met.** Automatic re-zero after adding a rod is a firmware function and is not verifiable at TRL 3.
 
 ## E. Depth measurement (R2, R4)
 
@@ -97,11 +101,11 @@ As the rod goes down, the first contact is the wire arm landing on the reel hous
 | Exit eyelet geometry | ±0.05 |
 | **Worst case; root sum square** | **±0.98; ±0.49** |
 
-The worst case uses the whole ±1 mm allowance of R2, so **R2 is at risk**. The raw wire stretch, 0.37 mm at zero depth, is mostly removed by the calibration. A printed plastic drum would add about 0.9 mm of thermal error, so the drum must be metal [E3].
+The worst case uses the whole ±1 mm allowance of R2, so **R2 is at risk**. The raw wire stretch, 0.36 mm at zero depth, is mostly removed by the calibration. A printed plastic drum would add about 0.9 mm of thermal error, so the drum must be metal [E3].
 
-**Rod lean in the field.** If the rod leans, the arm eye moves sideways over the reel and the wire reads short, most of all near the end of the stroke where the wire is short. At 1° of lean the uncorrected error is 0.16 mm at 500 mm, 1.34 mm at 850 mm and 15.4 mm at the full 940 mm; at 2° it is 5.24 mm at 850 mm [E4]. The app can correct for the lean using the tilt reading (D1), but a ±0.3° tilt error still leaves 0.94 mm at 1° and 1.77 mm at 2° at 850 mm [E4]. This is why the usable range stops at 850 mm, and why the depth accuracy in stiff layers near the end of a rod is weaker than the bench budget.
+**Rod lean in the field.** If the rod leans, the arm eye moves sideways over the reel and the wire reads short, most of all near the end of the stroke where the wire is short. At 1° of lean the uncorrected error is 0.17 mm at 500 mm, 1.52 mm at 850 mm and 15.2 mm at the full 928 mm; at 2° it is 5.91 mm at 850 mm [E4]. The app can correct for the lean using the tilt reading (D1), but a ±0.3° tilt error still leaves 1.07 mm at 1° and 2.02 mm at 2° at 850 mm [E4]. These are slightly larger than in version 0.2 (0.94 mm and 1.77 mm) because the taller reel housing leaves 12 mm less wire above the reel at the same depth. This is why the usable range stops at 850 mm, and why the depth accuracy in stiff layers near the end of a rod is weaker than the bench budget.
 
-**Wire slack after each blow.** The rod starts down at 2.82 m/s and stops within 1.4 ms at 2 mm per blow, 10.6 ms at 15 mm per blow and 35 ms at 50 mm per blow. The spring cannot rewind the drum that fast, so the wire goes slack by up to 1.9, 9.6 and 17.4 mm and becomes taut again after 5.2 to 35 ms [E5]. Two consequences follow. First, the reel needs a groove keeper so slack wire cannot jump the groove and break the single-layer assumption. Second, when the wire snaps taut the drum stops suddenly: with a rigid eye the peak wire tension would be 41 to 283 N at 850 mm, near or above the breaking load of a 0.45 mm wire. A preloaded spring at the arm eye (8 N preload, 2 N/mm) limits the peak to 9 to 35 N, and because the spring stays on its stop under the 3 to 5 N reel force it adds no reading error [E5]. Both details are in BOM line 8; Amish accepted them (CNP-DDR-002, D11).
+**Wire slack after each blow.** The rod starts down at 2.82 m/s and stops within 1.4 ms at 2 mm per blow, 10.6 ms at 15 mm per blow and 35 ms at 50 mm per blow. The spring cannot rewind the drum that fast, so the wire goes slack by up to 1.9, 9.6 and 17.4 mm and becomes taut again after 5.2 to 35 ms [E5]. Two consequences follow. First, the reel needs a groove keeper so slack wire cannot jump the groove and break the single-layer assumption. Second, when the wire snaps taut the drum stops suddenly: with a rigid eye the peak wire tension would be 44 to 304 N at 850 mm, near or above the breaking load of a 0.45 mm wire. A preloaded spring at the arm eye (8 N preload, 2 N/mm) limits the peak to 9 to 35 N, and because the spring stays on its stop under the 3 to 5 N reel force it adds no reading error [E5]. Both details are in BOM line 8; Amish accepted them (CNP-DDR-002, D11).
 
 **Record latency (R4).** The depth is settled at most 35 ms after impact, so a 0.2 s settle window plus one 100 Hz sample records each blow 0.21 s after impact, inside the 0.5 s of R4 [E6].
 
@@ -153,11 +157,11 @@ The sensor set clamps to a 16 mm rod, straps to any 50 to 80 mm anvil, sits 8 mm
 
 | ID | Value (calculation tag) | Target | Status |
 | --- | --- | --- | --- |
-| R2 | 0.046 mm resolution; bench ±0.98 mm worst, ±0.49 mm RSS; up to 1.8 mm more at 850 mm with a 2° lean [E1 to E4] | 0.5 mm; ±1 mm over 1,000 mm | At risk |
+| R2 | 0.046 mm resolution; bench ±0.98 mm worst, ±0.49 mm RSS; up to 2.0 mm more at 850 mm with a 2° lean [E1 to E4] | 0.5 mm; ±1 mm over 1,000 mm | At risk |
 | R11 | About 543 g at the isolated pad; 1,400 to 5,500 g mean at the anvil [G1, G2] | IP65; 0 to 45 °C; 10,000 blows | At risk |
 | R1 | 8.00 kg, 575 mm drop, 16 mm rod, 20 mm 60° cone [A1 to A3] | ASTM D6951 geometry | Met (nominal) |
 | R4 | Settled within 35 ms; record at 0.21 s [E5, E6] | Within 0.5 s | Met |
-| R5 | 940 mm stroke, 850 mm usable per rod; optional 500 mm extension rod [D1, D2, C7] | 850 mm per rod; extension rod as a separate accessory | Met (re-zero not verifiable) |
+| R5 | 928 mm stroke, 850 mm usable per rod; optional 500 mm extension rod [D1, D2, C7] | 850 mm per rod; extension rod as a separate accessory | Met (re-zero not verifiable) |
 | R6 | ±0.3° tilt reading; warning at 5° [H1] | Warn above 5° | Met by design |
 | R8 | About 830 tests stored [I1] | 50 tests | Met |
 | R9 | 8.1 to 11.7 min [J1] | 12 min or less | Met (estimate, thin) |
@@ -176,6 +180,6 @@ Counts: 9 met, 2 at risk, 0 not met, 4 not verifiable at TRL 3 (v0.1: 7 met, 2 a
 - Energy at the cone: TRL 2 said about 33 J (74 %); this note gives 28.0 J (62 %) [B5]. CNP-PRC-001 and the flow diagram are corrected.
 - Anvil shock: TRL 2 said hundreds to a few thousand g; this note gives about 1,400 to 5,500 g mean at the anvil and about 540 g at an isolated pad [G1, G2]. Corrected.
 - Total mass: TRL 2 said about 15.2 kg; v0.1 gave 16.7 kg with the bag, and v0.2, with the DDR-002 savings, gives 15.7 kg with the bag and 15.3 kg without it [C2, C6]. R10 is now met.
-- Penetration per rod: TRL 2 said about 850 mm; the model's stroke is 940 mm with 850 mm usable [D2]. Consistent.
+- Penetration per rod: TRL 2 said about 850 mm; the model's stroke is 928 mm with 850 mm usable [D2]. Consistent.
 - Cost: TRL 2 said about $296; v0.1 gave $321 and v0.2 gives $319 [L1].
 - Resolution 0.046 mm, fall time 0.342 s, impact speed 3.36 m/s, battery life about 40 h and the CBR table are unchanged [B1], [E1], [E7], [K2].

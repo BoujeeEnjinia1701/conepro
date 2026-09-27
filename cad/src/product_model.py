@@ -70,7 +70,6 @@ C_SCREEN = "#E7F4F1"
 # Appearance-only detail sizes (mm)
 GROUND = 560.0          # side of the context ground patch
 GROUND_D = 70.0         # its visible depth
-DRUM_SHOWN = 48.0       # drum drawn smaller than drum_d so it fits its housing (see REVIEW.md)
 REEL_WALL = 2.5
 LOG_WALL = 2.5
 
@@ -270,27 +269,27 @@ def product_parts(P=PARAMS):
     # ---- 8 draw-wire depth sensor: housing, lid, window, drum, eyelet, wire
     rx, ry = P["reel_xy"]
     bx, by, bz = P["reel_box"]
-    split = T + bz - 14.0
+    split = T + bz - 10.0
     hous = _prism(bx, by, 6.0, T, bz, x=rx, y=ry)
     hous = _fillet_try(hous, _top_edges(hous), [3.0, 2.0, 1.0])
     hous -= _prism(bx - 2 * REEL_WALL, by - 2 * REEL_WALL, 4.0, T + REEL_WALL, bz - 2 * REEL_WALL, x=rx, y=ry)
     hous -= _prism(bx + 2, by + 2, 7.0, split - 0.3, 0.6, x=rx, y=ry) - _prism(bx - 1.2, by - 1.2, 5.4, split - 1, 2, x=rx, y=ry)
-    wz = T + 26.0
-    win_cut = Pos(rx, ry - by / 2, wz) * Rot(90, 0, 0) * Cylinder(19.0, 10.0)
+    dr = P["drum_d"] / 2               # full 60 mm drum; the housing is sized round it (CNP-DDR-003)
+    wz = T + REEL_WALL + 1.5 + dr      # drum axis height, drum clear of the housing floor
+    win_cut = Pos(rx, ry - by / 2, wz) * Rot(90, 0, 0) * Cylinder(dr - 8.0, 10.0)
     lid = hous & Pos(rx, ry, split) * Box(bx + 4, by + 4, 40, align=(Align.CENTER, Align.CENTER, Align.MIN))
     base = hous & Pos(rx, ry, split) * Box(bx + 4, by + 4, 80, align=(Align.CENTER, Align.CENTER, Align.MAX))
     base -= win_cut
-    base -= Pos(rx, ry - by / 2, wz) * Rot(90, 0, 0) * (Cylinder(22.0, 1.2) - Cylinder(19.0, 2))
-    base += Pos(rx, ry - by / 2 + 0.2, wz) * Rot(90, 0, 0) * (Cylinder(23.5, 1.6) - Cylinder(20.5, 2))
+    base -= Pos(rx, ry - by / 2, wz) * Rot(90, 0, 0) * (Cylinder(dr - 5.0, 1.2) - Cylinder(dr - 8.0, 2))
+    base += Pos(rx, ry - by / 2 + 0.2, wz) * Rot(90, 0, 0) * (Cylinder(dr - 3.5, 1.6) - Cylinder(dr - 6.5, 2))
     lid -= _cyl(1.8, 10, T + bz - 5, rx, ry)
     add("Draw-wire housing (IP65)", base, C_SHELL, "plastic", 8, "shell", ex("reel"))
     add("Draw-wire housing lid", lid, C_SHELL2, "plastic", 8, "shell", ex("reel", dz=60))
     heads = [_fillet_try(_cyl(2.6, 1.2, T + bz, rx + sx * (bx / 2 - 7), ry + sy * (by / 2 - 7)),
                          [], [0.3]) for sx in (-1, 1) for sy in (-1, 1)]
     add("Housing lid screws", Compound(children=heads), C_STAINLESS, "metal", 14, "shell", ex("reel", dz=60))
-    win = Pos(rx, ry - by / 2 + 1.25, wz) * Rot(90, 0, 0) * Cylinder(20.5, 1.5)
+    win = Pos(rx, ry - by / 2 + 1.25, wz) * Rot(90, 0, 0) * Cylinder(dr - 6.5, 1.5)
     add("Draw-wire drum window", win, C_WINDOW, "clear", 8, "shell", ex("reel", dy=-60))
-    dr = DRUM_SHOWN / 2
     drum = Pos(rx, ry, wz) * Rot(90, 0, 0) * Cylinder(dr - 2.0, 30.0)
     for s in (-1, 1):
         drum += Pos(rx, ry + s * 14.0, wz) * Rot(90, 0, 0) * Cylinder(dr, 2.0)
