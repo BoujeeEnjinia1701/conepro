@@ -3,9 +3,9 @@ doc_id: CNP-PRC-001
 title: ConePro design precis
 project: ConePro
 doc_type: Design precis
-version: "0.5"
+version: "0.6"
 status: Draft
-date: '2026-09-27'
+date: '2026-09-30'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -29,11 +29,15 @@ revisions:
   date: '2026-09-27'
   author: Amish Chadha
   change: Reel housing 72 x 60 x 72 mm round the 60 mm drum (CNP-DDR-003, decided by Amish on 2026-09-27); stroke 928 mm, 850 mm usable; numbers from CNP-CAL-001 v0.3; CNP-DWG-001 Rev P3
+- version: "0.6"
+  date: '2026-09-30'
+  author: Amish Chadha
+  change: Design for construction (CNP-DDR-004, open for Amish's review); M12 rod joints, one-piece clamp against the anvil, reel internals and fixings, reel-to-logger cable (BOM line 17); stroke 939 mm; $335; numbers from CNP-CAL-001 v0.4; CNP-DWG-001 Rev P5; build plan CNP-BLD-001
 ---
 
 # ConePro design precis
 
-ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.3) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $319 in parts, within the $400 budget. With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trims the stroke from 940 mm to 928 mm and still clears the 850 mm usable range. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
+ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.4) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $335 in parts, within the $400 budget. With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trimmed the stroke from 940 mm to 928 mm. On 2026-09-30, under Amish's instruction to make the design physically buildable, the model was made constructable (CNP-DDR-004, open for his review): threaded rod joints, a one-piece clamp that butts the anvil, a reel with its drum, spring motor and sensor inside, fixings for every part and a cable from the reel to the logger. The stroke is now 939 mm, and the prototype build plan (CNP-BLD-001, `docs/05-build-plan.md`) shows how to make and assemble every part. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -58,20 +62,21 @@ Numbers match the exploded view (Figure 3) and `bom/bom.csv`. Geometry is in the
 
 | # | Component | Choice | Notes |
 | --- | --- | --- | --- |
-| 1 | Cone | Hardened steel, 20 mm base, 60 degree point, threaded onto the rod | Replaceable; a worn cone biases results |
-| 2 | Lower drive rod | 16 mm steel, 1,000 mm, engraved every 10 mm | Engraving is a manual backup scale and the calibration reference |
-| 3 | Anvil and coupler | Steel, 64 mm diameter x 60 mm, threaded between the rods | Plain; the sensor pad clamps on (D3) |
-| 4 | Drop hammer | 8.0 kg steel, 100 mm OD x 22 mm bore x 136.4 mm | Sixteen 8 x 4 mm magnets in the lower face |
-| 5 | Upper rod (hammer guide) | 16 mm steel, 729 mm | Gives the 575 mm free drop to the stop |
-| 6 | Handle and top stop | 26 mm tube T-handle, 44 mm stop collar, bubble level | Level is the tilt backup (D1) |
+| 1 | Cone | Hardened steel, 20 mm base, 60 degree point, 12 mm shoulder tapped M12, screwed onto the rod | Replaceable; a worn cone biases results |
+| 2 | Lower drive rod | 16 mm steel, 1,000 mm between shoulders, M12 studs on both ends, engraved every 10 mm | Engraving is a manual backup scale and the calibration reference |
+| 3 | Anvil and coupler | Steel, 64 mm diameter x 60 mm, tapped M12 at both ends | Plain; the sensor pad clamps on (D3) |
+| 4 | Drop hammer | 8.0 kg steel, 100 mm OD x 22 mm bore x 136.5 mm | Sixteen 8 x 4 mm magnets bonded in pockets in the lower face, outside the strike area |
+| 5 | Upper rod (hammer guide) | 16 mm steel, 776 mm above the anvil plus an M12 stud, running up through the handle | Gives the 575 mm free drop to the stop |
+| 6 | Handle and top stop | 26 mm tube T-handle welded to the upper rod, 44 mm stop collar on a 6 mm roll pin, bubble level on a welded seat | Level is the tilt backup (D1) |
 | 7 | Reference plate | 300 x 300 x 6 mm aluminum, 60 mm center hole and slot | Depth reference on the ground surface; 6 mm to save mass (D9) |
 | 8 | Draw-wire depth sensor | 60 mm grooved aluminum drum, single layer, constant-force spring, 12-bit angle sensor, groove keeper, preloaded eye spring | Drum must be metal for thermal stability; bought industrial sensor is the fallback |
-| 9 | Anvil clamp and wire arm | Aluminum split collar on the lower rod, arm about 115 mm to the wire eye | Wire exit on the plate 105 mm from the rod; aluminum to save mass (D9) |
+| 9 | Anvil clamp and wire arm | One piece cut from 12 mm aluminum plate: split collar on the lower rod, butting the anvil underside, arm about 115 mm to the wire eye | Wire exit on the plate 105 mm from the rod; aluminum to save mass (D9) |
 | 10 | Blow and tilt sensor pad | Hall switch and 3-axis accelerometer, potted, on a 300 Hz elastomer isolator, band clamp for 50 to 80 mm anvils | Top 8 mm below the anvil top, under the hammer overhang |
 | 11 | BLE logger | Microcontroller with BLE, 4 MB flash, button and LED, three AA cells, IP65 box | Kept on the plate, away from impacts |
 | 12 | Coiled sensor cable | Pad to logger, with a strain relief at each end | Follows the rod down during the test |
+| 17 | Reel-to-logger cable | 4-core cable through glands, in two P-clips on the plate | Carries the angle sensor signal; added for construction (CNP-DDR-004) |
 | 15 | Rod extraction lever (optional) | Lever puller with a self-gripping 16 mm rod clamp, about 10:1, about 3 kg | Carried separately; outside the R13 total (D2) |
-| 16 | Extension rod (optional) | 16 mm steel, 500 mm, engraved every 10 mm, 0.79 kg | Carried separately with the lever; outside the R10 mass and R13 total (D10) |
+| 16 | Extension rod (optional) | 16 mm steel, 500 mm, M12 studs and a 20 mm coupling sleeve, engraved every 10 mm, 0.79 kg | Carried separately with the lever; outside the R10 mass and R13 total (D10) |
 
 ![Exploded view](../media/exploded.png)
 
@@ -87,7 +92,7 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 | --- | --- | --- |
 | Potential energy per blow | 45.1 J [B1] | 8.0 kg x 9.81 m/s² x 0.575 m |
 | Impact speed; fall time | 3.36 m/s; 0.342 s [B1] | Free fall over 575 mm |
-| Energy reaching the cone | 28.0 J, 62 % (26.0 to 31.2 J) [B4] | 3 % guide friction; Hiley impact efficiency with restitution 0.4 (0.2 to 0.6) and 5.12 kg driven mass; 5 % rod and side friction |
+| Energy reaching the cone | 28.0 J, 62 % (26.1 to 31.2 J) [B4] | 3 % guide friction; Hiley impact efficiency with restitution 0.4 (0.2 to 0.6) and 5.09 kg driven mass; 5 % rod and side friction |
 | Mean dynamic soil resistance | 1.9 kN at 15 mm per blow; 14.0 kN at 2 mm per blow [B6] | Energy at the cone over penetration |
 | Blow rate | 17 to 24 per minute | One blow every 2.5 to 3.5 s (assumed) |
 
@@ -105,7 +110,7 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 | --- | --- | --- |
 | Resolution | 0.046 mm per count [E1] | R2 resolution met |
 | Bench error over 1,000 mm, vertical rod | ±0.98 mm worst case; ±0.49 mm root sum square [E3] | R2 (±1 mm) at risk |
-| Extra error from rod lean at 850 mm, after tilt correction | 1.07 mm at 1 degree; 2.02 mm at 2 degrees [E4] | Why the usable range stops at 850 mm (accepted, D11) |
+| Extra error from rod lean at 850 mm, after tilt correction | 0.95 mm at 1 degree; 1.79 mm at 2 degrees [E4] | Why the usable range stops at 850 mm (accepted, D11) |
 | DCP index error, 10 blows at 2 mm per blow | ±4.9 % RSS (±9.8 % worst); CBR ±5.5 % [E8] | |
 | Wire slack after a blow | 1.9 to 17 mm for 5 to 35 ms [E5] | Groove keeper and preloaded eye spring needed |
 | Record latency | 0.21 s after impact [E6] | R4 met |
@@ -115,13 +120,13 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 
 | Quantity | Estimate | Requirement |
 | --- | --- | --- |
-| Stroke per lower rod | 928 mm, limited by the wire arm meeting the reel housing (72 x 60 x 72 mm round the 60 mm drum, CNP-DDR-003); 850 mm usable [D1, D2]; optional 500 mm extension rod [C7] | R5 (restated, D10) met |
-| Assembled height | 1,867 mm [A3] | |
+| Stroke per lower rod | 939 mm, limited by the wire arm meeting the reel housing (72 x 60 x 72 mm round the 60 mm drum, CNP-DDR-003); 850 mm usable [D1, D2]; optional 500 mm extension rod [C7] | R5 (restated, D10) met |
+| Assembled height | 1,874 mm [A3] | |
 | Mass as carried in the bag | 15.7 kg (was 16.7 kg); 15.3 kg without the bag [C2, C6] | R10 (16 kg) met, thin |
-| Heaviest piece | 9.82 kg, hammer captive on the upper rod [C3] | R10 (10 kg) met |
-| Packed length | About 1.08 m (longest piece 1,022 mm) [C4] | R10 met |
+| Heaviest piece | 9.83 kg, hammer captive on the upper rod [C3] | R10 (10 kg) met |
+| Packed length | About 1.08 m (longest piece 1,029 mm) [C4] | R10 met |
 | Reference test time | 8.1 to 11.7 min [J1] | R9 met, thin |
-| Shock at the anvil; at the isolated pad | 1,400 to 5,500 g mean; about 543 g [G1, G2] | R11 at risk |
+| Shock at the anvil; at the isolated pad | 1,400 to 5,500 g mean; about 544 g [G1, G2] | R11 at risk |
 | Tilt reading | ±0.3 degree after rotation zeroing [H1] | R6 met by design |
 | Average current; battery life | 50.2 mA; 40 h, 20 h at 0 °C [K1, K2] | R12 met |
 | Storage | About 830 tests in 4 MB [I1] | R8 met |
@@ -130,11 +135,11 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 
 | Group | Indicative cost |
 | --- | --- |
-| Mechanical DCP (items 1 to 7) | $170 |
-| Sensing and logging (items 8 to 12) | $104 |
-| Carry bag, hardware and consumables (items 13, 14) | $45 |
-| **Instrument total** | **$319** (R13, $400, met) |
-| Optional extraction lever (item 15) and extension rod (item 16) | $50 and $15, outside the instrument total |
+| Mechanical DCP (items 1 to 7) | $174 |
+| Sensing and logging (items 8 to 12, 17) | $113 |
+| Carry bag, hardware and consumables (items 13, 14) | $48 |
+| **Instrument total** | **$335** (R13, $400, met) |
+| Optional extraction lever (item 15) and extension rod (item 16) | $50 and $16, outside the instrument total |
 
 ## Key design choices
 

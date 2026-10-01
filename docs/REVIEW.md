@@ -265,3 +265,57 @@ The photoreal renders (`media/render-hero.png`, `media/render-exploded.png`, `me
 - Kit 1.5.0 synced: STANDARDS v1.5 (sections 12 to 15: product renders, storefront images and image quality, public release, authorship and signing), `.kit/cards.py`, `.kit/image_qc.py`, `.kit/release_gate.py`, issue templates, and the `/render-product` and `/release` commands. `CLAUDE.md` now matches `.kit/CLAUDE.md`.
 - Every `media/render-*.png` recaptioned from its original render with the new layout: the title, concept label and repository sit in a band above the render and the view note in a band below it, each line wrapped to the image width, so no text overlaps other text or the render or runs off the image. `media/card.png` and `media/social-preview.png` regenerated with the same rules.
 - `python .kit/image_qc.py` and `python .kit/release_gate.py` pass. trl stays 3.
+
+## Session 2026-09-30: design for construction and prototype build plan (kit 1.7.0)
+
+Amish approved the build plan format on 2026-09-30 and asked for it across all repos, with outstanding decisions kept out of the build plan and in a separate design decisions register. He also wrote: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." This session applies both to ConePro. `trl` stays 3; nothing was built or bought.
+
+### What was done
+
+- Kit 1.7.0 installed (`.kit/`, `.claude/commands/`); `CLAUDE.md` matches `.kit/CLAUDE.md`.
+- `cad/src/model.py` rewritten to a constructable model: `build_components()` gives 39 separate parts and fixing sets; `build_parts()` fuses them into the BOM-numbered parts the calculations, drawing and concept media use; `python cad/src/model.py --check` runs 64 constructability checks (contacts, clearances, and no overlap between any two components). All 64 pass.
+- New decision record `docs/decisions/0004-design-for-construction.md` (CNP-DDR-004 v0.1, Draft), made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review.
+- `bom/bom.csv`: specs of lines 1 to 11, 14 and 16 now carry the joints and fixings; line 17 (reel-to-logger cable) added; `bom/bom-notes.md` updated.
+- Calculations rerun: CNP-CAL-001 v0.4 (`docs/04-calcs/sizing.py` now also allows for the magnet recess and line 17); CNP-PRC-001 v0.6; CNP-REQ-001 v0.6. No requirement changes status: 9 met, 2 at risk (R2, R11), 4 not verifiable at TRL 3.
+- STEP and STL regenerated; general arrangement CNP-DWG-001 Rev P4 to P5; concept media regenerated (`hero.png`, `concept-blueprint.*`, `exploded.png` now with the kit's own numbered callouts, `flow.png`, `model.glb`, `viewer.html`).
+- `cad/src/build_plan_media.py` (new): overview, 13 making sketches (CNP-DWG-101 to 113, rods drawn as broken views), 10 joint close-ups, 13 step pictures, a plate hole layout and a block wiring diagram, all from the model.
+- `docs/05-build-plan.md` (CNP-BLD-001 v0.1) and `docs/06-design-decisions.md` (CNP-DEC-001 v0.1) written; both added to `trl_evidence`; `design_state: constructable` in `project.yaml`; README links line and "Building the prototype" section added.
+
+### Design changes made for construction (CNP-DDR-004)
+
+1. Cone shoulder 5 to 12 mm, tapped M12 x 1.75, 14 mm deep (cone 29.3 mm overall); instrument 1,867 to 1,874 mm tall.
+2. M12 studs on the rod ends and M12 tapped holes 24 mm deep in both anvil faces; every joint seats on a square shoulder.
+3. Upper rod runs through the stop collar (6 mm roll pin, drilled at the set drop) and through the T-handle tube (welded); upper rod 776 mm above the anvil plus a 20 mm stud.
+4. Bubble level is a 20 mm bullseye in a seat disc welded to the rod top.
+5. Sixteen magnet pockets on an 82 mm circle, outside the anvil strike area, magnets 0.5 mm below the face; hammer 136.5 mm long to stay at 8.00 kg.
+6. Clamp collar and arm cut in one piece from 12 mm aluminum plate (was a collar with an arm through the rod), with a saw slit and M5 clamp screw; its top now butts the anvil underside (was 4 mm below it), so the anvil carries it at every blow.
+7. Sensor pad face curved on a curved 4 mm isolator; the band goes round the anvil and over the pad (it ran through the pad); cable strain relief boss.
+8. Reel housing given walls, posts, a bearing boss, a screwed lid, a drum on a shaft in two bearings, a spring motor, shaft magnet and sensor board; the drum's edge is under the wire exit, so the housing centre moved 30.7 mm toward the rod (exit point and housing size unchanged).
+9. Reel screwed to the plate from below into heat-set inserts; logger is a flanged box screwed to tapped plate holes.
+10. Reel-to-logger cable added (BOM line 17, $6), with glands and two P-clips (closes item 6 of the 2026-09-26 session, subject to Amish's review of CNP-DDR-004).
+11. Two M12 glands in the logger end wall for the coiled cable and the reel cable.
+12. Wire through the arm eye, preload spring and a crimped end stop drawn.
+13. Optional extension rod gets M12 studs and a 20 mm coupling sleeve ($15 to $16).
+
+Knock-on numbers: stroke 928 to 939 mm (850 mm usable unchanged); lean error at 850 mm after tilt correction 1.07 to 0.95 mm (1°) and 2.02 to 1.79 mm (2°); rigid-eye snap tension 44 to 304 N became 42 to 284 N; driven mass 5.12 to 5.09 kg; carried mass 15.7 kg unchanged; heaviest piece 9.83 kg; instrument cost $319 to $335; kit with both optional accessories $401.
+
+### Proposed, awaiting Amish
+
+All are in `docs/06-design-decisions.md`:
+
+1. Accept CNP-DDR-004 as a whole.
+2. Hammer can slide off the upper rod when it is unscrewed from the anvil; recommendation: a screw-on end cap on the stud (adds to the safety case).
+3. Kit with both optional accessories is $401, $1 over the $400 budget; recommendation: keep the budget comparison on the instrument ($335).
+4. Carried over: O1 co-design partner; render windows, hammer grip grooves, T-handle grips and coiled cable path (2026-09-26 items 2 to 5).
+
+### Stale images (made on Amish's Mac, not regenerated here)
+
+`media/render-hero.png`, `media/render-exploded.png`, `media/render-detail.png`, `media/card.png` and `media/social-preview.png` are stale: the clamp is now one piece against the anvil, the handle has a seat and bullseye level instead of a block level, the pad sits under its band, the reel housing sits 30.7 mm nearer the rod and the logger has flanges, glands and a second cable. `cad/src/product_model.py` needs the same updates before they are rendered again.
+
+### Safety
+
+No new hazard in the product. The build adds welding (handle) and lathe work on hardened steel, covered by the build plan's safety stops. The packing hazard of the hammer sliding off the upper rod is listed as open decision 2.
+
+### Recommended next step
+
+Amish reviews CNP-DDR-004 and the open decisions in the register. TRL 4 remains on hold; when it is released, the build plan is the starting point for the bench build.

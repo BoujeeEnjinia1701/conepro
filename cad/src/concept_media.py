@@ -16,14 +16,16 @@ from model import build_parts  # noqa: E402
 m = build_parts()
 EXPLODE = {"cone": (0, 0, -110), "lower_rod": (0, 0, -30), "anvil": (0, 0, 60), "hammer": (-330, -330, 420),
            "upper_rod": (0, 0, 150), "handle": (0, 0, 260), "plate": (0, 0, -260), "drawwire": (330, 330, -150),
-           "clamp": (330, 330, 60), "pad": (-330, 330, 60), "logger": (-330, 330, -150), "cable": (-450, 250, 0)}
+           "clamp": (330, 330, 60), "pad": (-330, 330, 60), "logger": (-330, 330, -150), "cable": (-450, 250, 0),
+           "reel_cable": (0, 420, -150)}
 parts = [Part(name, shape, color, bom, EXPLODE[k]) for k, (name, shape, bom, color) in m.items()]
 
 # Callout offsets for the exploded view, in screen pixels (dx right, dy down) from each part.
 # The kit places callouts on the part itself, which hides the small sensor parts on a 1.9 m tall
 # assembly, so the view is redrawn below with leader lines.
 CALLOUT = {1: (70, 0), 2: (60, 40), 3: (60, 0), 4: (-60, -40), 5: (60, 0), 6: (60, 10),
-           7: (-90, 10), 8: (60, 30), 9: (60, -30), 10: (60, -10), 11: (-70, 0), 12: (-60, 0)}
+           7: (-90, 10), 8: (60, 30), 9: (60, -30), 10: (60, -10), 11: (-70, 0), 12: (-60, 0),
+           17: (60, 20)}
 
 
 def exploded_with_leaders(parts, out, elev=24, azim=-58, size=(8, 6), dpi=160, ss=2, pad=0.06):
@@ -76,15 +78,16 @@ if __name__ == "__main__":
                      "About 45 J per blow; 16 mm rod, 20 mm 60 deg cone",
                      "About 28 J at the cone (estimate, CNP-CAL-001)",
                      "Draw-wire depth: 0.05 mm resolution; 850 mm per rod",
-                     "About 15.7 kg with bag; about $319 in parts"],
+                     "About 15.7 kg with bag; about $335 in parts"],
         cut=False,
         flow={"title": "energy per blow, J (estimates)", "unit": "J",
-              "stages": [("Hammer at 575 mm", 45.1), ("At impact", 43.8), ("Into rod", 29.4),
+              "stages": [("Hammer at 575 mm", 45.1), ("At impact", 43.8), ("Into rod", 29.5),
                          ("At cone", 28.0), ("Work on soil", 28.0)],
-              "losses": [(0, "Guide friction (3 %)", 1.4), (1, "Impact, e = 0.4 (33 %)", 14.4),
+              "losses": [(0, "Guide friction (3 %)", 1.4), (1, "Impact, e = 0.4 (33 %)", 14.3),
                          (2, "Rod wave, side friction (5 %)", 1.5)]},
     )
-    exploded_with_leaders(parts, ROOT / "media" / "exploded.png")
+    # The kit now places numbered callouts on visible pixels with leaders, so its exploded view is kept
+    # (the earlier leader redraw no longer matched the kit's cropped layout).
     import shutil
     for tmp in ("_views", "_views_fig"):
         shutil.rmtree(ROOT / "media" / tmp, ignore_errors=True)

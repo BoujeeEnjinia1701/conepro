@@ -57,7 +57,8 @@ A = {
     # bought-part masses, kg
     "mass_bought": {"8 draw-wire reel and housing": 0.30, "10 sensor pad and band": 0.06,
                     "11 logger with 3 AA cells": 0.35, "12 coiled cable": 0.12,
-                    "13 lightweight roll bag": 0.40, "14 hardware, cone cover, spare cone": 0.08},
+                    "13 lightweight roll bag": 0.40, "14 hardware, cone cover, spare cone": 0.10,
+                    "17 reel-to-logger cable and P-clips": 0.04},
     "extractor_kg": 3.0,
     "ext_rod_L": 500.0,            # optional extension rod, carried separately (DDR-002, R5)
 }
@@ -114,7 +115,7 @@ for p_mm in (2, 10, 15, 25):
 out("C1", "part masses, kg: " + "; ".join(f"{k} {v:.2f}" for k, v in masses.items()))
 total = sum(masses.values())
 heavy = sum(parts[k][1].volume * STEEL for k in ("hammer", "upper_rod", "handle"))
-out("C2", f"instrument as carried (items 1 to 14, bag and cells included): {total:.1f} kg; without the bag {total - bag:.1f} kg")
+out("C2", f"instrument as carried (items 1 to 14 and 17, bag and cells included): {total:.1f} kg; without the bag {total - bag:.1f} kg")
 out("C3", f"heaviest piece, hammer captive on the upper rod with the handle: {heavy:.2f} kg; hammer alone {m_hammer:.2f} kg")
 long_rod = P["lower_rod_L"] + D["z_rod"]
 hammer_asm = D["height"] - D["z_anvil_top"]
@@ -236,7 +237,7 @@ out("E9", f"plate bearing area {plate_area:.3f} m2; static bearing pressure {pla
 mu0 = 4e-7 * math.pi
 Vm = math.pi / 4 * (A["mag_d"] / 1000) ** 2 * (A["mag_t"] / 1000)
 mom = A["Br_T"] * Vm / mu0
-zc = (P["pad_gap"] + A["mag_t"] / 2) / 1000
+zc = (P["pad_gap"] + P["mag_recess"] + A["mag_t"] / 2) / 1000   # magnets set 0.5 mm into the face (CNP-DDR-004)
 R = A["mag_r"] / 1000
 
 
@@ -255,8 +256,8 @@ lift = 0.030
 b_lift = sum(1e-7 * mom * (3 * (zc + lift) ** 2 / ((2 * R * math.sin(math.pi * i / A['n_mag'])) ** 2 + (zc + lift) ** 2) ** 2.5
                            - 1 / ((2 * R * math.sin(math.pi * i / A['n_mag'])) ** 2 + (zc + lift) ** 2) ** 1.5)
              for i in range(A["n_mag"])) * 1000
-out("F1", f"{A['n_mag']} magnets {A['mag_d']:.0f} x {A['mag_t']:.0f} mm on a {A['mag_r']:.0f} mm radius, Hall {P['pad_gap']:.0f} mm below "
-          f"the hammer face: {b_on:.0f} mT under a magnet, {b_gap:.0f} mT between magnets, {b_lift:.1f} mT with the hammer "
+out("F1", f"{A['n_mag']} magnets {A['mag_d']:.0f} x {A['mag_t']:.0f} mm on a {A['mag_r']:.0f} mm radius, Hall {P['pad_gap'] + P['mag_recess']:.1f} mm below the magnets, "
+          f"0.5 mm inside the hammer face: {b_on:.0f} mT under a magnet, {b_gap:.0f} mT between magnets, {b_lift:.1f} mT with the hammer "
           f"lifted 30 mm; switch operate point {A['hall_op_mT']:.0f} mT (dipole model, steel hammer ignored)")
 out("F2", f"minimum time between real blows: fall {tf:.2f} s plus lift; blow period {A['blow_period'][0]} to {A['blow_period'][1]} s; "
           f"count needs Hall arrival, accelerometer peak and a depth step or hold within 0.5 s")
@@ -323,7 +324,7 @@ rows = list(csv.DictReader((ROOT / "bom" / "bom.csv").open()))
 inst = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if "Optional" not in r["notes"])
 opt = sum(float(r["qty"]) * float(r["unit_cost_usd"]) for r in rows if "Optional" in r["notes"])
 budget_usd = yaml.safe_load((ROOT / "project.yaml").read_text())["budget_usd"]
-out("L1", f"BOM {len(rows)} lines, all priced; instrument (lines 1 to 14) ${inst:.0f}; optional accessories (lever, extension rod) "
+out("L1", f"BOM {len(rows)} lines, all priced; instrument (lines 1 to 14 and 17) ${inst:.0f}; optional accessories (lever, extension rod) "
           f"${opt:.0f}; kit with accessories ${inst + opt:.0f}; budget ${budget_usd}")
 req("R13", f"${inst:.0f} instrument; ${inst + opt:.0f} with the optional lever and extension rod [L1]", f"${budget_usd} or less", "Met")
 
