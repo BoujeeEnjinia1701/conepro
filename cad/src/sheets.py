@@ -89,13 +89,14 @@ def main():
     asm = Compound(children=[v[1] for v in parts.values()])
     bb = asm.bounding_box()
     views = views_of(asm, work)
-    s = Sheet(project="ConePro", title="General arrangement", dwg_no="CNP-DWG-001", rev="P3",
-              author="Amish Chadha", date="2026-09-27", scale=None, theme="technical",
+    s = Sheet(project="ConePro", title="General arrangement", dwg_no="CNP-DWG-001", rev="P4",
+              author="Amish Chadha", date="2026-09-27", scale=1 / 20, theme="technical",
               material="Steel rods, anvil, hammer; aluminum plate and clamp; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
               revisions=[("P1", "Preliminary GA for TRL 3 (from cad/src/model.py)", DATE, "AC"),
                          ("P2", "6 mm plate, aluminum clamp, 15.7 kg (CNP-DDR-002)", DATE, "AC"),
-                         ("P3", "Reel housing 72 x 60 x 72 round the 60 mm drum; stroke 928 (CNP-DDR-003)", "2026-09-27", "AC")])
-    s.add_ortho(views)
+                         ("P3", "Reel housing 72 x 60 x 72 round the 60 mm drum; stroke 928 (CNP-DDR-003)", "2026-09-27", "AC"),
+                         ("P4", "Layout and labels tidied", "2026-09-30", "AC")])
+    s.add_ortho(views, dims=False)
     k = s.scale
     c = ortho_cells(s, views)
     L = []
@@ -113,11 +114,16 @@ def main():
     rx = P["reel_xy"][0]
     xr, yr, wr, hr = c["right"]
     L += [ext(xr + wr / 2 + 3, Z(D["arm_under"]), xr + wr + 10, Z(D["arm_under"])), ext(xr + wr / 2 + 3, Z(D["reel_top"]), xr + wr + 10, Z(D["reel_top"]))]
-    L += dim_v(xr + wr + 8, Z(D["arm_under"]), Z(D["reel_top"]), f"{D['travel']:.0f} stroke (850 usable)", side=1)
+    L += dim_v(xr + wr + 8, Z(D["arm_under"]), Z(D["reel_top"]), "", side=1)
+    cxs, cys = xr + wr + 8 + 2.6, (Z(D["arm_under"]) + Z(D["reel_top"])) / 2
+    stroke_txt = f"{D['travel']:.0f} stroke (850 usable)"
+    L.append(f'<g transform="rotate(-90 {cxs:.2f} {cys:.2f})">{_t(cxs, cys, stroke_txt, 2.1, 400, INK, "middle", mono=True)}</g>')
 
     # top view (from +Z): X right, Y up the sheet
     x, y, w, h = c["top"]
     L += dim_h(x, x + w, y - 3, f"{P['plate']:.0f} plate")
+    L += [ext(x, y, x - 5, y), ext(x, y + h, x - 5, y + h)]
+    L += dim_v(x - 4, y, y + h, f"{P['plate']:.0f}")
 
     # detail A: anvil, sensor pad and clamp, front view at 1:5
     z0, z1 = D["z_anvil"] - 60, D["z_anvil_top"] + 60
@@ -137,11 +143,12 @@ def main():
     L += [ext(gx, gy, gx - 14, gy - 10), ext(gx - 14, gy - 10, gx - 16, gy - 10),
           f'<circle cx="{gx:.2f}" cy="{gy:.2f}" r="0.5" fill="{INK}"/>']
     L.append(_t(gx - 17, gy - 9.2, f"{P['pad_gap']:.0f} gap, pad to hammer face", 2.2, 400, INK, "end", mono=True))
-    L += dim_h(Xd(0), Xd(rx), Zd(D["arm_under"]) + 7, f"{rx:.0f} rod to wire")
+    L += dim_h(Xd(0), Xd(rx), Zd(D["arm_under"]) + 7, "")[:3]
+    L.append(_t(Xd(rx) + 1.8, Zd(D["arm_under"]) + 7.8, f"{rx:.0f} rod to wire", 2.1, 400, INK, "start", mono=True))
     L += dim_h(Xd(-P["hammer_od"] / 2), Xd(P["hammer_od"] / 2), Zd(dbb.max.Z) - 3, f"{P['hammer_od']:.0f} hammer, 8.0 kg")
 
     s._layers += L
-    s.add_svg(views["iso"], 290, 32, 125, 80, label="Isometric view", sublabel="Not to scale")
+    s.add_svg(views["iso"], 282, 44, 134, 76, label="Isometric view", sublabel="Not to scale")
     s.add_notes("Main dimensions and interfaces (mm)", [
         f"ASTM D6951: {P['hammer_mass']:.1f} kg hammer, {P['drop']:.0f} drop, {P['rod_d']:.0f} rod, "
         f"{P['cone_d']:.0f} cone at {P['cone_angle']:.0f} deg",
@@ -154,7 +161,7 @@ def main():
         f"Stroke {D['travel']:.0f}, limited by the {D['travel_by']}",
         "About 15.7 kg with bag; heaviest piece 9.8 kg (CNP-CAL-001)",
         "Third-angle; front view from -Y; ground at Z 0",
-    ], x=290, y=138, width=132)
+    ], x=282, y=138, width=134)
     out = s.save(ROOT / "cad" / "drawings" / "CNP-DWG-001")
     shutil.rmtree(work, ignore_errors=True)
     print(f"wrote {out} and .pdf, .png at scale 1:{1 / k:g}")
