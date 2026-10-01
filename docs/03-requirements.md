@@ -3,9 +3,9 @@ doc_id: CNP-REQ-001
 title: ConePro requirements
 project: ConePro
 doc_type: Requirements
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,6 +33,10 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Status from CNP-CAL-001 v0.4 after the design for construction (CNP-DDR-004); R5 stroke 939 mm; R2 lean term 1.8 mm; R13 $335; R15 sensor set now includes the reel cable (line 17); no status changes
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # ConePro requirements
@@ -57,7 +61,7 @@ These requirements were checked by calculation at TRL 3 in CNP-CAL-001 v0.4 agai
 | R10 | Portability | Total mass as carried in the bag, cells included and the optional lever and extension rod excluded, 16 kg or less; heaviest piece 10 kg or less; packed length 1.1 m or less | Met, thin: 15.7 kg (was 16.7 kg before D9); heaviest piece 9.8 kg; packed length about 1.08 m | Mass roll-up; weighing |
 | R11 | Rugged electronics | Logger, sensors and connectors IP65; operate at 0 to 45 °C; anvil-mounted parts survive 10,000 blows | **At risk:** about 1,400 to 5,500 g mean at the anvil; about 540 g on the isolated pad against 10,000 g part ratings; cable and connector fatigue not calculated | Drop-count test |
 | R12 | Battery life | 8 h or more of continuous logging on user-replaceable non-lithium cells | Met (calculation): about 40 h, about 20 h at 0 °C | Power measurement |
-| R13 | Cost | $400 or less in parts for one complete instrument (optional lever and extension rod excluded) | Met: $335; $401 with the lever and extension rod | Priced BOM (`bom/bom.csv`) |
+| R13 | Cost | Within the $400 value-engineering target (hypothetical control target, not a limit) for one complete instrument in parts (optional lever and extension rod excluded) | Within the value-engineering target: $335, $65 under; $401 with the lever and extension rod, $1 over the target | Priced BOM (`bom/bom.csv`) |
 | R14 | Honest results | App states the correlation used and that results are indicative and not for foundation design | Not verifiable at TRL 3 (app not written) | App specification review |
 | R15 | Retrofit fit (D3) | Sensor set (BOM items 8 to 12 and 17) fits a standard ASTM D6951 penetrometer with a 16 mm rod and a 50 to 80 mm anvil, without machining | Not verifiable at TRL 3: interfaces sized in the model; needs a commercial DCP to check | Fit check on a commercial DCP |
 

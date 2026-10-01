@@ -3,9 +3,9 @@ doc_id: CNP-CAL-001
 title: ConePro sizing calculations
 project: ConePro
 doc_type: Calculation
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,6 +25,10 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Rerun for the design for construction (CNP-DDR-004); M12 rod joints and 12 mm cone shoulder, one-piece clamp against the anvil, reel cable added; stroke 939 mm, height 1,874 mm, instrument $335; no requirement changes status
+- version: "0.5"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # ConePro sizing calculations
@@ -149,7 +153,7 @@ The average current is 50.2 mA (microcontroller 35, angle sensor 7, Hall switch 
 
 ## L. Cost (R13)
 
-All 17 BOM lines are priced. The instrument (lines 1 to 14 and 17) costs $335 (v0.3: $319; the design for construction adds the reel-to-logger cable, $6, and $10 of welding, fixings and reel parts, CNP-DDR-004) and the optional accessories $66 (lever $50, extension rod with its coupling sleeve $16), $401 together, against the $400 budget [L1]. R13, which covers the instrument, is met. The kit with both optional accessories is $1 over the budget; this is listed in the design decisions register. Prices are indicative. They were not quoted by suppliers.
+All 17 BOM lines are priced. The instrument (lines 1 to 14 and 17) costs $335 (v0.3: $319; the design for construction adds the reel-to-logger cable, $6, and $10 of welding, fixings and reel parts, CNP-DDR-004) and the optional accessories $66 (lever $50, extension rod with its coupling sleeve $16), $401 together, against the $400 value-engineering target (a hypothetical control target, not a limit) [L1]. R13, which covers the instrument, is within the target by $65. The kit with both optional accessories is $1 over the target; the savings worth trying are in the Value engineering section of the design decisions register. Prices are indicative. They were not quoted by suppliers.
 
 ## M. Retrofit fit (R15)
 
@@ -171,7 +175,7 @@ The sensor set clamps to a 16 mm rod, straps to any 50 to 80 mm anvil, sits 8 mm
 | R9 | 8.1 to 11.7 min [J1] | 12 min or less | Met (estimate, thin) |
 | R10 | 15.7 kg carried, 9.8 kg heaviest piece, about 1.08 m packed [C2 to C4] | 16 kg; 10 kg; 1.1 m | Met (thin) |
 | R12 | 40 h; 20 h at 0 °C [K2] | 8 h, non-lithium | Met |
-| R13 | $335 instrument; $401 with the lever and extension rod [L1] | $400 or less | Met |
+| R13 | $335 instrument; $401 with the lever and extension rod [L1] | $400 or less (value-engineering target) | Within the value-engineering target |
 | R3 | Hall margin 2.3 times; three-signal logic [F1, F2] | Every blow, no false counts in 200 | Not verifiable at TRL 3 |
 | R7 | App specified, not written | Plot, DCP index, CBR, CSV | Not verifiable at TRL 3 |
 | R14 | App wording specified, not written | Correlation and limits stated | Not verifiable at TRL 3 |

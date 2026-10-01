@@ -3,9 +3,9 @@ doc_id: CNP-DDR-004
 title: ConePro design for construction
 project: ConePro
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Changes that make the concept physically buildable, with the reason for each; made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review
+- version: "0.2"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target, with cost question A2 replaced by a value-engineering note
 ---
 
 # 0004: Design for construction
@@ -53,7 +57,7 @@ The model (`cad/src/model.py`) now builds every part as a separate solid, includ
 | Stroke and range | Stroke 928 to 939 mm, still limited by the wire arm on the reel; 850 mm usable unchanged [D1, D2] | P1, P6 |
 | Depth error | Lean error at 850 mm after tilt correction 1.07 to 0.95 mm at 1° and 2.02 to 1.79 mm at 2° [E4] | Longer wire above the reel |
 | Mass | Carried mass stays 15.7 kg; heaviest piece 9.83 kg [C2, C3] | Mass moves between parts; clamp 0.12 to 0.09 kg |
-| Cost | Instrument $319 to $335; kit with both optional accessories $401, $1 over the $400 budget (register item) [L1] | Lines 6, 8, 14 and 16 repriced; line 17 added |
+| Cost | Instrument $319 to $335; kit with both optional accessories $401, $1 over the $400 value-engineering target (see the register's Value engineering section) [L1] | Lines 6, 8, 14 and 16 repriced; line 17 added |
 | Documents | CNP-CAL-001 v0.4, CNP-PRC-001 v0.6, CNP-REQ-001 v0.6; drawing CNP-DWG-001 Rev P5; making sketches CNP-DWG-101 to 113; build plan CNP-BLD-001; design decisions register CNP-DEC-001 | Follow the model. No requirement changes status. |
 
 *Table 3. Proposed, awaiting Amish.*
@@ -61,7 +65,8 @@ The model (`cad/src/model.py`) now builds every part as a separate solid, includ
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
 | A1 | When the upper rod is unscrewed from the anvil for packing, the 8 kg hammer can slide off its lower end onto the user's feet. Keeping the anvil on the upper rod instead makes the heaviest piece about 11.3 kg, over the 10 kg of R10. | (a) a screw-on end cap on the upper rod's M12 stud whenever it is off the anvil; (b) pack with the anvil on the upper rod and relax R10's heaviest piece; (c) leave it to the user guidance. | (a): a cheap cap that also protects the thread. This adds to the safety case, so it is Amish's decision. |
-| A2 | The kit with both optional accessories is $401, $1 over the $400 budget; the instrument alone is $335. | (a) keep the budget comparison on the instrument, as D2 and D10 already set; (b) trim an accessory price. | (a). |
+
+(A2, on the kit cost, is now a value-engineering note: with both optional accessories the kit is $401 against the $400 value-engineering target, $1 over, and the instrument alone is $335.)
 
 ## Consequences
 

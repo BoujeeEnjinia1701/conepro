@@ -3,9 +3,9 @@ doc_id: CNP-PRC-001
 title: ConePro design precis
 project: ConePro
 doc_type: Design precis
-version: "0.6"
+version: "0.7"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -33,11 +33,15 @@ revisions:
   date: '2026-09-30'
   author: Amish Chadha
   change: Design for construction (CNP-DDR-004, open for Amish's review); M12 rod joints, one-piece clamp against the anvil, reel internals and fixings, reel-to-logger cable (BOM line 17); stroke 939 mm; $335; numbers from CNP-CAL-001 v0.4; CNP-DWG-001 Rev P5; build plan CNP-BLD-001
+- version: "0.7"
+  date: '2026-10-01'
+  author: Amish Chadha
+  change: Budget treated as a value-engineering target
 ---
 
 # ConePro design precis
 
-ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.4) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $335 in parts, within the $400 budget. With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trimmed the stroke from 940 mm to 928 mm. On 2026-09-30, under Amish's instruction to make the design physically buildable, the model was made constructable (CNP-DDR-004, open for his review): threaded rod joints, a one-piece clamp that butts the anvil, a reel with its drum, spring motor and sensor inside, fixings for every part and a cable from the reel to the logger. The stroke is now 939 mm, and the prototype build plan (CNP-BLD-001, `docs/05-build-plan.md`) shows how to make and assemble every part. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
+ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.4) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $335 in parts, $65 under the $400 value-engineering target (a hypothetical control target, not a limit). With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trimmed the stroke from 940 mm to 928 mm. On 2026-09-30, under Amish's instruction to make the design physically buildable, the model was made constructable (CNP-DDR-004, open for his review): threaded rod joints, a one-piece clamp that butts the anvil, a reel with its drum, spring motor and sensor inside, fixings for every part and a cable from the reel to the logger. The stroke is now 939 mm, and the prototype build plan (CNP-BLD-001, `docs/05-build-plan.md`) shows how to make and assemble every part. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -138,7 +142,7 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 | Mechanical DCP (items 1 to 7) | $174 |
 | Sensing and logging (items 8 to 12, 17) | $113 |
 | Carry bag, hardware and consumables (items 13, 14) | $48 |
-| **Instrument total** | **$335** (R13, $400, met) |
+| **Instrument total** | **$335** (R13, within the $400 value-engineering target) |
 | Optional extraction lever (item 15) and extension rod (item 16) | $50 and $16, outside the instrument total |
 
 ## Key design choices

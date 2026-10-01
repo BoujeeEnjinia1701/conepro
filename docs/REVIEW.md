@@ -297,7 +297,7 @@ Amish approved the build plan format on 2026-09-30 and asked for it across all r
 12. Wire through the arm eye, preload spring and a crimped end stop drawn.
 13. Optional extension rod gets M12 studs and a 20 mm coupling sleeve ($15 to $16).
 
-Knock-on numbers: stroke 928 to 939 mm (850 mm usable unchanged); lean error at 850 mm after tilt correction 1.07 to 0.95 mm (1°) and 2.02 to 1.79 mm (2°); rigid-eye snap tension 44 to 304 N became 42 to 284 N; driven mass 5.12 to 5.09 kg; carried mass 15.7 kg unchanged; heaviest piece 9.83 kg; instrument cost $319 to $335; kit with both optional accessories $401.
+Knock-on numbers: stroke 928 to 939 mm (850 mm usable unchanged); lean error at 850 mm after tilt correction 1.07 to 0.95 mm (1°) and 2.02 to 1.79 mm (2°); rigid-eye snap tension 44 to 304 N became 42 to 284 N; driven mass 5.12 to 5.09 kg; carried mass 15.7 kg unchanged; heaviest piece 9.83 kg; instrument cost $319 to $335; kit with both optional accessories $401 ($1 over the $400 value-engineering target; instrument $65 under it).
 
 ### Proposed, awaiting Amish
 
@@ -305,8 +305,7 @@ All are in `docs/06-design-decisions.md`:
 
 1. Accept CNP-DDR-004 as a whole.
 2. Hammer can slide off the upper rod when it is unscrewed from the anvil; recommendation: a screw-on end cap on the stud (adds to the safety case).
-3. Kit with both optional accessories is $401, $1 over the $400 budget; recommendation: keep the budget comparison on the instrument ($335).
-4. Carried over: O1 co-design partner; render windows, hammer grip grooves, T-handle grips and coiled cable path (2026-09-26 items 2 to 5).
+3. Carried over: O1 co-design partner; render windows, hammer grip grooves, T-handle grips and coiled cable path (2026-09-26 items 2 to 5).
 
 ### Stale images (made on Amish's Mac, not regenerated here)
 

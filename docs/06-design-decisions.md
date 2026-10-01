@@ -3,9 +3,9 @@ doc_id: CNP-DEC-001
 title: ConePro design decisions register
 project: ConePro
 doc_type: Design decisions register
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-01'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-09-30'
     author: Amish Chadha
     change: Register opened with the open items from the review note, the decision records and the build plan work
+  - version: "0.2"
+    date: '2026-10-01'
+    author: Amish Chadha
+    change: Budget treated as a value-engineering target
 ---
 
 # ConePro design decisions register
@@ -27,12 +31,11 @@ Every design decision still to be made, and every decision made, in one place. E
 | --- | --- | --- | --- | --- | --- |
 | 1 | Accept the design for construction: M12 rod joints and a 12 mm cone shoulder, pinned stop collar and welded handle, magnet pockets outside the strike area, one-piece clamp against the anvil, curved pad under the band, reel internals with the drum's edge under the exit, fixings for the reel and logger, reel-to-logger cable, coupling sleeve on the extension rod (P1 to P12) | Accept all; accept some and ask for alternatives to others | Accept all; each keeps what ConePro does and was needed to make a part buildable | Every component; the whole build plan follows these changes | CNP-DDR-004, Tables 1 and 2 |
 | 2 | Keeping the hammer on the upper rod when it is off the anvil (packing and carrying): the 8 kg hammer can slide off the rod's lower end | (a) a screw-on end cap on the rod's M12 stud whenever it is off the anvil; (b) pack with the anvil on the upper rod and relax the 10 kg heaviest-piece limit of R10 (about 11.3 kg); (c) user guidance only | (a); it adds to the safety case, so it is Amish's call | A small cap in BOM line 14; packing | CNP-DDR-004, A1 |
-| 3 | Kit with both optional accessories is $401, $1 over the $400 budget (instrument alone $335) | (a) keep the budget comparison on the instrument, as D2 and D10 set; (b) trim an accessory price | (a) | None | CNP-DDR-004, A2; CNP-CAL-001 [L1] |
-| 4 | First co-design partner and user group | Small contractors, an NGO shelter or water team, or a low-volume road agency | None yet; to be picked per area | Not part of the TRL 3 build; shapes field trials at TRL 4 | CNP-DDR-001 and CNP-DDR-002, O1 |
-| 5 | Clear windows in the reel housing and logger lid shown in the photoreal renders | (a) render-only features, opaque parts in the design; (b) real inspection windows, each with an extra seal | (a), since each window adds a seal to an IP65 box | None if (a); housing and lid if (b) | `docs/REVIEW.md`, 2026-09-26, item 2 |
-| 6 | Grip grooves on the hammer in the appearance model | Accept; leave the hammer plain | Accept; length is set at machining to keep 8.00 kg (the magnet pockets are now defined in CNP-DDR-004) | Hammer making sketch (grooves would be added) | `docs/REVIEW.md`, 2026-09-26, item 3 |
-| 7 | Rubber grips on the T-handle | Add grips of about 33 mm diameter to BOM line 6; no grips | Add them (a few dollars) | T-handle | `docs/REVIEW.md`, 2026-09-26, item 4 |
-| 8 | Coiled cable path as drawn in the renders | Accept; redraw | Accept | None | `docs/REVIEW.md`, 2026-09-26, item 5 |
+| 3 | First co-design partner and user group | Small contractors, an NGO shelter or water team, or a low-volume road agency | None yet; to be picked per area | Not part of the TRL 3 build; shapes field trials at TRL 4 | CNP-DDR-001 and CNP-DDR-002, O1 |
+| 4 | Clear windows in the reel housing and logger lid shown in the photoreal renders | (a) render-only features, opaque parts in the design; (b) real inspection windows, each with an extra seal | (a), since each window adds a seal to an IP65 box | None if (a); housing and lid if (b) | `docs/REVIEW.md`, 2026-09-26, item 2 |
+| 5 | Grip grooves on the hammer in the appearance model | Accept; leave the hammer plain | Accept; length is set at machining to keep 8.00 kg (the magnet pockets are now defined in CNP-DDR-004) | Hammer making sketch (grooves would be added) | `docs/REVIEW.md`, 2026-09-26, item 3 |
+| 6 | Rubber grips on the T-handle | Add grips of about 33 mm diameter to BOM line 6; no grips | Add them (a few dollars) | T-handle | `docs/REVIEW.md`, 2026-09-26, item 4 |
+| 7 | Coiled cable path as drawn in the renders | Accept; redraw | Accept | None | `docs/REVIEW.md`, 2026-09-26, item 5 |
 
 ## To confirm when parts are bought
 
@@ -49,6 +52,13 @@ Every design decision still to be made, and every decision made, in one place. E
 | 7 | The band clamp's range takes the anvil plus the pad (about 90 mm across) | It goes round the anvil and over the pad | CNP-DDR-004, P7 |
 | 8 | The Hall switch and accelerometer are rated to 10,000 g shock, and the elastomer gives about 300 Hz isolation with the pad | The shock calculation assumes both | CNP-CAL-001 section G |
 | 9 | The bearings are 6 x 13 x 5 mm and fit the 18 mm boss | The boss is printed to suit | CNP-DDR-004, P8 |
+
+## Value engineering
+
+Value-engineering target: USD 400 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 335 for the instrument (USD 65 under the target); the kit with both optional accessories is USD 401 (USD 1 over the target).
+
+- **Main cost drivers:** the mechanical penetrometer (items 1 to 7, USD 174), sensing and logging (items 8 to 12 and 17, USD 113), and the carry bag, hardware and consumables (USD 48); the optional lever (USD 50) and extension rod (USD 16) are outside the instrument total. The design for construction added USD 16 (the reel-to-logger cable at USD 6 and USD 10 of welding, fixings and reel parts).
+- **Savings worth trying:** trim the price of an optional accessory, which would bring the full kit to the target; and re-price the sensing parts at purchase.
 
 ## Decisions made
 
