@@ -3,9 +3,9 @@ doc_id: CNP-DDR-002
 title: ConePro recommendations accepted
 project: ConePro
 doc_type: Design decision record
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,12 +13,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Record Amish's acceptance of the TRL 3 review recommendations and what changed in the repo
+- version: "0.2"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: O1 decided by Amish on 2026-10-02 (recommendation approved, CNP-DEC-001)
 ---
 
 # 0002: Recommendations accepted
 
 - **Date:** 2026-09-25
-- **Status:** accepted for items D9 to D12; item O1 remains proposed
+- **Status:** accepted for items D9 to D12; item O1 was decided on 2026-10-02 (CNP-DEC-001)
 
 ## Context
 
@@ -39,11 +43,11 @@ The options for each item are those listed in `docs/REVIEW.md`, session 2026-09-
 | D11 | Draw-wire reel details | Accept the metal single-layer grooved drum, groove keeper and preloaded eye spring (8 N, 2 N/mm) in BOM line 8, and a usable range of 850 mm per rod. Decided by Amish, 2026-09-25: go with recommendation. | No geometry or cost change; CNP-PRC-001 and CNP-CAL-001 now record the details as decided. The bought industrial draw-wire sensor stays the fallback. |
 | D12 | Stiff-ground extraction | Note the disposable-cone practice for stiff ground in the user guidance; no hardware change. Decided by Amish, 2026-09-25: go with recommendation. | CNP-PRC-001, How it works (step 6) and Safety, state the practice. No BOM or model change. |
 
-*Table 2. Items that remain open (no recommendation was made).*
+*Table 2. Item left open then, decided on 2026-10-02.*
 
 | # | Item | Status |
 | --- | --- | --- |
-| O1 | First co-design partner and user group (small contractors, an NGO shelter or water team, or a low-volume road agency) | Proposed, awaiting Amish. |
+| O1 | First co-design partner and user group (small contractors, an NGO shelter or water team, or a low-volume road agency) | Decided by Amish, 2026-10-02 (recommendation approved): first partner to approach is a low-volume road agency (a county or district road department) that already runs manual DCP tests on unpaved roads; a university pavement or geotechnical lab is the second choice (CNP-DEC-001). |
 
 ## Consequences
 

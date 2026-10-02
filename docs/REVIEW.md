@@ -318,3 +318,49 @@ No new hazard in the product. The build adds welding (handle) and lathe work on 
 ### Recommended next step
 
 Amish reviews CNP-DDR-004 and the open decisions in the register. TRL 4 remains on hold; when it is released, the build plan is the starting point for the bench build.
+
+## Session 2026-10-02: open decisions decided
+
+On 2026-10-02 Amish approved every recommendation written for the open decisions: "i approve your recommendations for all 555 open decisions." Nothing was built or tested; TRL 4 remains on hold.
+
+### Decisions recorded
+
+7 decisions moved from "Open decisions" to "Decisions made" in the design decisions register, dated 2026-10-02. Design for construction (CNP-DDR-004) accepted with one exception (no thread locker on the rod, anvil and cone joints) and its item A1 (end cap on the upper rod); a low-volume road agency named as the first co-design partner to approach; render-only windows, hammer grip grooves, T-handle grips and the cable path accepted.
+
+### Documents changed
+
+- `docs/01-problem.md` (CNP-PRB-001 v0.4)
+- `docs/02-concept.md` (CNP-PRC-001 v0.8)
+- `docs/05-build-plan.md` (CNP-BLD-001 v0.2)
+- `docs/06-design-decisions.md` (CNP-DEC-001 v0.3)
+- `docs/decisions/0001-trl2-review-decisions.md` (CNP-DDR-001 v0.3)
+- `docs/decisions/0002-recommendations-accepted.md` (CNP-DDR-002 v0.2)
+- `docs/decisions/0004-design-for-construction.md` (CNP-DDR-004 v0.3)
+- `README.md` (not a controlled document)
+- `bom/bom-notes.md` (not a controlled document)
+- `docs/pdf/`: every controlled document re-rendered.
+
+### Follow-up actions to carry approved decisions into the design
+
+The model, drawings, build plan pictures, BOM quantities and prices, and calculations were not changed in this session. These actions carry the approved decisions into them:
+
+1. Decision 1 (model): Add spanner flats to the rods (and the anvil and cone if needed) in cad/src/model.py so the joints can be tightened with spanners now that no thread locker is used; re-run the constructability checks.
+2. Decision 1 (drawings): CNP-DWG-001 and the making sketches of the rods, anvil and cone (CNP-DWG-101 to 104): add the spanner flats; remove any thread-locker note.
+3. Decision 1 (pictures): Build plan pictures of joints 1 and 2 and steps 1, 3 and 6: remove any thread-locker callout and show the spanner flats.
+4. Decision 2 (model): Model the screw-on end cap for the upper rod's M12 stud and the label position on the hammer.
+5. Decision 2 (bom): Add the end cap and the hammer label to BOM line 14 and price them.
+6. Decision 2 (calcs): CNP-CAL-001: add the end cap's mass to the packed mass and heaviest-piece checks (R10); a few grams.
+7. Decision 2 (pictures): Build plan pictures: show the end cap in step 5 and in the packing stop S6.
+8. Decision 5 (drawings): Hammer making sketch: add the grip grooves and the note that the length is set at machining to keep 8.00 kg.
+9. Decision 5 (model): Add the grip grooves to the hammer in cad/src/model.py and adjust its length to keep 8.00 kg.
+10. Decision 6 (bom): BOM line 6: add rubber grips of about 33 mm diameter and reprice the line.
+11. Decision 6 (model): Add the rubber grips to the T-handle in the model and the appearance model.
+12. Decision 4 (pictures): At the next render session on Amish's Mac, keep the windows render-only and redraw the renders, card and social preview to the constructable design (clamp, handle, pad and reel position).
+
+### Points found in the review
+
+Raised when the recommendations were written (2026-10-01) and not yet acted on:
+
+- The value-engineering section compares the kit with both optional accessories (USD 401) against the USD 400 target; the like-for-like figure is the instrument at USD 335, USD 65 under.
+- The build plan applies medium thread locker to joints that must be undone for packing (upper rod to anvil) and for disposable cones, which conflicts with routine disassembly.
+- Renders and appearance model still show the concept clamp, handle, pad and reel position.

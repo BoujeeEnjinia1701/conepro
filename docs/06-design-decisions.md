@@ -3,9 +3,9 @@ doc_id: CNP-DEC-001
 title: ConePro design decisions register
 project: ConePro
 doc_type: Design decisions register
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,6 +17,10 @@ revisions:
     date: '2026-10-01'
     author: Amish Chadha
     change: Budget treated as a value-engineering target
+  - version: "0.3"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: Amish approved the recommendations for open decisions 1 to 7 (CNP-DDR-004 accepted with the thread-locker exception); moved to decisions made
 ---
 
 # ConePro design decisions register
@@ -25,17 +29,7 @@ Every design decision still to be made, and every decision made, in one place. E
 
 ## Open decisions
 
-*Table 1. Decisions awaiting Amish.*
-
-| # | Decision needed | Options | Recommendation | Affects in the build | Source |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Accept the design for construction: M12 rod joints and a 12 mm cone shoulder, pinned stop collar and welded handle, magnet pockets outside the strike area, one-piece clamp against the anvil, curved pad under the band, reel internals with the drum's edge under the exit, fixings for the reel and logger, reel-to-logger cable, coupling sleeve on the extension rod (P1 to P12) | Accept all; accept some and ask for alternatives to others | Accept all; each keeps what ConePro does and was needed to make a part buildable | Every component; the whole build plan follows these changes | CNP-DDR-004, Tables 1 and 2 |
-| 2 | Keeping the hammer on the upper rod when it is off the anvil (packing and carrying): the 8 kg hammer can slide off the rod's lower end | (a) a screw-on end cap on the rod's M12 stud whenever it is off the anvil; (b) pack with the anvil on the upper rod and relax the 10 kg heaviest-piece limit of R10 (about 11.3 kg); (c) user guidance only | (a); it adds to the safety case, so it is Amish's call | A small cap in BOM line 14; packing | CNP-DDR-004, A1 |
-| 3 | First co-design partner and user group | Small contractors, an NGO shelter or water team, or a low-volume road agency | None yet; to be picked per area | Not part of the TRL 3 build; shapes field trials at TRL 4 | CNP-DDR-001 and CNP-DDR-002, O1 |
-| 4 | Clear windows in the reel housing and logger lid shown in the photoreal renders | (a) render-only features, opaque parts in the design; (b) real inspection windows, each with an extra seal | (a), since each window adds a seal to an IP65 box | None if (a); housing and lid if (b) | `docs/REVIEW.md`, 2026-09-26, item 2 |
-| 5 | Grip grooves on the hammer in the appearance model | Accept; leave the hammer plain | Accept; length is set at machining to keep 8.00 kg (the magnet pockets are now defined in CNP-DDR-004) | Hammer making sketch (grooves would be added) | `docs/REVIEW.md`, 2026-09-26, item 3 |
-| 6 | Rubber grips on the T-handle | Add grips of about 33 mm diameter to BOM line 6; no grips | Add them (a few dollars) | T-handle | `docs/REVIEW.md`, 2026-09-26, item 4 |
-| 7 | Coiled cable path as drawn in the renders | Accept; redraw | Accept | None | `docs/REVIEW.md`, 2026-09-26, item 5 |
+None. All open decisions were decided on 2026-10-02.
 
 ## To confirm when parts are bought
 
@@ -58,6 +52,7 @@ Every design decision still to be made, and every decision made, in one place. E
 Value-engineering target: USD 400 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 335 for the instrument (USD 65 under the target); the kit with both optional accessories is USD 401 (USD 1 over the target).
 
 - **Main cost drivers:** the mechanical penetrometer (items 1 to 7, USD 174), sensing and logging (items 8 to 12 and 17, USD 113), and the carry bag, hardware and consumables (USD 48); the optional lever (USD 50) and extension rod (USD 16) are outside the instrument total. The design for construction added USD 16 (the reel-to-logger cable at USD 6 and USD 10 of welding, fixings and reel parts).
+- **Decided on 2026-10-02 and not yet priced:** rubber grips on the T-handle (BOM line 6, a few dollars) and the end cap for the upper rod (line 14, cents).
 - **Savings worth trying:** trim the price of an optional accessory, which would bring the full kit to the target; and re-price the sensing parts at purchase.
 
 ## Decisions made
@@ -69,5 +64,12 @@ Value-engineering target: USD 400 (a hypothetical control target, not a limit). 
 | 2026-09-25 | TRL 2 review items D1 to D8: accelerometer tilt with a bubble level backup; optional lever extraction; sensor set designed to fit standard DCPs; draw-wire depth with a laser fallback; standard 8 kg geometry; Hall blow detection with cross-checks; electronics on the plate; three AA cells | Amish: "proceed with all of your recommendations across all batches. Make sure we don't proceed to TRL 4 on any of them." | [CNP-DDR-001](decisions/0001-trl2-review-decisions.md) |
 | 2026-09-25 | D9 lighter carried set (6 mm plate, aluminum clamp, 0.40 kg bag); D10 R5 at 850 mm per rod with an optional extension rod; D11 reel details and 850 mm usable range; D12 disposable-cone practice for stiff ground | Amish: "i accept all your recommendations, go with them across all repos." | [CNP-DDR-002](decisions/0002-recommendations-accepted.md) |
 | 2026-09-27 | Keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm | Amish asked to "resolve the challenges for ConePro, BridgePulse, Grainguard and WellSense" and chose this option | [CNP-DDR-003](decisions/0003-reel-housing-size.md) |
-| 2026-09-30 | Make the design physically buildable while drawing the build plan; changes recorded in CNP-DDR-004 and open for review (open decision 1) | Amish: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." | [CNP-DDR-004](decisions/0004-design-for-construction.md) |
+| 2026-09-30 | Make the design physically buildable while drawing the build plan; changes recorded in CNP-DDR-004 and open for review; accepted on 2026-10-02 with one exception (below) | Amish: "If you are realising that the design cannot be built as per concept - fix the design assumptions to match and be physically feasible as you draw the illustrations." | [CNP-DDR-004](decisions/0004-design-for-construction.md) |
 | 2026-09-30 | Open decisions go in this register, not in the build plan | Amish: "don't log outstanding decisions in this build plan - that is not the place for it. that should be in a separate design document logged and named as such" | This register |
+| 2026-10-02 | Design for construction accepted, P1 to P12 as made, with one exception: no thread locker on the rod, anvil and cone joints; they are tightened with spanners and checked before each test, because they are undone for packing and for disposable cones | Amish: "i approve your recommendations for all 555 open decisions." | CNP-DDR-004, Tables 1 and 2 |
+| 2026-10-02 | A screw-on end cap goes on the upper rod's M12 stud whenever the rod is off the anvil, with a label on the hammer saying so | Amish: "i approve your recommendations for all 555 open decisions." | CNP-DDR-004, A1 |
+| 2026-10-02 | First co-design partner to approach: a low-volume road agency (a county or district road department) that already runs manual DCP tests on unpaved roads; a university pavement or geotechnical lab is the second choice, for example the civil engineering department at the University of Texas at Arlington | Amish: "i approve your recommendations for all 555 open decisions." | CNP-DDR-001 and CNP-DDR-002, O1 |
+| 2026-10-02 | The clear windows in the reel housing and logger lid stay render-only features; the parts stay opaque | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 2 |
+| 2026-10-02 | Grip grooves on the hammer accepted; the hammer length is set at machining so it still weighs 8.00 kg | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 3 |
+| 2026-10-02 | Rubber grips of about 33 mm diameter added to BOM line 6 | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 4 |
+| 2026-10-02 | The coiled cable path as drawn in the renders accepted | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 5 |

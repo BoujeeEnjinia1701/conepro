@@ -3,9 +3,9 @@ doc_id: CNP-PRC-001
 title: ConePro design precis
 project: ConePro
 doc_type: Design precis
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,11 +37,15 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Decisions of 2026-10-02 carried in: end cap for the upper rod, T-handle grips, hammer grip grooves, first co-design partner to approach"
 ---
 
 # ConePro design precis
 
-ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.4) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $335 in parts, $65 under the $400 value-engineering target (a hypothetical control target, not a limit). With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trimmed the stroke from 940 mm to 928 mm. On 2026-09-30, under Amish's instruction to make the design physically buildable, the model was made constructable (CNP-DDR-004, open for his review): threaded rod joints, a one-piece clamp that butts the anvil, a reel with its drum, spring motor and sensor inside, fixings for every part and a cable from the reel to the logger. The stroke is now 939 mm, and the prototype build plan (CNP-BLD-001, `docs/05-build-plan.md`) shows how to make and assemble every part. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
+ConePro is a standard-geometry dynamic cone penetrometer (8 kg hammer, 575 mm drop, 20 mm 60 degree cone, as in ASTM D6951) with a draw-wire depth sensor referenced to a plate on the ground, a clamp-on sensor pad at the anvil that detects blows and reads rod tilt, and a small BLE logger, so one person can run a test while the phone plots penetration against blows and exports the record. The sensor set is designed to fit existing standard penetrometers too. The TRL 3 calculations (CNP-CAL-001 v0.4) give about 28 J at the cone per blow, 850 mm of usable penetration per lower rod, about 40 h of logging on three AA cells and $335 in parts, $65 under the $400 value-engineering target (a hypothetical control target, not a limit). With the changes Amish accepted on 2026-09-25 (CNP-DDR-002), the instrument carried in its bag weighs about 15.7 kg (was 16.7 kg) and meets the 16 kg target (R10), and a 500 mm extension rod is a separately carried accessory for tests deeper than 850 mm (R5). On 2026-09-27 Amish decided to keep the 60 mm drum and grow the reel housing to 72 x 60 x 72 mm (CNP-DDR-003), which trimmed the stroke from 940 mm to 928 mm. On 2026-09-30, under Amish's instruction to make the design physically buildable, the model was made constructable (CNP-DDR-004, accepted by Amish on 2026-10-02 with one exception: no thread locker on the rod, anvil and cone joints): threaded rod joints, a one-piece clamp that butts the anvil, a reel with its drum, spring motor and sensor inside, fixings for every part and a cable from the reel to the logger. The stroke is now 939 mm, and the prototype build plan (CNP-BLD-001, `docs/05-build-plan.md`) shows how to make and assemble every part. No requirement is now not met; depth accuracy (R2) and shock survival (R11) remain at risk.
 
 ![Hero render](../media/hero.png)
 
@@ -69,9 +73,9 @@ Numbers match the exploded view (Figure 3) and `bom/bom.csv`. Geometry is in the
 | 1 | Cone | Hardened steel, 20 mm base, 60 degree point, 12 mm shoulder tapped M12, screwed onto the rod | Replaceable; a worn cone biases results |
 | 2 | Lower drive rod | 16 mm steel, 1,000 mm between shoulders, M12 studs on both ends, engraved every 10 mm | Engraving is a manual backup scale and the calibration reference |
 | 3 | Anvil and coupler | Steel, 64 mm diameter x 60 mm, tapped M12 at both ends | Plain; the sensor pad clamps on (D3) |
-| 4 | Drop hammer | 8.0 kg steel, 100 mm OD x 22 mm bore x 136.5 mm | Sixteen 8 x 4 mm magnets bonded in pockets in the lower face, outside the strike area |
+| 4 | Drop hammer | 8.0 kg steel, 100 mm OD x 22 mm bore x 136.5 mm | Sixteen 8 x 4 mm magnets bonded in pockets in the lower face, outside the strike area; grip grooves, with the length set at machining to keep 8.00 kg (decided 2026-10-02) |
 | 5 | Upper rod (hammer guide) | 16 mm steel, 776 mm above the anvil plus an M12 stud, running up through the handle | Gives the 575 mm free drop to the stop |
-| 6 | Handle and top stop | 26 mm tube T-handle welded to the upper rod, 44 mm stop collar on a 6 mm roll pin, bubble level on a welded seat | Level is the tilt backup (D1) |
+| 6 | Handle and top stop | 26 mm tube T-handle welded to the upper rod, 44 mm stop collar on a 6 mm roll pin, bubble level on a welded seat | Level is the tilt backup (D1); rubber grips about 33 mm across on the T-handle (decided 2026-10-02) |
 | 7 | Reference plate | 300 x 300 x 6 mm aluminum, 60 mm center hole and slot | Depth reference on the ground surface; 6 mm to save mass (D9) |
 | 8 | Draw-wire depth sensor | 60 mm grooved aluminum drum, single layer, constant-force spring, 12-bit angle sensor, groove keeper, preloaded eye spring | Drum must be metal for thermal stability; bought industrial sensor is the fallback |
 | 9 | Anvil clamp and wire arm | One piece cut from 12 mm aluminum plate: split collar on the lower rod, butting the anvil underside, arm about 115 mm to the wire eye | Wire exit on the plate 105 mm from the rod; aluminum to save mass (D9) |
@@ -177,6 +181,7 @@ The TRL 3 calculations raised four further items, which Amish decided on 2026-09
 - **Noise.** Steel-on-steel impact is loud at close range. Hearing protection is recommended; the level is not yet estimated.
 - **Lifting and posture.** The hammer is lifted about 57 times per test and the upper assembly weighs about 9.8 kg. Use a straight back and swap operators on long test days. Pull the rod only with the lever, never by back strength; stop if the lever will not move it (the pull force can exceed 3 kN in stiff ground), and use a disposable cone for further tests at that site (D12).
 - **Rod whip and tipping.** A leaning rod can bend or kick sideways when struck. Stop when the app warns of lean (R6).
+- **Hammer sliding off when packed.** Whenever the upper rod is off the anvil, a screw-on end cap on its M12 stud stops the 8 kg hammer sliding off onto the user's feet; a label on the hammer says so (decided 2026-10-02).
 - **Sharp cone.** Cover the cone in transport.
 - **Ground and site hazards.** Contaminated land, trench edges and traffic: follow site rules and do not test at the edge of an open excavation.
 - **Misuse of results.** CBR values are indicative correlations. ConePro results must not be used on their own to design foundations or to decide that ground is safe to build on; they show where a qualified geotechnical engineer should investigate.
@@ -184,7 +189,7 @@ The TRL 3 calculations raised four further items, which Amish decided on 2026-09
 
 ## Open questions
 
-- Choose the first co-design partner and site types (proposed, awaiting Amish; partners to be picked per area later).
+- Approach the first co-design partner: a low-volume road agency (a county or district road department) that already runs manual DCP tests on unpaved roads, with a university pavement or geotechnical lab as the second choice (decided 2026-10-02; not yet agreed).
 - Measure the restitution, the magnet field with the steel hammer, the isolator response and the draw-wire error on a bench.
 - Estimate plate settlement or heave under blows, and how to detect it (for example a second reference point).
 - Define the blow and depth data format and the layer-splitting method; check against ORN 8 practice.

@@ -73,13 +73,13 @@ The priced bill of materials is in [bom/bom.csv](bom/bom.csv). Parametric geomet
 
 ## Building the prototype
 
-The design has been made constructable: every part can be turned, drilled, cut, printed or bought, and every joint has a fixing (decision record CNP-DDR-004, open for Amish's review). The [prototype build plan](docs/05-build-plan.md) (CNP-BLD-001) shows how to make each of the 16 components and assemble them in 13 steps, with a making sketch for every made part (CNP-DWG-101 to 113), close-ups of the joints and a picture for every step. It is a plan, not a record of a build; building to it is TRL 4 work. Decisions still open are in the [design decisions register](docs/06-design-decisions.md).
+The design has been made constructable: every part can be turned, drilled, cut, printed or bought, and every joint has a fixing (decision record CNP-DDR-004, accepted by Amish on 2026-10-02). The [prototype build plan](docs/05-build-plan.md) (CNP-BLD-001) shows how to make each of the 16 components and assemble them in 13 steps, with a making sketch for every made part (CNP-DWG-101 to 113), close-ups of the joints and a picture for every step. It is a plan, not a record of a build; building to it is TRL 4 work. Decisions still open are in the [design decisions register](docs/06-design-decisions.md).
 
 ![ConePro prototype: every component laid out in build order](docs/05-build-plan/overview.png)
 
 ## Safety
 
-> **Safety:** Confirm utility locates before driving any rod into the ground. The 8 kg hammer can crush fingers, so keep hands on the handle only; wear safety glasses and hearing protection. The hammer carries strong magnets; keep it away from implanted medical devices. ConePro results are indicative and must not be used on their own for foundation design. See the safety section of [docs/02-concept.md](docs/02-concept.md).
+> **Safety:** Confirm utility locates before driving any rod into the ground. The 8 kg hammer can crush fingers, so keep hands on the handle only, and fit the end cap on the upper rod whenever it is off the anvil so the hammer cannot slide off; wear safety glasses and hearing protection. The hammer carries strong magnets; keep it away from implanted medical devices. ConePro results are indicative and must not be used on their own for foundation design. See the safety section of [docs/02-concept.md](docs/02-concept.md).
 
 ## Repository layout
 

@@ -3,9 +3,9 @@ doc_id: CNP-DDR-004
 title: ConePro design for construction
 project: ConePro
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,17 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target, with cost question A2 replaced by a value-engineering note
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: Accepted by Amish with one exception (no thread locker on the rod, anvil and cone joints), including the recommendation for A1
 ---
 
 # 0004: Design for construction
 
 - **Date:** 2026-09-30
-- **Status:** Draft. Every change in Tables 1 and 2 was made under Amish's 2026-09-30 instruction to make the design physically buildable; open for his review. Nothing here changes what ConePro does, its pitch or its safety case. Items that would are in Table 3 as "Proposed, awaiting Amish" and in the design decisions register (`docs/06-design-decisions.md`).
+- **Status:** accepted with one exception. Amish, 2026-10-02: "i approve your recommendations for all 555 open decisions." This covers every change in Tables 1 and 2 and the recommendation for A1 in Table 3, now decided as recommended and recorded in the design decisions register (CNP-DEC-001). Every change was made under Amish's 2026-09-30 instruction to make the design physically buildable.
+- **Exception (P2):** no thread locker on the rod, anvil and cone joints. The upper rod is unscrewed from the anvil for packing and disposable cones are swapped in stiff ground, so a thread locker would have to be broken and reapplied every time; the shoulders, not the threads, carry the blows. The joints are tightened with spanners and checked before each test.
 
 ## Context
 
@@ -37,7 +42,7 @@ The model (`cad/src/model.py`) now builds every part as a separate solid, includ
 | # | Problem in the concept | Change made | Why this way |
 | --- | --- | --- | --- |
 | P1 | The cone's 5 mm parallel shoulder could not hold a threaded hole: a 12 mm tapped hole of useful depth would break out through the 60° point. | The shoulder is 12 mm long (cone 29.3 mm overall), tapped M12 x 1.75 to 14 mm deep in its top face; hardened after tapping. | Keeps the 20 mm, 60° ASTM D6951 point. The rod shoulder bears on the cone's top face, so the thread only locates the cone. The instrument stands 7 mm taller (1,874 mm). |
-| P2 | Rods, anvil and cone met as plain cylinders with no joint. | M12 x 1.75 studs turned on the rod ends (12 mm at the cone, 20 mm at the anvil) and M12 tapped holes 24 mm deep in both anvil faces; every joint seats on a square 16 mm shoulder, with medium thread locker. | Blows pass through the shoulders, not the threads. One thread size for every joint; ordinary lathe work. |
+| P2 | Rods, anvil and cone met as plain cylinders with no joint. | M12 x 1.75 studs turned on the rod ends (12 mm at the cone, 20 mm at the anvil) and M12 tapped holes 24 mm deep in both anvil faces; every joint seats on a square 16 mm shoulder, with medium thread locker (exception accepted 2026-10-02: no thread locker; tightened with spanners and checked before each test). | Blows pass through the shoulders, not the threads. One thread size for every joint; ordinary lathe work. |
 | P3 | The handle stem overlapped the T-handle tube; the stop collar was solid where the rod passed through it; neither had a fixing. | The upper rod runs up through the stop collar and through a 16 mm cross hole in the tube, its top flush with the tube; the tube is welded to the rod; the collar is fixed by a 6 mm roll pin drilled through collar and rod at the drop height. | The pin lets the 575 mm drop be set on the finished hammer before drilling. Upper rod 776 mm above the anvil. |
 | P4 | The bubble level was a block resting on the round tube along a line, with no fixing. | A 30 x 5 mm steel seat disc is welded on the rod top; a 20 mm bullseye level is bonded in a 3 mm recess in it. | A bullseye on the rod axis reads plumb directly; overall height is unchanged. |
 | P5 | The hammer magnets had no defined position and would sit in the striking face. | Sixteen 8.2 mm pockets on an 82 mm circle, outside the 64 mm anvil strike area; magnets bonded 0.5 mm below the face; hammer length 136.5 mm to keep 8.00 kg. | Magnets are never struck. The Hall switch sees them from 8.5 mm instead of 8 mm; the calculated field between magnets is still 2.3 times the switch operate point [F1]. |
@@ -60,16 +65,17 @@ The model (`cad/src/model.py`) now builds every part as a separate solid, includ
 | Cost | Instrument $319 to $335; kit with both optional accessories $401, $1 over the $400 value-engineering target (see the register's Value engineering section) [L1] | Lines 6, 8, 14 and 16 repriced; line 17 added |
 | Documents | CNP-CAL-001 v0.4, CNP-PRC-001 v0.6, CNP-REQ-001 v0.6; drawing CNP-DWG-001 Rev P5; making sketches CNP-DWG-101 to 113; build plan CNP-BLD-001; design decisions register CNP-DEC-001 | Follow the model. No requirement changes status. |
 
-*Table 3. Proposed, awaiting Amish.*
+*Table 3. Proposed for Amish; A1 accepted as recommended on 2026-10-02.*
 
 | # | Question | Options | Recommendation |
 | --- | --- | --- | --- |
-| A1 | When the upper rod is unscrewed from the anvil for packing, the 8 kg hammer can slide off its lower end onto the user's feet. Keeping the anvil on the upper rod instead makes the heaviest piece about 11.3 kg, over the 10 kg of R10. | (a) a screw-on end cap on the upper rod's M12 stud whenever it is off the anvil; (b) pack with the anvil on the upper rod and relax R10's heaviest piece; (c) leave it to the user guidance. | (a): a cheap cap that also protects the thread. This adds to the safety case, so it is Amish's decision. |
+| A1 | When the upper rod is unscrewed from the anvil for packing, the 8 kg hammer can slide off its lower end onto the user's feet. Keeping the anvil on the upper rod instead makes the heaviest piece about 11.3 kg, over the 10 kg of R10. | (a) a screw-on end cap on the upper rod's M12 stud whenever it is off the anvil; (b) pack with the anvil on the upper rod and relax R10's heaviest piece; (c) leave it to the user guidance. | (a): a cheap cap that also protects the thread. This adds to the safety case, so it is Amish's decision. Accepted by Amish, 2026-10-02, with a label on the hammer saying so. |
 
 (A2, on the kit cost, is now a value-engineering note: with both optional accessories the kit is $401 against the $400 value-engineering target, $1 over, and the instrument alone is $335.)
 
 ## Consequences
 
+- With A1 accepted, a screw-on end cap goes on the upper rod's M12 stud whenever the rod is off the anvil, and a label on the hammer says so. With the P2 exception, the rod joints carry no thread locker and are checked before each test.
 - `design_state: constructable` in `project.yaml`. The build plan CNP-BLD-001 shows every component and step in pictures generated from the model (`cad/src/build_plan_media.py`).
 - Requirement status is unchanged: 9 met, 2 at risk (R2, R11), 4 not verifiable at TRL 3 (CNP-CAL-001 v0.4).
 - The photoreal renders (`media/render-*.png`), `media/card.png`, `media/social-preview.png` and the appearance model `cad/src/product_model.py` still show the concept clamp, handle, pad and reel position; they need updating on Amish's Mac.

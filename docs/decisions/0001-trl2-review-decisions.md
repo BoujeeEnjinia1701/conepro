@@ -3,9 +3,9 @@ doc_id: CNP-DDR-001
 title: ConePro TRL 2 review decisions
 project: ConePro
 doc_type: Design decision record
-version: "0.2"
+version: "0.3"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -17,12 +17,16 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Recommendations accepted by Amish (DDR-002); TRL 3 items now decided in CNP-DDR-002
+- version: "0.3"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: O1 decided by Amish on 2026-10-02 (recommendation approved, CNP-DEC-001)
 ---
 
 # 0001: TRL 2 review decisions
 
 - **Date:** 2026-09-25
-- **Status:** accepted for items D1 to D8; item O1 remains proposed
+- **Status:** accepted for items D1 to D8; item O1 was decided on 2026-10-02 (CNP-DEC-001)
 
 ## Context
 
@@ -49,11 +53,11 @@ The options for each item are those listed in `docs/REVIEW.md` (session 2026-09-
 | D7 | Electronics location | Logger on the stationary plate, so only the sensor pad sees impacts. Decided by Amish, 2026-09-25: go with recommendation. |
 | D8 | Cells | Three AA cells rather than a lithium-ion cell. Decided by Amish, 2026-09-25: go with recommendation. |
 
-*Table 2. Items that remain open (no recommendation was made).*
+*Table 2. Item left open then, decided on 2026-10-02.*
 
 | # | Item | Status |
 | --- | --- | --- |
-| O1 | First co-design partner and user group (small contractors, an NGO shelter or water team, or a low-volume road agency) | Proposed, awaiting Amish. Co-design partners are to be picked per area later, as Amish directed for community designs. |
+| O1 | First co-design partner and user group (small contractors, an NGO shelter or water team, or a low-volume road agency) | Decided by Amish, 2026-10-02 (recommendation approved): first partner to approach is a low-volume road agency (a county or district road department) that already runs manual DCP tests on unpaved roads; a university pavement or geotechnical lab is the second choice (CNP-DEC-001). |
 
 ## Consequences
 

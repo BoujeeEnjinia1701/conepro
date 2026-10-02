@@ -3,9 +3,9 @@ doc_id: CNP-PRB-001
 title: ConePro problem statement
 project: ConePro
 doc_type: Problem statement
-version: "0.3"
+version: "0.4"
 status: Draft
-date: '2026-09-25'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -21,6 +21,10 @@ revisions:
   date: '2026-09-25'
   author: Amish Chadha
   change: Citations checked online and corrected (Kleyn report number, ORN 8 title); retrofit question closed by CNP-DDR-001 (D3)
+- version: "0.4"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: First co-design partner to approach, decided on 2026-10-02 (CNP-DEC-001)
 ---
 
 # ConePro problem statement
@@ -65,6 +69,6 @@ ConePro gives a DCP index profile and an **indicative** CBR profile from the pub
 
 ## Open questions
 
-- Which user group to co-design with first (small contractors, an NGO shelter or water team, or a low-volume road agency)? Proposed, awaiting Amish; co-design partners are to be picked per area later.
+- Which user group to co-design with first? Decided by Amish on 2026-10-02: the first candidate to approach is a low-volume road agency (a county or district road department) that already runs manual DCP tests on unpaved roads, with a university pavement or geotechnical lab as the second choice. Not yet agreed with any partner.
 - Build complete instruments, or also offer the sensor set as a retrofit? Decided by Amish, 2026-09-25 (CNP-DDR-001, D3): design the sensor set to fit standard DCPs, and build the complete instrument for the prototype.
 - The sources above were checked online on 2026-09-25 (ASTM D6951 geometry and correlations, Scala, Kleyn, Webster and others, ORN 8, PANDA). Commercial prices for instrumented penetrometers are still unchecked.

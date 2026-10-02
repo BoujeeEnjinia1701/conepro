@@ -3,9 +3,9 @@ doc_id: CNP-BLD-001
 title: ConePro prototype build plan
 project: ConePro
 doc_type: Build plan
-version: "0.1"
+version: "0.2"
 status: Draft
-date: '2026-09-30'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -13,6 +13,10 @@ revisions:
     date: '2026-09-30'
     author: Amish Chadha
     change: First build plan; design made constructable (CNP-DDR-004)
+  - version: "0.2"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Decisions of 2026-10-02 carried in: no thread locker on the rod, anvil and cone joints (checked before each test); end cap on the upper rod's stud when off the anvil"
 ---
 
 # ConePro prototype build plan
@@ -27,11 +31,11 @@ revisions:
 
 The prototype is a complete dynamic cone penetrometer with its sensor set: a hardened cone and a 1 m steel drive rod, a steel anvil, an 8 kg drop hammer sliding on an upper rod with a stop collar and a T-handle, and, on a slotted aluminium plate that lies on the ground, a draw-wire reel that measures how far the rod has gone down and a small logger box. A sensor pad strapped to the anvil counts the blows and reads the rod's lean. Figure 1 shows the 16 components in the order you make or fit them. Twelve are made in a small workshop: the cone, both rods, the anvil, the hammer, the stop collar, the T-handle, the clamp and arm, the reference plate, the printed reel housing and pad, and the turned drum; the bought logger box is drilled. The rest are bought and fitted: the bearings, spring motor and sensor boards, the wire, the band clamp, the cables, glands and fixings. The work is lathe turning and threading, sawing, drilling and tapping steel and aluminium, one welding job (the handle), two 3D prints, and wiring bought modules. The parts cost about $335 from the bill of materials.
 
-> **Safety:** The finished instrument drops an 8 kg hammer 575 mm onto a steel anvil. Keep fingers off the anvil, the hammer face and the sensor pad whenever the hammer is on the rod, and never stand the upper rod on its end with the hammer free to slide off. The hammer carries sixteen strong magnets: keep it away from pacemakers and other implanted devices. Hardened steel can chip: wear safety glasses for turning, drilling and every test blow. Welding needs a welding screen, gloves and a clear, ventilated space, or have a local shop do it.
+> **Safety:** The finished instrument drops an 8 kg hammer 575 mm onto a steel anvil. Keep fingers off the anvil, the hammer face and the sensor pad whenever the hammer is on the rod, and never stand the upper rod on its end with the hammer free to slide off; whenever the upper rod is off the anvil, its M12 stud carries the screw-on end cap. The hammer carries sixteen strong magnets: keep it away from pacemakers and other implanted devices. Hardened steel can chip: wear safety glasses for turning, drilling and every test blow. Welding needs a welding screen, gloves and a clear, ventilated space, or have a local shop do it.
 
 ## 2. What changed to make it buildable
 
-The concept showed what ConePro does; some of its parts could not be made or joined as drawn. Each change below keeps what the instrument does, and all of them are recorded in decision record CNP-DDR-004, open for Amish's review.
+The concept showed what ConePro does; some of its parts could not be made or joined as drawn. Each change below keeps what the instrument does, and all of them are recorded in decision record CNP-DDR-004, accepted by Amish on 2026-10-02.
 
 *Table 1. Changes from the concept.*
 
@@ -73,7 +77,7 @@ Make and check each component before the assembly step that needs it. Sizes are 
 
 *Figure 3. The rod's 12 mm stud screws into the cone; the rod's shoulder seats on the cone's top face.*
 
-The cone screws onto the bottom stud of the lower rod with medium thread locker until the shoulder seats. A 2 mm gap is left at the bottom of the tapped hole, so the shoulder, not the stud, carries the blows.
+The cone screws onto the bottom stud of the lower rod, with no thread locker, until the shoulder seats; it is tightened with spanners and checked before each test. A 2 mm gap is left at the bottom of the tapped hole, so the shoulder, not the stud, carries the blows.
 
 **Check before moving on.** 20.0 mm across the body; 60° against a gauge; the rod shoulder sits flat on the cone with no visible gap.
 
@@ -132,7 +136,7 @@ The cone screws onto the bottom stud of the lower rod with medium thread locker 
 1. Turn to 64 mm diameter x 60 mm; face both ends square and parallel within 0.1 mm; chamfer the outer edges 1 mm.
 2. In both end faces, centre drill, drill 10.2 mm 27 mm deep and tap M12 x 1.75 to 24 mm deep. The two holes do not meet.
 
-**How it fits the parts next to it.** The lower rod's top stud screws into the bottom hole and the upper rod's stud into the top hole, each to its shoulder with medium thread locker (Figure 6). The clamp collar butts the bottom face; the sensor pad and band clamp onto the side.
+**How it fits the parts next to it.** The lower rod's top stud screws into the bottom hole and the upper rod's stud into the top hole, each to its shoulder with no thread locker, tightened with spanners (Figure 6). The clamp collar butts the bottom face; the sensor pad and band clamp onto the side.
 
 **Check before moving on.** Both rods seat on their shoulders with no rock; the anvil spins true on the rod within 0.2 mm.
 
@@ -387,7 +391,7 @@ In each picture the parts already fitted are grey and the part being fitted is i
 
 ![Step 1](05-build-plan/step-01.png)
 
-Medium thread locker on the bottom stud; screw the cone on by hand, then hold the cone's body in soft vice jaws and turn the rod until the shoulder seats firmly.
+No thread locker (the cone is swapped for disposable cones); screw the cone on by hand, then hold the cone's body in soft vice jaws and turn the rod until the shoulder seats firmly.
 
 ### Step 2: clamp collar onto the lower rod
 
@@ -399,7 +403,7 @@ Slide the collar on from the top end with its screw slack.
 
 ![Step 3](05-build-plan/step-03.png)
 
-Thread locker on the top stud; screw the anvil down to the shoulder. Push the collar up against the anvil's underside and snug its screw; it is aimed at the reel in step 13.
+No thread locker; screw the anvil down to the shoulder and tighten it with spanners. Push the collar up against the anvil's underside and snug its screw; it is aimed at the reel in step 13.
 
 ### Step 4: sensor pad and band onto the anvil
 
@@ -411,13 +415,13 @@ Hold the pad on the side of the anvil opposite the arm with its top 8 mm below t
 
 ![Step 5](05-build-plan/step-05.png)
 
-The upper rod already carries the pinned stop collar and the welded handle. Hold it handle down and slide the hammer on from the bottom end, strike face toward the stud. **Hold point:** from now on keep a hand on the hammer whenever the rod is not upright on the anvil.
+The upper rod already carries the pinned stop collar and the welded handle. Hold it handle down and slide the hammer on from the bottom end, strike face toward the stud, then screw the end cap onto the stud. **Hold point:** from now on keep a hand on the hammer whenever the rod is not upright on the anvil.
 
 ### Step 6: hammer assembly into the anvil
 
 ![Step 6](05-build-plan/step-06.png)
 
-Hold the hammer up at the stop; thread locker on the stud; screw the upper rod into the anvil to its shoulder. Lower the hammer gently onto the anvil.
+Hold the hammer up at the stop; take the end cap off the stud; screw the upper rod into the anvil to its shoulder, with no thread locker, and tighten it with spanners. Lower the hammer gently onto the anvil.
 
 ### Step 7: drum and shaft into the reel housing
 
@@ -489,9 +493,9 @@ Stop at each point. Carry on only when everything listed is true.
 - **S1. Before the first lathe or drill work on hardened steel.** Safety glasses on; the part held in a chuck or vice, never by hand; chips cleared with a brush.
 - **S2. Before welding the handle.** A welding screen and gloves; no flammable material within 3 m; the rod and tube clamped square; or the job sent to a shop.
 - **S3. Before the hammer goes on the upper rod.** The stop collar pin is fully driven and the handle welds are sound (no cracks, full fillet all round). The magnets are cured in their pockets.
-- **S4. Before the first blow.** All three rod joints are tight with thread locker cured; the clamp collar is tight against the anvil; the pad band is tight; no cable crosses the hammer's path or the pad top; safety glasses and hearing protection on; feet clear of the plate edge; nobody within 2 m.
+- **S4. Before the first blow.** All three rod joints are tight on their shoulders, checked with spanners (no thread locker; check them again before each test); the clamp collar is tight against the anvil; the pad band is tight; no cable crosses the hammer's path or the pad top; safety glasses and hearing protection on; feet clear of the plate edge; nobody within 2 m.
 - **S5. Before any blow at a real test point (outside this plan).** A utility locate for that point; the ground is not the edge of a trench or excavation.
-- **S6. Before packing.** The upper rod is unscrewed with a hand under the hammer, and the hammer is held or tied so it cannot slide off the rod's lower end.
+- **S6. Before packing.** The upper rod is unscrewed with a hand under the hammer, and the hammer is held until the screw-on end cap is on the rod's M12 stud, so it cannot slide off the rod's lower end (the label on the hammer says so).
 
 ## 7. Tools, skills and workspace
 
