@@ -3,7 +3,7 @@ doc_id: CNP-BLD-001
 title: ConePro prototype build plan
 project: ConePro
 doc_type: Build plan
-version: "0.2"
+version: "0.3"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -17,6 +17,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: "Decisions of 2026-10-02 carried in: no thread locker on the rod, anvil and cone joints (checked before each test); end cap on the upper rod's stud when off the anvil"
+  - version: "0.3"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: "Approved decisions carried into the model and pictures: spanner flats on the cone, lower rod and anvil; hammer grip grooves and label; rubber grips; end cap shown in step 5 and at safety stop S6; sketches CNP-DWG-101, 102 and 104 to 108 at Rev P2"
 ---
 
 # ConePro prototype build plan
@@ -29,13 +33,13 @@ revisions:
 
 *Figure 1. Every component laid out on the bench and numbered in build order.*
 
-The prototype is a complete dynamic cone penetrometer with its sensor set: a hardened cone and a 1 m steel drive rod, a steel anvil, an 8 kg drop hammer sliding on an upper rod with a stop collar and a T-handle, and, on a slotted aluminium plate that lies on the ground, a draw-wire reel that measures how far the rod has gone down and a small logger box. A sensor pad strapped to the anvil counts the blows and reads the rod's lean. Figure 1 shows the 16 components in the order you make or fit them. Twelve are made in a small workshop: the cone, both rods, the anvil, the hammer, the stop collar, the T-handle, the clamp and arm, the reference plate, the printed reel housing and pad, and the turned drum; the bought logger box is drilled. The rest are bought and fitted: the bearings, spring motor and sensor boards, the wire, the band clamp, the cables, glands and fixings. The work is lathe turning and threading, sawing, drilling and tapping steel and aluminium, one welding job (the handle), two 3D prints, and wiring bought modules. The parts cost about $335 from the bill of materials.
+The prototype is a complete dynamic cone penetrometer with its sensor set: a hardened cone and a 1 m steel drive rod, a steel anvil, an 8 kg drop hammer sliding on an upper rod with a stop collar and a T-handle, and, on a slotted aluminium plate that lies on the ground, a draw-wire reel that measures how far the rod has gone down and a small logger box. A sensor pad strapped to the anvil counts the blows and reads the rod's lean. Figure 1 shows the 17 components in the order you make or fit them. Thirteen are made in a small workshop: the cone, both rods, the anvil, the hammer, the stop collar, the T-handle, the end cap for the upper rod, the clamp and arm, the reference plate, the printed reel housing and pad, and the turned drum; the bought logger box is drilled. The rest are bought and fitted: the bearings, spring motor and sensor boards, the wire, the band clamp, the cables, glands and fixings. The work is lathe turning and threading, sawing, drilling and tapping steel and aluminium, one welding job (the handle), two 3D prints, and wiring bought modules. The parts cost about $346 from the bill of materials.
 
 > **Safety:** The finished instrument drops an 8 kg hammer 575 mm onto a steel anvil. Keep fingers off the anvil, the hammer face and the sensor pad whenever the hammer is on the rod, and never stand the upper rod on its end with the hammer free to slide off; whenever the upper rod is off the anvil, its M12 stud carries the screw-on end cap. The hammer carries sixteen strong magnets: keep it away from pacemakers and other implanted devices. Hardened steel can chip: wear safety glasses for turning, drilling and every test blow. Welding needs a welding screen, gloves and a clear, ventilated space, or have a local shop do it.
 
 ## 2. What changed to make it buildable
 
-The concept showed what ConePro does; some of its parts could not be made or joined as drawn. Each change below keeps what the instrument does, and all of them are recorded in decision record CNP-DDR-004, accepted by Amish on 2026-10-02.
+The concept showed what ConePro does; some of its parts could not be made or joined as drawn. Each change below keeps what the instrument does. They are recorded in decision record CNP-DDR-004, accepted by Amish on 2026-10-02, and, for the changes Amish decided that day, in the design decisions register.
 
 *Table 1. Changes from the concept.*
 
@@ -50,6 +54,10 @@ The concept showed what ConePro does; some of its parts could not be made or joi
 | Sensor pad and band | A band running through a flat pad | A curved pad on a curved isolator, with the band over the pad (Figure 16) | Full contact; a stock band clamp |
 | Draw-wire reel | A solid block, drum under the exit | Housing, lid, drum, shaft, spring motor and sensor, with the drum's edge under the exit (Figures 21 and 22) | The wire leaves the drum straight up |
 | Reel and logger | No fixing to the plate | Screws from below into the reel; a flanged logger box screwed down (Figures 20 and 26) | The plate still lies flat |
+| Rod joint fixing | Thread locker on the rod, anvil and cone joints | No thread locker; spanner flats on the cone, the lower rod and the anvil, and the upper rod turned by its handle (Figures 2, 4 and 7) | The joints are undone for packing and for disposable cones; tightened with spanners and checked before each test |
+| Hammer | A plain cylinder | Three grip grooves and a "fit the end cap" label, its length set at machining to keep 8.00 kg (Figure 8) | A safer grip when lifting and packing |
+| Handle | A bare tube with end caps | Closed-end rubber grips about 33 mm across on both tube ends (Figure 13) | A firmer, warmer grip |
+| Packing | Nothing to stop the hammer sliding off the upper rod | A screw-on end cap on the upper rod's stud whenever it is off the anvil (step 5 and safety stop S6) | The hammer cannot fall onto the user's feet |
 | Wiring | No cable from the reel to the logger; no cable entries | A reel-to-logger cable in two P-clips; two glands in the logger (Figures 25 and 26) | The depth sensor can reach the logger; IP65 entries |
 
 ## 3. Making the components
@@ -69,7 +77,8 @@ Make and check each component before the assembly step that needs it. Sizes are 
 1. Turn a 20.0 mm diameter body 12 mm long with a 60° point below it; the point is 17.3 mm high and the cone 29.3 mm overall. Leave a sharp point.
 2. Face the top square to the axis: the rod's shoulder bears on it.
 3. Drill 10.2 mm 16 mm deep in the top face and tap M12 x 1.75 to 14 mm deep.
-4. Harden to about 50 HRC, then run the tap through again.
+4. Mill two spanner flats 17 mm across on the top 10 mm of the body, leaving the bottom 2 mm and the 20 mm base edge round.
+5. Harden to about 50 HRC, then run the tap through again.
 
 **How it fits the parts next to it.**
 
@@ -77,9 +86,9 @@ Make and check each component before the assembly step that needs it. Sizes are 
 
 *Figure 3. The rod's 12 mm stud screws into the cone; the rod's shoulder seats on the cone's top face.*
 
-The cone screws onto the bottom stud of the lower rod, with no thread locker, until the shoulder seats; it is tightened with spanners and checked before each test. A 2 mm gap is left at the bottom of the tapped hole, so the shoulder, not the stud, carries the blows.
+The cone screws onto the bottom stud of the lower rod, with no thread locker, until the shoulder seats; it is tightened with a 17 mm spanner on the cone's flats and a 13 mm spanner on the rod's flats, and checked before each test. A 2 mm gap is left at the bottom of the tapped hole, so the shoulder, not the stud, carries the blows.
 
-**Check before moving on.** 20.0 mm across the body; 60° against a gauge; the rod shoulder sits flat on the cone with no visible gap.
+**Check before moving on.** 20.0 mm across the body; 17 mm across the flats; 60° against a gauge; the rod shoulder sits flat on the cone with no visible gap.
 
 ### 3.2 Lower drive rod
 
@@ -93,7 +102,8 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 
 1. Cut 1,032 mm and face both ends square.
 2. Turn an M12 x 1.75 stud 12 mm long on the bottom end and one 20 mm long on the top end, each with a square, flat shoulder; the shoulders are 1,000 mm apart. Break the shoulder edges 0.5 mm.
-3. Engrave a ring every 10 mm, deeper every 100 mm, measured up from the cone point with the cone fitted (the point is 29.3 mm below the bottom shoulder). This is the backup depth scale and the calibration reference.
+3. Mill two spanner flats 13 mm across and 20 mm long, starting 8 mm above the bottom shoulder.
+4. Engrave a ring every 10 mm, deeper every 100 mm, measured up from the cone point with the cone fitted (the point is 29.3 mm below the bottom shoulder). This is the backup depth scale and the calibration reference.
 
 **How it fits the parts next to it.** The cone screws onto the bottom stud (Figure 3), the anvil onto the top stud (Figure 6). The clamp collar slides on from the top before the anvil goes on.
 
@@ -135,8 +145,9 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 
 1. Turn to 64 mm diameter x 60 mm; face both ends square and parallel within 0.1 mm; chamfer the outer edges 1 mm.
 2. In both end faces, centre drill, drill 10.2 mm 27 mm deep and tap M12 x 1.75 to 24 mm deep. The two holes do not meet.
+3. Mill two spanner flats 55 mm across and 17 mm long, starting 3 mm above the bottom face, so they stay below the sensor pad.
 
-**How it fits the parts next to it.** The lower rod's top stud screws into the bottom hole and the upper rod's stud into the top hole, each to its shoulder with no thread locker, tightened with spanners (Figure 6). The clamp collar butts the bottom face; the sensor pad and band clamp onto the side.
+**How it fits the parts next to it.** The lower rod's top stud screws into the bottom hole and the upper rod's stud into the top hole, each to its shoulder with no thread locker, tightened with a 55 mm spanner on the anvil's flats and a 13 mm spanner on the lower rod's flats, or by turning the T-handle for the upper rod (Figure 6). The clamp collar butts the bottom face; the sensor pad and band clamp onto the side.
 
 **Check before moving on.** Both rods seat on their shoulders with no rock; the anvil spins true on the rod within 0.2 mm.
 
@@ -153,9 +164,10 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 1. Saw 140 mm of bar and bore 22 mm through.
 2. Face both ends square. The lower face strikes the anvil.
 3. In the lower face, cut sixteen pockets 8.2 mm diameter and 5 mm deep, equally spaced (22.5° apart) on an 82 mm circle. They all lie outside the 64 mm area that strikes the anvil.
-4. Weigh it, then face the top end down until it weighs 8.00 kg within 10 g (about 136.5 mm long).
-5. Bond a magnet in each pocket with epoxy, 0.5 mm below the face, every one with the same pole facing down. Mark that pole.
-6. Paint or oil the outside; leave the strike face bare.
+4. Turn three grip grooves 6 mm wide and 2 mm deep, 14 mm apart, centred on the middle of the length.
+5. Weigh it, then face the top end down until it weighs 8.00 kg within 10 g. The length is set here, at machining (about 138.0 mm).
+6. Bond a magnet in each pocket with epoxy, 0.5 mm below the face, every one with the same pole facing down. Mark that pole.
+7. Paint or oil the outside; leave the strike face bare. Stick the "fit the end cap when the rod is off the anvil" label on the side, above the grooves.
 
 **How it fits the parts next to it.** It slides on the upper rod with 3 mm clearance all round and lands on the anvil's top face. As it lands, the magnets pass over the sensor pad:
 
@@ -169,18 +181,18 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 
 ![Figure 10. Making sketch of the upper rod](../cad/drawings/CNP-DWG-106.png)
 
-*Figure 10. Upper rod making sketch (CNP-DWG-106), drawn broken; it is 796 mm overall.*
+*Figure 10. Upper rod making sketch (CNP-DWG-106), drawn broken; it is 798 mm overall.*
 
 **What it is and what it is made from.** The rod the hammer slides on; it carries the stop collar and the handle. 16 mm steel rod, 4140 class.
 
 **How to make it.**
 
-1. Cut 796 mm and face both ends square.
+1. Cut 798 mm and face both ends square.
 2. Turn an M12 x 1.75 stud 20 mm long on the bottom end with a square shoulder. Measure everything from this shoulder: it sits on the anvil.
 3. Smooth the rod from the shoulder up to 715 mm, where the hammer slides.
-4. The 6 mm pin hole, 720.5 mm above the shoulder, is drilled later through rod and collar together (section 3.7).
+4. The 6 mm pin hole, 722.0 mm above the shoulder, is drilled later through rod and collar together (section 3.7).
 
-**How it fits the parts next to it.** The hammer goes on from the bottom end, then the stud screws into the anvil (Figure 6). The top end passes through the handle tube and ends flush with its top (Figure 14).
+**How it fits the parts next to it.** The hammer goes on from the bottom end and the end cap screws onto the stud to keep it there; the cap comes off when the stud screws into the anvil (Figure 6). The rod needs no spanner flats: it is turned by its T-handle. The top end passes through the handle tube and ends flush with its top (Figure 14).
 
 **Check before moving on.** Straight within 0.5 mm; the hammer slides its whole working length without sticking.
 
@@ -195,8 +207,8 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 **How to make it.**
 
 1. Turn to 44 mm diameter x 18 mm and bore 16 mm, a close slide fit on the rod. Face both ends square.
-2. Slide it onto the upper rod from the top so its underside is 711.5 mm above the rod's shoulder: the 136.5 mm hammer plus the 575 mm drop. Check the drop with the hammer on the rod and the shoulder standing on a flat plate.
-3. Clamp it there and drill 6 mm straight through collar and rod together at its mid-height, 720.5 mm above the shoulder.
+2. Slide it onto the upper rod from the top so its underside is 713.0 mm above the rod's shoulder: the 138.0 mm hammer plus the 575 mm drop. Check the drop with the hammer on the rod and the shoulder standing on a flat plate.
+3. Clamp it there and drill 6 mm straight through collar and rod together at its mid-height, 722.0 mm above the shoulder.
 4. Drive in the roll pin; its ends sit just inside the collar's outside surface.
 
 **How it fits the parts next to it.**
@@ -213,7 +225,7 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 
 *Figure 13. T-handle, level seat and level making sketch (CNP-DWG-108).*
 
-**What it is and what it is made from.** The handle the operator holds, and the backup level that shows when the rod is plumb. Steel tube 26 x 2.5 mm, a 30 x 5 mm steel disc and a bought 20 mm bullseye level.
+**What it is and what it is made from.** The handle the operator holds, and the backup level that shows when the rod is plumb. Steel tube 26 x 2.5 mm, a 30 x 5 mm steel disc, a bought 20 mm bullseye level and two rubber grips.
 
 **How to make it.**
 
@@ -221,7 +233,8 @@ The cone screws onto the bottom stud of the lower rod, with no thread locker, un
 2. Turn the seat disc 30 mm diameter and 5 mm thick with a 20 mm recess 3 mm deep in its top face.
 3. Push the upper rod (with the stop collar already pinned) up through the tube until its top end is flush with the top of the tube and the tube is square to the rod.
 4. Weld the tube to the rod all round where the rod comes out, top and bottom, or have a local shop do it. Weld the disc centred on the rod top.
-5. Paint, fit push-in caps in the tube ends, then bond the level in the recess.
+5. Paint, then bond the level in the recess.
+6. Push a closed-end rubber grip, about 33 mm across and 100 mm long, over each tube end; soapy water helps it slide on.
 
 **How it fits the parts next to it.**
 
@@ -374,13 +387,13 @@ The flanges lie flat on the plate and four M4 pan-head screws go into the tapped
 Buy to specification, not brand. Line numbers are those of the bill of materials.
 
 - **Magnets (line 4).** Sixteen 8 x 4 mm N42 nickel-plated discs, plus one spare.
-- **Roll pin and handle parts (line 6).** 6 x 40 mm spring steel roll pin; 20 mm bullseye level; two push-in tube caps for 26 mm tube.
+- **Roll pin and handle parts (line 6).** 6 x 40 mm spring steel roll pin; 20 mm bullseye level; two closed-end rubber grips about 33 mm across and 100 mm long for 26 mm tube.
 - **Reel parts (line 8).** Two 6 x 13 x 5 mm sealed ball bearings; 6 mm silver steel shaft; constant-force spring motor of about 3 N retracted and 5 N extended; 6 x 2.5 mm diametric magnet; 12-bit magnetic angle sensor board about 30 x 30 mm; 0.45 mm coated 7x7 stainless wire; a ceramic or brass wire eyelet; a compression spring about 8 mm outside diameter, 15 mm free length, 2 N/mm; a crimp sleeve.
 - **Sensor pad parts (line 10).** Hall-effect switch and 3-axis MEMS accelerometer on a small board, both rated to 10,000 g shock; 4 mm elastomer sheet; 12 mm stainless worm-drive band clamp for 50 to 80 mm.
 - **Logger (line 11).** BLE microcontroller board with 4 MB flash, button and LED; three-AA holder with a switch; flanged IP65 box about 100 x 70 x 42 mm; three M12 cable glands (two for the logger, one for the reel).
 - **Coiled cable (line 12).** Six-core screened coiled cable about 1.2 m extended, with strain reliefs.
 - **Reel cable (line 17).** Four-core screened cable about 0.5 m, 5 mm outside diameter; two 5 mm P-clips.
-- **Fixings (line 14).** Stainless: 4 x M4 x 14 countersunk screws (reel), 4 x M4 x 10 pan-head screws (logger), 2 x M4 x 8 screws (P-clips), 4 x M3 x 10 screws (reel lid), 1 x M5 x 25 socket screw (clamp), 1 x M3 set screw (drum); 4 M4 and 4 M3 brass heat-set inserts; medium thread locker; slow-setting epoxy; potting epoxy.
+- **Fixings (line 14).** Stainless: 4 x M4 x 14 countersunk screws (reel), 4 x M4 x 10 pan-head screws (logger), 2 x M4 x 8 screws (P-clips), 4 x M3 x 10 screws (reel lid), 1 x M5 x 25 socket screw (clamp), 1 x M3 set screw (drum); 4 M4 and 4 M3 brass heat-set inserts; medium thread locker for the screws only, never the rod, anvil and cone joints; slow-setting epoxy; potting epoxy. Also on line 14: the end cap for the upper rod's stud, turned from 32 mm aluminium bar 24 mm long, tapped M12 x 1.75 21 mm deep (blind) with a fluted grip, and a printed vinyl label for the hammer.
 - **Carry bag (line 13), extraction lever (line 15) and extension rod (line 16)** are not needed to build or check the prototype.
 
 ## 4. Putting it together
@@ -391,7 +404,7 @@ In each picture the parts already fitted are grey and the part being fitted is i
 
 ![Step 1](05-build-plan/step-01.png)
 
-No thread locker (the cone is swapped for disposable cones); screw the cone on by hand, then hold the cone's body in soft vice jaws and turn the rod until the shoulder seats firmly.
+No thread locker (the cone is swapped for disposable cones); screw the cone on by hand, then put a 17 mm spanner on the cone's flats and a 13 mm spanner on the rod's flats and tighten until the shoulder seats firmly.
 
 ### Step 2: clamp collar onto the lower rod
 
@@ -403,7 +416,7 @@ Slide the collar on from the top end with its screw slack.
 
 ![Step 3](05-build-plan/step-03.png)
 
-No thread locker; screw the anvil down to the shoulder and tighten it with spanners. Push the collar up against the anvil's underside and snug its screw; it is aimed at the reel in step 13.
+No thread locker; screw the anvil down to the shoulder and tighten it with a 55 mm spanner on its flats against a 13 mm spanner on the rod's flats. Push the collar up against the anvil's underside and snug its screw; it is aimed at the reel in step 13.
 
 ### Step 4: sensor pad and band onto the anvil
 
@@ -411,7 +424,7 @@ No thread locker; screw the anvil down to the shoulder and tighten it with spann
 
 Hold the pad on the side of the anvil opposite the arm with its top 8 mm below the anvil top; pass the band round the anvil and over the pad and tighten it. Lead the coiled cable down.
 
-### Step 5: hammer onto the upper rod
+### Step 5: hammer onto the upper rod, end cap on
 
 ![Step 5](05-build-plan/step-05.png)
 
@@ -421,7 +434,7 @@ The upper rod already carries the pinned stop collar and the welded handle. Hold
 
 ![Step 6](05-build-plan/step-06.png)
 
-Hold the hammer up at the stop; take the end cap off the stud; screw the upper rod into the anvil to its shoulder, with no thread locker, and tighten it with spanners. Lower the hammer gently onto the anvil.
+Hold the hammer up at the stop; take the end cap off the stud; screw the upper rod into the anvil to its shoulder, with no thread locker, turning it by the T-handle while a 55 mm spanner holds the anvil. Keep the end cap in the bag. Lower the hammer gently onto the anvil.
 
 ### Step 7: drum and shaft into the reel housing
 
@@ -484,7 +497,7 @@ These are the checks a TRL 4 test report would record; this plan only lists them
 | Clamp holds | R11 | Twenty blows, then look at the collar and arm | The collar is still against the anvil; the arm has not turned |
 | Pad holds | R11 | After the twenty blows, look at the pad and band | No movement, no cracks in the potting |
 | Logger sealed | R11 | Look at the lid gasket and both glands | Gasket even all round; glands grip their cables (the spray test comes later) |
-| Mass and packed length | R10 | Weigh the set in its bag; measure the longest piece | 15.7 kg (16 kg or less); heaviest piece 9.8 kg; 1.1 m or less |
+| Mass and packed length | R10 | Weigh the set in its bag; measure the longest piece | 15.8 kg (16 kg or less); heaviest piece 9.96 kg; 1.1 m or less |
 
 ## 6. Safety stops
 
@@ -497,9 +510,11 @@ Stop at each point. Carry on only when everything listed is true.
 - **S5. Before any blow at a real test point (outside this plan).** A utility locate for that point; the ground is not the edge of a trench or excavation.
 - **S6. Before packing.** The upper rod is unscrewed with a hand under the hammer, and the hammer is held until the screw-on end cap is on the rod's M12 stud, so it cannot slide off the rod's lower end (the label on the hammer says so).
 
+![Safety stop S6](05-build-plan/packing-s6.png)
+
 ## 7. Tools, skills and workspace
 
-**Tools.** A metal lathe that can screw-cut M12 x 1.75 and a 1 mm pitch, with a 4-jaw chuck or collets for 16 mm rod and a steady for 1 m rods (or a machine shop for the turned parts); bench drill; drills 1 to 16 mm and a step drill to 12 mm; M3, M4, M5 and M12 x 1.75 taps; hacksaw or bandsaw and a jigsaw with a metal blade; files; countersink; MIG or TIG welder (or a welding shop); 3D printer that prints ASA or PETG with a bed of at least 80 x 80 mm; soldering iron for heat-set inserts and wiring; crimp tool; calipers, steel rule, engineer's square, angle gauge; scale to 10 kg reading 10 g; multimeter.
+**Tools.** A metal lathe that can screw-cut M12 x 1.75 and a 1 mm pitch, with a 4-jaw chuck or collets for 16 mm rod and a steady for 1 m rods (or a machine shop for the turned parts); bench drill; drills 1 to 16 mm and a step drill to 12 mm; M3, M4, M5 and M12 x 1.75 taps; 13 mm and 17 mm spanners and a 55 mm (or large adjustable) spanner for the rod joints; a milling machine, or a file and a guide, for the spanner flats; hacksaw or bandsaw and a jigsaw with a metal blade; files; countersink; MIG or TIG welder (or a welding shop); 3D printer that prints ASA or PETG with a bed of at least 80 x 80 mm; soldering iron for heat-set inserts and wiring; crimp tool; calipers, steel rule, engineer's square, angle gauge; scale to 10 kg reading 10 g; multimeter.
 
 **Skills.** Lathe turning and threading, marking out, drilling and tapping, basic welding (or a shop for it), through-hole soldering. All circuits run at 4.5 V or less from AA cells; no mains wiring is part of this build.
 
@@ -509,10 +524,10 @@ Stop at each point. Carry on only when everything listed is true.
 
 ## 8. Where the numbers come from
 
-- Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`, 64 checks); STEP and STL exports in `cad/step/` and `cad/stl/`.
+- Model and constructability checks: `cad/src/model.py` (`python cad/src/model.py --check`, 73 checks); STEP and STL exports in `cad/step/` and `cad/stl/`.
 - Pictures: `cad/src/build_plan_media.py`, using `.kit/build_views.py`; written to `docs/05-build-plan/` and `cad/drawings/CNP-DWG-101` to `CNP-DWG-113`.
-- General arrangement: `cad/drawings/CNP-DWG-001.pdf`, Rev P5.
-- Calculations: `docs/04-calcs/01-sizing.md` (CNP-CAL-001 v0.4) and `docs/04-calcs/sizing.py`; drop and hammer [A2], [A3], stroke [D1], [D2], depth error [E1] to [E4], wire spring [E5], magnet field [F1], masses [C1] to [C3], cost [L1].
+- General arrangement: `cad/drawings/CNP-DWG-001.pdf`, Rev P6.
+- Calculations: `docs/04-calcs/01-sizing.md` (CNP-CAL-001 v0.6) and `docs/04-calcs/sizing.py`; drop and hammer [A2], [A3], stroke [D1], [D2], depth error [E1] to [E4], wire spring [E5], magnet field [F1], masses [C1] to [C3], cost [L1].
 - Bill of materials: `bom/bom.csv`.
-- Decisions: `docs/decisions/0004-design-for-construction.md` (CNP-DDR-004), with CNP-DDR-001 to CNP-DDR-003; open items in `docs/06-design-decisions.md` (CNP-DEC-001).
-- Requirements: `docs/03-requirements.md` (CNP-REQ-001 v0.6).
+- Decisions: `docs/decisions/0004-design-for-construction.md` (CNP-DDR-004), with CNP-DDR-001 to CNP-DDR-003; every decision made in `docs/06-design-decisions.md` (CNP-DEC-001).
+- Requirements: `docs/03-requirements.md` (CNP-REQ-001 v0.8).

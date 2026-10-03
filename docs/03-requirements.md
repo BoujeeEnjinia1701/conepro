@@ -3,9 +3,9 @@ doc_id: CNP-REQ-001
 title: ConePro requirements
 project: ConePro
 doc_type: Requirements
-version: "0.7"
+version: "0.8"
 status: Draft
-date: '2026-10-01'
+date: '2026-10-02'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -37,11 +37,15 @@ revisions:
   date: '2026-10-01'
   author: Amish Chadha
   change: Budget treated as a value-engineering target
+- version: "0.8"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Status from CNP-CAL-001 v0.6 after Amish's decisions of 2026-10-02 (grips, end cap, hammer grooves, spanner flats); R10 15.8 kg, heaviest piece 9.96 kg; R13 $346; no status changes"
 ---
 
 # ConePro requirements
 
-These requirements were checked by calculation at TRL 3 in CNP-CAL-001 v0.4 against the design decided in CNP-DDR-001, CNP-DDR-002 and CNP-DDR-003 and made constructable in CNP-DDR-004. None is now not met: two are at risk, nine are met on paper and four cannot be verified until hardware exists. The two at risk are **R2** (depth accuracy) and **R11** (shock survival). Version 0.4 applies Amish's 2026-09-25 acceptance of the review recommendations (CNP-DDR-002): **R5** is restated as 850 mm per lower rod, with a 500 mm extension rod offered as a separately carried accessory instead of a 1,000 mm clause (D10), and **R10** is now met at about 15.7 kg (was 16.7 kg) with a 6 mm plate, an aluminum clamp and arm and a lighter bag (D9). Targets are still proposals, not yet validated with users, and will be revised after co-design (see CNP-PRB-001). Version 0.5 reflects the larger reel housing decided by Amish on 2026-09-27 (CNP-DDR-003): R5 stays met with a 928 mm stroke, and the lean term in R2 grows from 1.8 mm to 2.0 mm, so R2 stays at risk. R15 carries decision D3.
+These requirements were checked by calculation at TRL 3 in CNP-CAL-001 v0.6 against the design decided in CNP-DDR-001, CNP-DDR-002 and CNP-DDR-003 and made constructable in CNP-DDR-004, with Amish's decisions of 2026-10-02 carried in. None is now not met: two are at risk, nine are met on paper and four cannot be verified until hardware exists. The two at risk are **R2** (depth accuracy) and **R11** (shock survival). Version 0.4 applies Amish's 2026-09-25 acceptance of the review recommendations (CNP-DDR-002): **R5** is restated as 850 mm per lower rod, with a 500 mm extension rod offered as a separately carried accessory instead of a 1,000 mm clause (D10), and **R10** is now met at about 15.7 kg (was 16.7 kg) with a 6 mm plate, an aluminum clamp and arm and a lighter bag (D9). Targets are still proposals, not yet validated with users, and will be revised after co-design (see CNP-PRB-001). Version 0.5 reflects the larger reel housing decided by Amish on 2026-09-27 (CNP-DDR-003): R5 stays met with a 928 mm stroke, and the lean term in R2 grows from 1.8 mm to 2.0 mm, so R2 stays at risk. R15 carries decision D3.
 
 **Reference test.** A single test point driven to 850 mm in a medium-stiff soil averaging 15 mm per blow (about 57 blows), by one person, on level ground.
 
@@ -58,10 +62,10 @@ These requirements were checked by calculation at TRL 3 in CNP-CAL-001 v0.4 agai
 | R7 | Phone output | Live plot of depth against blows; DCP index per layer; indicative CBR from the ASTM D6951 correlations with the soil type selected; CSV export with time, location and operator notes | Not verifiable at TRL 3 (app specified, not written) | App specification review |
 | R8 | Works offline | No cell signal needed; logger stores 50 or more tests if the phone is absent or disconnects | Met (calculation): about 830 tests in 4 MB | Firmware sketch review |
 | R9 | One-person test time | Reference test, including setup and rod extraction with the optional lever (D2), in 12 min or less by one person | Met (estimate), thin: 8.1 to 11.7 min | Timed trials |
-| R10 | Portability | Total mass as carried in the bag, cells included and the optional lever and extension rod excluded, 16 kg or less; heaviest piece 10 kg or less; packed length 1.1 m or less | Met, thin: 15.7 kg (was 16.7 kg before D9); heaviest piece 9.8 kg; packed length about 1.08 m | Mass roll-up; weighing |
+| R10 | Portability | Total mass as carried in the bag, cells included and the optional lever and extension rod excluded, 16 kg or less; heaviest piece 10 kg or less; packed length 1.1 m or less | Met, thin: 15.8 kg (was 16.7 kg before D9); heaviest piece 9.96 kg with the grips and end cap, 0.04 kg under the limit; packed length about 1.08 m | Mass roll-up; weighing |
 | R11 | Rugged electronics | Logger, sensors and connectors IP65; operate at 0 to 45 °C; anvil-mounted parts survive 10,000 blows | **At risk:** about 1,400 to 5,500 g mean at the anvil; about 540 g on the isolated pad against 10,000 g part ratings; cable and connector fatigue not calculated | Drop-count test |
 | R12 | Battery life | 8 h or more of continuous logging on user-replaceable non-lithium cells | Met (calculation): about 40 h, about 20 h at 0 °C | Power measurement |
-| R13 | Cost | Within the $400 value-engineering target (hypothetical control target, not a limit) for one complete instrument in parts (optional lever and extension rod excluded) | Within the value-engineering target: $335, $65 under; $401 with the lever and extension rod, $1 over the target | Priced BOM (`bom/bom.csv`) |
+| R13 | Cost | Within the $400 value-engineering target (hypothetical control target, not a limit) for one complete instrument in parts (optional lever and extension rod excluded) | Within the value-engineering target: $346, $54 under; $412 with the lever and extension rod, $12 over the target | Priced BOM (`bom/bom.csv`) |
 | R14 | Honest results | App states the correlation used and that results are indicative and not for foundation design | Not verifiable at TRL 3 (app not written) | App specification review |
 | R15 | Retrofit fit (D3) | Sensor set (BOM items 8 to 12 and 17) fits a standard ASTM D6951 penetrometer with a 16 mm rod and a 50 to 80 mm anvil, without machining | Not verifiable at TRL 3: interfaces sized in the model; needs a commercial DCP to check | Fit check on a commercial DCP |
 

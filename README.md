@@ -2,7 +2,7 @@
 
 ![TRL 3](https://img.shields.io/badge/TRL-3%20of%209-0F766E) ![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-111827) ![Software: MIT](https://img.shields.io/badge/software-MIT-111827) [![DOI](https://zenodo.org/badge/1386351326.svg)](https://zenodo.org/badge/latestdoi/1386351326) [![REUSE compliant](https://github.com/BoujeeEnjinia1701/conepro/actions/workflows/reuse.yml/badge.svg)](https://github.com/BoujeeEnjinia1701/conepro/actions/workflows/reuse.yml) [![Archived in Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/BoujeeEnjinia1701/conepro/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/BoujeeEnjinia1701/conepro)
 
-**Area:** Situational Field Hardware · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** about $400 USD (hypothetical control target; estimated instrument cost $335) · **Difficulty:** 3 of 5
+**Area:** Situational Field Hardware · **TRL:** 3 of 9 (proof of concept on paper) · **Value-engineering target:** about $400 USD (hypothetical control target; estimated instrument cost $346) · **Difficulty:** 3 of 5
 
 Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone.
 
@@ -56,7 +56,7 @@ Early site assessments need soil bearing data, but lab geotech is slow. The manu
 
 ## Concept
 
-Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows and reads rod tilt with a clamp-on Hall and accelerometer pad at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. The sensor set is designed to fit existing standard penetrometers too. TRL 3 calculations give about 28 J at the cone, 850 mm per rod, about 40 h on three AA cells and $335 in parts; the instrument carried in its bag is about 15.7 kg, within the 16 kg target, and a 500 mm extension rod is an optional accessory for deeper tests. Depth accuracy and shock survival are still at risk. Results are for screening, not foundation design.
+Portable dynamic cone penetrometer with a digital depth encoder and blow counter that logs penetration curves to a phone. ConePro keeps the standard geometry (8 kg hammer, 575 mm drop, 20 mm 60 degree cone), measures penetration with a draw-wire sensor referenced to a plate on the ground, counts blows and reads rod tilt with a clamp-on Hall and accelerometer pad at the anvil, and sends each blow to a phone app that plots the profile and gives an indicative CBR. The sensor set is designed to fit existing standard penetrometers too. TRL 3 calculations give about 28 J at the cone, 850 mm per rod, about 40 h on three AA cells and $346 in parts; the instrument carried in its bag is about 15.8 kg, within the 16 kg target, and a 500 mm extension rod is an optional accessory for deeper tests. Depth accuracy and shock survival are still at risk. Results are for screening, not foundation design.
 
 Full design precis: [docs/02-concept.md](docs/02-concept.md)
 

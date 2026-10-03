@@ -3,7 +3,7 @@ doc_id: CNP-PRC-001
 title: ConePro design precis
 project: ConePro
 doc_type: Design precis
-version: "0.8"
+version: "0.9"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -41,6 +41,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Decisions of 2026-10-02 carried in: end cap for the upper rod, T-handle grips, hammer grip grooves, first co-design partner to approach"
+- version: "0.9"
+  date: '2026-10-02'
+  author: Amish Chadha
+  change: "Approved decisions carried into the model, BOM and calculations (CNP-CAL-001 v0.6): spanner flats on the cone, lower rod and anvil; grips, end cap and label priced; hammer 138.0 mm; heaviest piece 9.96 kg; 15.8 kg; $346"
 ---
 
 # ConePro design precis
@@ -70,11 +74,11 @@ Numbers match the exploded view (Figure 3) and `bom/bom.csv`. Geometry is in the
 
 | # | Component | Choice | Notes |
 | --- | --- | --- | --- |
-| 1 | Cone | Hardened steel, 20 mm base, 60 degree point, 12 mm shoulder tapped M12, screwed onto the rod | Replaceable; a worn cone biases results |
-| 2 | Lower drive rod | 16 mm steel, 1,000 mm between shoulders, M12 studs on both ends, engraved every 10 mm | Engraving is a manual backup scale and the calibration reference |
-| 3 | Anvil and coupler | Steel, 64 mm diameter x 60 mm, tapped M12 at both ends | Plain; the sensor pad clamps on (D3) |
-| 4 | Drop hammer | 8.0 kg steel, 100 mm OD x 22 mm bore x 136.5 mm | Sixteen 8 x 4 mm magnets bonded in pockets in the lower face, outside the strike area; grip grooves, with the length set at machining to keep 8.00 kg (decided 2026-10-02) |
-| 5 | Upper rod (hammer guide) | 16 mm steel, 776 mm above the anvil plus an M12 stud, running up through the handle | Gives the 575 mm free drop to the stop |
+| 1 | Cone | Hardened steel, 20 mm base, 60 degree point, 12 mm shoulder tapped M12 with 17 mm spanner flats, screwed onto the rod | Replaceable; a worn cone biases results |
+| 2 | Lower drive rod | 16 mm steel, 1,000 mm between shoulders, M12 studs on both ends, 13 mm spanner flats near the bottom, engraved every 10 mm | Engraving is a manual backup scale and the calibration reference |
+| 3 | Anvil and coupler | Steel, 64 mm diameter x 60 mm, tapped M12 at both ends, 55 mm spanner flats below the pad | Plain; the sensor pad clamps on (D3); the rod, anvil and cone joints carry no thread locker and are tightened with spanners (decided 2026-10-02) |
+| 4 | Drop hammer | 8.0 kg steel, 100 mm OD x 22 mm bore x 138.0 mm, three grip grooves | Sixteen 8 x 4 mm magnets bonded in pockets in the lower face, outside the strike area; grip grooves, with the length set at machining to keep 8.00 kg (decided 2026-10-02) |
+| 5 | Upper rod (hammer guide) | 16 mm steel, 778 mm above the anvil plus an M12 stud, running up through the handle; screw-on end cap on the stud whenever it is off the anvil | Gives the 575 mm free drop to the stop; the end cap keeps the hammer on the rod when packed (decided 2026-10-02) |
 | 6 | Handle and top stop | 26 mm tube T-handle welded to the upper rod, 44 mm stop collar on a 6 mm roll pin, bubble level on a welded seat | Level is the tilt backup (D1); rubber grips about 33 mm across on the T-handle (decided 2026-10-02) |
 | 7 | Reference plate | 300 x 300 x 6 mm aluminum, 60 mm center hole and slot | Depth reference on the ground surface; 6 mm to save mass (D9) |
 | 8 | Draw-wire depth sensor | 60 mm grooved aluminum drum, single layer, constant-force spring, 12-bit angle sensor, groove keeper, preloaded eye spring | Drum must be metal for thermal stability; bought industrial sensor is the fallback |
@@ -100,7 +104,7 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 | --- | --- | --- |
 | Potential energy per blow | 45.1 J [B1] | 8.0 kg x 9.81 m/s² x 0.575 m |
 | Impact speed; fall time | 3.36 m/s; 0.342 s [B1] | Free fall over 575 mm |
-| Energy reaching the cone | 28.0 J, 62 % (26.1 to 31.2 J) [B4] | 3 % guide friction; Hiley impact efficiency with restitution 0.4 (0.2 to 0.6) and 5.09 kg driven mass; 5 % rod and side friction |
+| Energy reaching the cone | 27.9 J, 62 % (26.0 to 31.2 J) [B4] | 3 % guide friction; Hiley impact efficiency with restitution 0.4 (0.2 to 0.6) and 5.14 kg driven mass; 5 % rod and side friction |
 | Mean dynamic soil resistance | 1.9 kN at 15 mm per blow; 14.0 kN at 2 mm per blow [B6] | Energy at the cone over penetration |
 | Blow rate | 17 to 24 per minute | One blow every 2.5 to 3.5 s (assumed) |
 
@@ -129,12 +133,12 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 | Quantity | Estimate | Requirement |
 | --- | --- | --- |
 | Stroke per lower rod | 939 mm, limited by the wire arm meeting the reel housing (72 x 60 x 72 mm round the 60 mm drum, CNP-DDR-003); 850 mm usable [D1, D2]; optional 500 mm extension rod [C7] | R5 (restated, D10) met |
-| Assembled height | 1,874 mm [A3] | |
-| Mass as carried in the bag | 15.7 kg (was 16.7 kg); 15.3 kg without the bag [C2, C6] | R10 (16 kg) met, thin |
-| Heaviest piece | 9.83 kg, hammer captive on the upper rod [C3] | R10 (10 kg) met |
+| Assembled height | 1,875 mm [A3] | |
+| Mass as carried in the bag | 15.8 kg (was 16.7 kg); 15.4 kg without the bag [C2, C6] | R10 (16 kg) met, thin |
+| Heaviest piece | 9.96 kg, hammer captive on the upper rod with the grips and end cap [C3] | R10 (10 kg) met, 0.04 kg to spare |
 | Packed length | About 1.08 m (longest piece 1,029 mm) [C4] | R10 met |
 | Reference test time | 8.1 to 11.7 min [J1] | R9 met, thin |
-| Shock at the anvil; at the isolated pad | 1,400 to 5,500 g mean; about 544 g [G1, G2] | R11 at risk |
+| Shock at the anvil; at the isolated pad | 1,400 to 5,500 g mean; about 542 g [G1, G2] | R11 at risk |
 | Tilt reading | ±0.3 degree after rotation zeroing [H1] | R6 met by design |
 | Average current; battery life | 50.2 mA; 40 h, 20 h at 0 °C [K1, K2] | R12 met |
 | Storage | About 830 tests in 4 MB [I1] | R8 met |
@@ -143,10 +147,10 @@ All values are estimates from CNP-CAL-001; the bracketed tag names the line of `
 
 | Group | Indicative cost |
 | --- | --- |
-| Mechanical DCP (items 1 to 7) | $174 |
+| Mechanical DCP (items 1 to 7) | $180 |
 | Sensing and logging (items 8 to 12, 17) | $113 |
-| Carry bag, hardware and consumables (items 13, 14) | $48 |
-| **Instrument total** | **$335** (R13, within the $400 value-engineering target) |
+| Carry bag, hardware and consumables (items 13, 14) | $53 |
+| **Instrument total** | **$346** (R13, within the $400 value-engineering target) |
 | Optional extraction lever (item 15) and extension rod (item 16) | $50 and $16, outside the instrument total |
 
 ## Key design choices
@@ -179,7 +183,7 @@ The TRL 3 calculations raised four further items, which Amish decided on 2026-09
 - **Magnets.** The hammer carries sixteen strong magnets. Keep it away from pacemakers and other implanted devices, and from cards and instruments that magnets can damage.
 - **Draw-wire.** A wire that breaks or is released under tension can whip. Keep faces away from the reel and never let the arm snap back.
 - **Noise.** Steel-on-steel impact is loud at close range. Hearing protection is recommended; the level is not yet estimated.
-- **Lifting and posture.** The hammer is lifted about 57 times per test and the upper assembly weighs about 9.8 kg. Use a straight back and swap operators on long test days. Pull the rod only with the lever, never by back strength; stop if the lever will not move it (the pull force can exceed 3 kN in stiff ground), and use a disposable cone for further tests at that site (D12).
+- **Lifting and posture.** The hammer is lifted about 57 times per test and the upper assembly weighs about 10 kg. Use a straight back and swap operators on long test days. Pull the rod only with the lever, never by back strength; stop if the lever will not move it (the pull force can exceed 3 kN in stiff ground), and use a disposable cone for further tests at that site (D12).
 - **Rod whip and tipping.** A leaning rod can bend or kick sideways when struck. Stop when the app warns of lean (R6).
 - **Hammer sliding off when packed.** Whenever the upper rod is off the anvil, a screw-on end cap on its M12 stud stops the 8 kg hammer sliding off onto the user's feet; a label on the hammer says so (decided 2026-10-02).
 - **Sharp cone.** Cover the cone in transport.

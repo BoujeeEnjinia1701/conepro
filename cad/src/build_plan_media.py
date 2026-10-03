@@ -18,11 +18,18 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / ".kit"), str(ROOT / "cad" / "src")]
 import build_views as bv  # noqa: E402
 from build_views import Part  # noqa: E402
-from model import PARAMS as P, build_components, derived  # noqa: E402
+from model import PARAMS as P, build_components, derived, end_cap  # noqa: E402
 
 OUT = ROOT / "docs" / "05-build-plan"
 DWG = ROOT / "cad" / "drawings"
 DATE = "2026-09-30"
+DATE2 = "2026-10-02"
+
+
+def rev2(change):
+    """Revision P2 of a making sketch: Amish's decisions of 2026-10-02 carried in."""
+    return dict(rev="P2", date=DATE2, revisions=[("P1", "Making sketch for the prototype build plan", DATE, "AC"),
+                                     ("P2", change, DATE2, "AC")])
 D = derived(P)
 C = build_components(P)
 ZA, ZT = D["z_anvil"], D["z_anvil_top"]
@@ -72,10 +79,11 @@ def made():
         "rod": part("Lower drive rod", C["lower_rod"].shape, COL["rod"]),
         "clamp": part("Clamp collar and wire arm", S("clamp", "clamp_screw"), COL["clamp"]),
         "anvil": part("Anvil", C["anvil"].shape, COL["anvil"]),
-        "hammer": part("Drop hammer with its magnets", S("hammer", "magnets"), COL["hammer"]),
+        "hammer": part("Drop hammer with its magnets and label", S("hammer", "magnets", "label"), COL["hammer"]),
         "upper": part("Upper rod", C["upper_rod"].shape, COL["upper"]),
         "stop": part("Stop collar and roll pin", S("stop", "pin"), COL["stop"]),
-        "tube": part("T-handle, level seat and level", S("tube", "seat", "level"), COL["tube"]),
+        "tube": part("T-handle with grips, level seat and level", S("tube", "grips", "seat", "level"), COL["tube"]),
+        "cap": part("End cap for the upper rod's stud", end_cap(P), "#475569"),
         "pad": part("Sensor pad, isolator and band", S("pad", "isolator", "band"), COL["pad"]),
         "plate": part("Reference plate", C["plate"].shape, COL["plate"]),
         "housing": part("Reel housing and lid", S("reel_body", "reel_lid", "eyelet", "lid_screws"), COL["body"]),
@@ -111,6 +119,7 @@ def overview():
         "upper": place(flat(M["upper"].shape), 0, 600),
         "stop": place(M["stop"].shape, 880, 600),
         "tube": place(M["tube"].shape, 1010, 520),
+        "cap": place(M["cap"].shape, 880, 680),
         "pad": place(M["pad"].shape, 640, 420),
         "plate": place(M["plate"].shape, 0, 130),
         "housing": place(M["housing"].shape, 400, 180),
@@ -120,7 +129,7 @@ def overview():
         "rcable": place(M["rcable"].shape, 950, 160),
         "cable": place(flat(cable), 0, -200),
     }
-    order = ["cone", "rod", "clamp", "anvil", "hammer", "upper", "stop", "tube", "pad", "plate", "housing", "reel",
+    order = ["cone", "rod", "clamp", "anvil", "hammer", "upper", "stop", "tube", "cap", "pad", "plate", "housing", "reel",
              "wire", "logger", "rcable", "cable"]
     parts = [part(M[k].name, lay_out[k], M[k].color) for k in order]
     parts[-1] = part("Coiled sensor cable (shown straight)", lay_out["cable"], "#1F2937")
@@ -139,7 +148,7 @@ def broken(shape_flat, keep=110.0, gap=24.0):
     return Compound(children=[a, b]), bb.size.X
 
 
-def rod_sheet(part_, neighbours, flat_shape, dwg_no, title, material, notes, inset_view=(15, -58)):
+def rod_sheet(part_, neighbours, flat_shape, dwg_no, title, material, notes, inset_view=(15, -58), change=None):
     """component_sheet for a long rod: broken views at a readable scale, true length written on."""
     import shutil
     from drawing import Sheet, project_views, _t, INK
@@ -147,9 +156,9 @@ def rod_sheet(part_, neighbours, flat_shape, dwg_no, title, material, notes, ins
     work = DWG / f"_{dwg_no}_views"
     views = project_views(view, work)
     inset = bv.where_it_goes(part_, neighbours, work / "where.png", elev=inset_view[0], azim=inset_view[1])
-    s = Sheet(project="ConePro", title=title, dwg_no=dwg_no, rev="P1", author="Amish Chadha", date=DATE,
-              concept="BUILD PLAN SKETCH, PLAN NOT YET BUILT", scale=None, material=material,
-              revisions=[("P1", "Making sketch for the prototype build plan", DATE, "AC")])
+    rv = rev2(change) if change else dict(rev="P1", date=DATE, revisions=[("P1", "Making sketch for the prototype build plan", DATE, "AC")])
+    s = Sheet(project="ConePro", title=title, dwg_no=dwg_no, author="Amish Chadha",
+              concept="BUILD PLAN SKETCH, PLAN NOT YET BUILT", scale=None, material=material, **rv)
     s.add_ortho(views, ["front", "top", "right"], dims=False)
     s._layers.append(_t(30, 60, f"Broken view: the middle of the rod is left out. True length {L:,.0f} mm overall.",
                         3.0, 600, INK, "start"))
@@ -189,12 +198,15 @@ def sheets(only=None):
                "  biases the DCP index. Leave a sharp point, no flat.",
                "Top face: drill 10.2 mm 16 deep, tap M12 x 1.75 to 14 mm deep, and",
                "  face it square to the axis: the rod shoulder bears on this face.",
+               "Spanner flats: mill two flats 17 mm across on the top 10 mm of the",
+               "  body, leaving the bottom 2 mm and the 20 mm base edge round.",
                "Harden after tapping (about 50 HRC); run a tap through after.",
                "Fit: screws onto the M12 stud on the bottom of the lower rod with",
-               "  medium thread locker; the rod shoulder seats on the top face.",
+               "  no thread locker; tighten with a 17 mm spanner on the cone and",
+               "  a 13 mm spanner on the rod flats until the shoulder seats.",
                "Check: 20.0 mm across the body; 60 degrees with a gauge; the",
                "  rod shoulder sits flat on the top face with no gap."],
-        inset_view=(15, -58), **base))
+        inset_view=(15, -58), **dict(base, **rev2("17 mm spanner flats; no thread locker"))))
 
     # 102 lower drive rod, laid flat
     out.append(rod_sheet(
@@ -206,6 +218,8 @@ def sheets(only=None):
                "Bottom end: turn an M12 x 1.75 stud 12 mm long (12.0 mm diameter)",
                "  and cut the thread; leave a square, flat 16 mm shoulder.",
                "Top end: turn an M12 stud 20 mm long the same way.",
+               "Spanner flats: mill two flats 13 mm across, 20 mm long, starting",
+               "  8 mm above the bottom shoulder.",
                "The shoulders are 1,000 mm apart. Both shoulders carry every",
                "  blow, so face them square and break the edge 0.5 mm.",
                "Engrave a ring every 10 mm, deeper every 100 mm, measured up from",
@@ -214,7 +228,8 @@ def sheets(only=None):
                "Fit: the cone screws on the bottom stud, the anvil on the top",
                "  stud; the clamp collar slides on from the top before the anvil.",
                "Check: straight within 1 mm over its length when rolled on a",
-               "  flat bench; both studs take an M12 nut by hand."]))
+               "  flat bench; both studs take an M12 nut by hand."],
+        change="13 mm spanner flats near the bottom shoulder"))
 
     # 103 clamp and wire arm, flat in XY
     clamp = Rot(0, 0, -D["arm_ang"]) * Pos(0, 0, -(ZA - P["collar_h"])) * C["clamp"].shape
@@ -248,14 +263,16 @@ def sheets(only=None):
                "  parallel within 0.1 mm. Chamfer the outer edges 1 mm.",
                "Both end faces: centre drill, drill 10.2 mm 27 mm deep and tap",
                "  M12 x 1.75 to 24 mm deep. The two holes do not meet.",
+               "Spanner flats: mill two flats 55 mm across, 17 mm long, starting",
+               "  3 mm above the bottom face, below the sensor pad.",
                "The top face takes every hammer blow: leave it flat and smooth.",
-               "Fit: the lower rod's top stud screws into the bottom hole and the",
-               "  upper rod's stud into the top hole, each to its shoulder, with",
-               "  medium thread locker. The clamp collar butts the bottom face;",
+               "Fit: both rod studs screw in to their shoulders with no thread",
+               "  locker, tightened with a 55 mm spanner on the anvil and the",
+               "  rod flats or T-handle. The clamp collar butts the bottom face;",
                "  the sensor pad and band clamp onto its side.",
                "Check: both rods seat on their shoulders with no rock; the anvil",
                "  spins true on the rod within 0.2 mm."],
-        inset_view=(15, -58), **base))
+        inset_view=(15, -58), **dict(base, **rev2("55 mm spanner flats; no thread locker"))))
 
     # 105 hammer
     out.append(bv.component_sheet(
@@ -267,16 +284,19 @@ def sheets(only=None):
                "Lower face: 16 pockets 8.2 mm diameter, 5 mm deep, equally spaced",
                "  (22.5 degrees) on an 82 mm circle, all outside the 64 mm area",
                "  that strikes the anvil.",
-               "Weigh, then face the top end down to 8.00 kg, within 10 g",
-               "  (about 136.5 mm long).",
+               f"Grip grooves: turn {P['groove_n']} grooves {P['groove_w']:.0f} mm wide and {P['groove_d']:.0f} mm deep,",
+               f"  {P['groove_pitch']:.0f} mm apart, centred on the middle of the length.",
+               "Weigh, then face the top end down to 8.00 kg, within 10 g.",
+               f"  The length is set at machining (about {D['hammer_L']:.1f} mm).",
                "Bond a 8 x 4 mm N42 magnet in each pocket with epoxy, 0.5 mm",
                "  below the face, every one with the same pole facing down.",
-               "Paint or oil the outside; keep the strike face bare.",
+               "Paint or oil the outside; keep the strike face bare. Stick the",
+               "  \"fit the end cap\" label above the grooves.",
                "Fit: slides on the upper rod (3 mm clearance all round) and",
                "  falls 575 mm onto the anvil.",
                "Check: 8.00 kg; slides freely the length of a 16 mm rod; no",
                "  magnet stands proud of the face."],
-        inset_view=(20, -58), **base))
+        inset_view=(20, -58), **dict(base, **rev2("Grip grooves; length set to keep 8.00 kg; label"))))
 
     # 106 upper rod, laid flat
     out.append(rod_sheet(
@@ -284,19 +304,21 @@ def sheets(only=None):
         flat_shape=flat(C["upper_rod"].shape, ZT - P["stud_anvil"]),
         dwg_no="CNP-DWG-106", title="ConePro upper rod (hammer guide): making sketch",
         material="16 mm 4140 class steel rod, ground or bright",
-        notes=["Cut 796 mm of 16 mm rod; face both ends square.",
+        notes=[f"Cut {D['upper_L'] + P['stud_anvil']:.0f} mm of 16 mm rod; face both ends square.",
                "Bottom end: turn an M12 x 1.75 stud 20 mm long with a square",
                "  shoulder. The shoulder is the anvil top: measure from it.",
-               "The rod above the shoulder is 776.5 mm; its top end ends",
+               f"The rod above the shoulder is {D['upper_L']:.1f} mm; its top end ends",
                "  flush with the top of the T-handle tube.",
                "Smooth the rod between the shoulder and 715 mm: the hammer",
                "  slides on it.",
-               "The 6 mm roll pin hole, 720.5 mm above the shoulder, is drilled",
+               f"The 6 mm roll pin hole, {D['upper_free'] + P['stop_h'] / 2:.1f} mm above the shoulder, is drilled",
                "  through the rod and the stop collar together (DWG-107).",
-               "Fit: the hammer goes on from the bottom end; then the stud",
-               "  screws into the anvil with medium thread locker.",
+               "Fit: the hammer goes on from the bottom end and the end cap",
+               "  screws on the stud; take it off to screw the stud into the",
+               "  anvil with no thread locker, turned by the T-handle.",
                "Check: straight within 0.5 mm; the hammer slides its whole",
-               "  length without sticking."]))
+               "  length without sticking."],
+        change="Lengths for the grooved hammer; end cap; no thread locker"))
 
     # 107 stop collar
     out.append(bv.component_sheet(
@@ -306,26 +328,25 @@ def sheets(only=None):
         notes=["Turn to 44 mm diameter x 18 mm; bore 16 mm, a close slide fit.",
                "Face both ends square; the hammer's top face hits the underside.",
                "Slide it on the upper rod from the top so its underside is",
-               "  711.5 mm above the rod shoulder. With the 136.5 mm hammer",
+               f"  {D['upper_free']:.1f} mm above the rod shoulder. With the {D['hammer_L']:.1f} mm hammer",
                "  this gives the 575 mm free drop. Set it with a rule and check",
                "  the drop with the hammer on a flat plate standing for the anvil.",
                "Clamp it there and drill 6 mm straight through collar and rod",
-               "  together, at mid-height (720.5 mm above the shoulder).",
+               f"  together, at mid-height ({D['upper_free'] + P['stop_h'] / 2:.1f} mm above the shoulder).",
                "Drive in a 6 x 40 mm spring steel roll pin; its ends sit just",
                "  inside the collar's outside surface.",
                "Check: the free drop is 575 mm, within 2 mm; the collar does not",
                "  move when the hammer is jerked up against it."],
-        inset_view=(15, -58), **base))
+        inset_view=(15, -58), **dict(base, **rev2("Heights for the grooved hammer"))))
 
     # 108 T-handle and level seat
-    tee = S("tube", "seat", "level")
+    tee = S("tube", "grips", "seat", "level")
     out.append(bv.component_sheet(
         part("T-handle and level seat", tee, COL["tube"]), nb("upper", "stop", z0=D["z_stop"] - 150, z1=D["height"] + 5),
         dwg_no="CNP-DWG-108", title="ConePro T-handle, level seat and level: making sketch",
         material="Steel tube 26 x 2.5 mm; steel disc 30 x 5 mm; bought bullseye level",
         view_shape=Rot(0, 0, 90) * Pos(0, 0, -D["z_handle"]) * tee,
-        notes=["Tube: cut 260 mm of 26 x 2.5 mm steel tube; deburr; plug the",
-               "  ends with push-in caps after painting.",
+        notes=["Tube: cut 260 mm of 26 x 2.5 mm steel tube; deburr.",
                "At mid-length drill 16 mm straight through both walls, square",
                "  to the tube, so the upper rod passes through.",
                "Seat disc: 30 mm diameter, 5 mm thick, with a 20 mm recess",
@@ -335,9 +356,11 @@ def sheets(only=None):
                "Weld the tube to the rod all round where the rod comes out, top",
                "  and bottom (or have a shop do it). Weld the disc centred on the",
                "  rod top. Paint, then bond the 20 mm bubble level in the recess.",
+               "Grips: push a closed-end rubber grip, about 33 mm across and",
+               "  100 mm long, over each tube end (soapy water helps).",
                "Check: the level reads centred when the rod hangs plumb; the",
                "  handle is square to the rod within 1 degree."],
-        inset_view=(20, -58), **base))
+        inset_view=(20, -58), **dict(base, **rev2("Rubber grips on the tube ends"))))
 
     # 109 sensor pad
     padv = C["pad"].shape
@@ -464,7 +487,7 @@ def joints():
     # 1 cone on the rod
     j(1, [part("Cone", C["cone"].shape, COL["cone"]),
           part("Lower rod with its M12 stud", zwin(C["lower_rod"].shape, 0, zr + 60), COL["rod"])],
-      "cone on the lower rod", "Cut open. The rod's M12 stud screws into the cone; the rod shoulder bears on the cone's top face",
+      "cone on the lower rod", "Cut open. The M12 stud screws into the cone, no thread locker; spanner flats on both; the shoulder bears on the cone",
       cut="+Y", elev=10, azim=-90)
     # 2 rod into anvil, clamp against the underside
     z0, z1 = ZA - 50, ZT + 10
@@ -472,7 +495,7 @@ def joints():
           part("Anvil", C["anvil"].shape, COL["anvil"]),
           part("Upper rod, bottom stud", zwin(C["upper_rod"].shape, z0, ZT + 50), COL["upper"]),
           part("Clamp collar, butting the anvil", win(C["clamp"].shape, -40, 40, -40, 40, z0, z1), COL["clamp"])],
-      "rods into the anvil, clamp collar under it", "Cut open. Each M12 stud screws in to its shoulder; the collar's top face butts the anvil",
+      "rods into the anvil, clamp collar under it", "Cut open. Each M12 stud screws in to its shoulder, no thread locker; 55 mm flats on the anvil; the collar butts it",
       cut="+Y", elev=10, azim=-90)
     # 3 hammer on the anvil, magnets above the pad
     z0 = ZT - 50
@@ -497,6 +520,7 @@ def joints():
     zh = D["z_handle"]
     j(5, [part("Upper rod", zwin(C["upper_rod"].shape, zh - 40, zh + 20), COL["upper"]),
           part("T-handle tube, welded to the rod", win(C["tube"].shape, -60, 60, -60, 60, zh - 20, zh + 20), COL["tube"]),
+          part("Rubber grip, pushed over the far tube end", win(C["grips"].shape, -60, 60, 0, 60, zh - 20, zh + 20), "#475569"),
           part("Level seat, welded on the rod top", C["seat"].shape, COL["seat"]),
           part("Bubble level, bonded", C["level"].shape, COL["level"])],
       "T-handle, rod and level", "Cut open. The rod passes through the tube, its top flush; welds where the rod meets the tube",
@@ -572,24 +596,25 @@ def steps():
     zr = D["z_rod"]
     rod_lo = short(M["rod"], 0, 260, "Lower drive rod (shown short)")
     st(1, [rod_lo], [mv(M["cone"], (0, 0, -70))], "cone onto the lower rod",
-       "Medium thread locker on the bottom stud; screw the cone on until the rod shoulder seats", elev=12, azim=-60)
+       "No thread locker; screw the cone on and tighten it with 17 and 13 mm spanners on the flats until the shoulder seats", elev=12, azim=-60)
     rod_hi = short(M["rod"], ZA - 260, ZA + 30, "Lower drive rod (shown short)")
     st(2, [rod_hi], [mv(M["clamp"], (0, 0, 140))], "clamp collar onto the lower rod",
        "Slide it on from the top end, screw slack, arm roughly toward where the reel will be", elev=20, azim=-60)
     st(3, [rod_hi, M["clamp"]], [mv(M["anvil"], (0, 0, 140))], "anvil onto the lower rod",
-       "Thread locker on the top stud; screw the anvil down to the shoulder; push the collar up against it",
+       "No thread locker; screw the anvil to the shoulder, tighten with spanners on its flats; push the collar up against it",
        elev=15, azim=-60)
     st(4, [rod_hi, M["clamp"], M["anvil"]], [mv(M["pad"], (-120, 0, 0))], "sensor pad and band onto the anvil",
        "Pad top 8 mm below the anvil top, opposite the arm; band round the anvil and over the pad, tight",
        elev=15, azim=-60, label_done=False)
     upper_set = [M["upper"], M["stop"], M["tube"]]
-    st(5, upper_set, [mv(M["hammer"], (0, 0, -260))], "hammer onto the upper rod",
-       "The rod already carries the pinned stop collar and the welded handle; slide the hammer on from the bottom end",
+    st(5, upper_set, [mv(M["hammer"], (0, 0, -260)), mv(M["cap"], (0, 0, -420))], "hammer onto the upper rod, end cap on",
+       "Slide the hammer on from the bottom end, then screw the end cap onto the stud so the hammer cannot slide off",
        elev=12, azim=-60, label_done=True)
     st(6, [short(M["rod"], ZA - 200, ZA + 30, "Lower drive rod (shown short)"), M["clamp"], M["anvil"], M["pad"]],
-       [mv(part("Hammer assembly", S("upper_rod", "stop", "pin", "tube", "seat", "level", "hammer", "magnets"), COL["hammer"]), (0, 0, 120))],
+       [mv(part("Hammer assembly", S("upper_rod", "stop", "pin", "tube", "grips", "seat", "level", "hammer", "magnets", "label"), COL["hammer"]), (0, 0, 120)),
+        mv(part("End cap, taken off and kept", M["cap"].shape, "#475569"), (150, 0, 60))],
        "hammer assembly into the anvil",
-       "Hold the hammer up; thread locker on the stud; screw the upper rod into the anvil to its shoulder",
+       "Hold the hammer up; take the end cap off; no thread locker; turn the T-handle to screw the rod in to its shoulder",
        elev=10, azim=-60, label_done=False)
     st(7, [part("Housing body", C["reel_body"].shape, "#D1D5DB")],
        [mv(part("Drum, spring motor and shaft", S("drum", "motor", "shaft", "magnet"), "#0891B2"), (0, -130, 0))],
@@ -620,7 +645,7 @@ def steps():
        context=[ground], elev=30, azim=-35, label_done=True)
     # whole instrument: hook the wire and plug the cable
     whole_done = [part(k, C[k].shape, "#D1D5DB") for k in ("cone", "lower_rod", "clamp", "clamp_screw", "anvil", "hammer", "magnets",
-                                                          "upper_rod", "stop", "pin", "tube", "seat", "level", "pad", "isolator",
+                                                          "upper_rod", "stop", "pin", "tube", "grips", "seat", "level", "label", "pad", "isolator",
                                                           "band", "plate", "reel_body", "reel_lid", "eyelet", "logger",
                                                           "logger_lid", "glands", "reel_cable", "pclips")]
     st(13, whole_done, [mv(part("Draw wire to the arm eye", thick_wire(D["reel_top"], D["arm_under"] + 25, 2.5), COL["wire"]), (0, 0, 0)),
@@ -628,6 +653,12 @@ def steps():
        "wire to the arm and cable to the logger",
        "Pull the wire up through the arm eye, spring and end stop; plug in the coiled cable. Wire drawn thick to show",
        elev=18, azim=-55, label_done=False, size=(8, 9))
+    # safety stop S6, before packing: the end cap goes on as the upper rod comes off the anvil
+    zs6 = ZT - 60
+    hold = part("Hammer assembly, off the anvil (shown short)", _fuse([zwin(C[k].shape, zs6, ZT + 260) for k in ("upper_rod", "hammer", "magnets", "label")]), COL["hammer"])
+    out.append(bv.step([hold], [mv(M["cap"], (0, 0, -60))], OUT / "packing-s6.png", "Safety stop S6: end cap on before packing",
+                       subtitle="Hold the hammer; screw the end cap onto the stud as soon as the rod is off the anvil; the hammer then rests on the cap",
+                       elev=12, azim=-60, label_done=True))
     return out
 
 

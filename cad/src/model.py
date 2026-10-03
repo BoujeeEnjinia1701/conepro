@@ -4,7 +4,7 @@ Run from the repo root:  python cad/src/model.py            exports STEP and STL
                          python cad/src/model.py --check    prints the constructability checks only
 Exports STEP and STL into cad/step and cad/stl:
     conepro-assembly.step / .stl   whole instrument set up at the start of a test
-    hammer-assembly.step / .stl    upper rod, 8 kg hammer, stop collar and T-handle (heaviest piece)
+    hammer-assembly.step / .stl    upper rod, 8 kg hammer, stop collar, T-handle and end cap, packed (heaviest piece)
     drive-train.step / .stl        cone, lower drive rod and anvil
     sensor-set.step / .stl         reference plate, draw-wire reel, clamp and arm, sensor pad, logger, cables
 
@@ -25,6 +25,10 @@ drilled, sawn, printed or bought, and every joint has a fixing:
     reel housing with walls, lid, posts, drum, shaft, spring motor and angle sensor; drum placed so
     the wire leaves it vertically under the exit eyelet; housing screwed to the plate from below;
     logger box with mounting flanges, two cable glands and a reel-to-logger cable in P-clips.
+Revised 2026-10-02 to carry Amish's decisions of that day (CNP-DEC-001): spanner flats on the lower
+rod, anvil and cone (no thread locker); a screw-on end cap for the upper rod's stud (end_cap());
+grip grooves on the hammer, its length set to keep 8.00 kg; a "fit the end cap" label on the hammer;
+33 mm rubber grips on the T-handle. The upper rod is turned by its T-handle, so it needs no flats.
 The same PARAMS feed docs/04-calcs/sizing.py (CNP-CAL-001), the drawing CNP-DWG-001
 (cad/src/sheets.py) and the build plan pictures (cad/src/build_plan_media.py).
 """
@@ -46,10 +50,18 @@ PARAMS = {
     "anvil_d": 64.0, "anvil_h": 60.0,
     "hammer_mass": 8.0,              # kg; hammer length is derived from it
     "hammer_od": 100.0, "hammer_id": 22.0,
+    "groove_n": 3, "groove_w": 6.0, "groove_d": 2.0, "groove_pitch": 14.0,   # hammer grip grooves (decided 2026-10-02)
+    "label": (25.0, 50.0, 0.2),      # hammer label: height, arc length, thickness ("fit the end cap", decided 2026-10-02)
     "n_mag": 16, "mag_d": 8.0, "mag_t": 4.0, "mag_r": 41.0, "mag_recess": 0.5,
     "drop": 575.0,                   # free drop, anvil top to hammer lower face at the stop
     "stop_d": 44.0, "stop_h": 18.0, "pin_d": 6.0,
     "handle_w": 260.0, "handle_tube": (26.0, 2.5), "handle_stem": 34.0,
+    "grip": (33.0, 100.0, 3.0),      # rubber grips: OD, length over the closed end, end thickness (decided 2026-10-02)
+    "end_cap": (32.0, 24.0, 21.0),   # upper rod stud end cap: OD, length, tapped depth (CNP-DDR-004, A1)
+    # spanner flats (no thread locker, decided 2026-10-02): across flats, length
+    "flats_rod": (13.0, 20.0), "flats_rod_z": 8.0,     # lower rod, 8 mm above its bottom shoulder
+    "flats_anvil": (55.0, 17.0), "flats_anvil_z": 3.0,  # anvil, 3 mm above its bottom face
+    "flats_cone": (17.0, 10.0),                         # cone shoulder, top 10 mm
     "seat": (30.0, 5.0), "level": (20.0, 6.0), "level_recess": 3.0,
     # sensor set (decisions D1, D3, D4, D6, D7 in CNP-DDR-001; plate and clamp lightened per CNP-DDR-002)
     "plate": 300.0, "plate_t": 6.0, "plate_hole": 60.0, "slot_w": 60.0,
@@ -80,6 +92,8 @@ def derived(p=PARAMS):
     # magnet pockets remove steel; the magnets are counted at steel density, so add back the glue gaps
     rm = p["mag_d"] / 2
     void = p["n_mag"] * math.pi * ((rm + 0.1) ** 2 * (p["mag_t"] + p["mag_recess"] + 0.5) - rm ** 2 * p["mag_t"])
+    ro = p["hammer_od"] / 2
+    void += p["groove_n"] * math.pi * (ro ** 2 - (ro - p["groove_d"]) ** 2) * p["groove_w"]   # grip grooves
     d["hammer_L"] = (p["hammer_mass"] / STEEL + void) / ring
     d["upper_free"] = d["hammer_L"] + p["drop"]          # anvil top to stop underside
     d["z_stop"] = d["z_anvil_top"] + d["upper_free"]
@@ -89,6 +103,8 @@ def derived(p=PARAMS):
     d["upper_L"] = d["z_rod_top"] - d["z_anvil_top"]    # rod length above the anvil (stud extra)
     d["height"] = d["z_rod_top"] + p["seat"][1] - p["level_recess"] + p["level"][1]
     d["drop_check"] = d["z_stop"] - d["z_anvil_top"] - d["hammer_L"]
+    d["groove_z"] = [d["hammer_L"] / 2 + (k - (p["groove_n"] - 1) / 2) * p["groove_pitch"] for k in range(p["groove_n"])]
+    d["label_z"] = d["hammer_L"] - 8.0 - p["label"][0] / 2   # label centre above the hammer's lower face
     d["collar_top"] = d["z_anvil"] - p["collar_gap"]
     d["arm_under"] = d["collar_top"] - p["arm_section"][1]
     d["reel_top"] = p["plate_t"] + p["reel_box"][2]
@@ -157,14 +173,24 @@ def build_components(p=PARAMS):
     def add(key, name, shape, bom, color):
         C[key] = Comp(name, shape, bom, color)
 
+    def flats(af, z0, L, r):
+        """Two parallel spanner flats, af across, facing +X and -X, from z0 for L."""
+        big = 2 * r + 4
+        return (Pos(af / 2 + big / 2, 0, z0) * Box(big, big, L, align=BASE)
+                + Pos(-af / 2 - big / 2, 0, z0) * Box(big, big, L, align=BASE))
+
     # ------------------------------------------------------------ drive train
     zr, za, zt = D["z_rod"], D["z_anvil"], D["z_anvil_top"]
     cone = Cone(0.4, p["cone_d"] / 2, D["cone_h"], align=BASE) + cyl(p["cone_d"] / 2, p["cone_shoulder"], D["cone_h"])
     cone -= cyl(rs, p["tap_cone"] + 1, zr - p["tap_cone"])
+    fc, lc = p["flats_cone"]
+    cone -= flats(fc, zr - lc, lc + 1, p["cone_d"] / 2)
     add("cone", "Hardened cone, 20 mm, 60 degree", cone, 1, "#B45309")
     rod = cyl(rr, p["lower_rod_L"], zr) + cyl(rs, p["stud_cone"], zr - p["stud_cone"]) + cyl(rs, p["stud_anvil"], za)
+    rod -= flats(p["flats_rod"][0], zr + p["flats_rod_z"], p["flats_rod"][1], rr)
     add("lower_rod", "Lower drive rod, 16 mm x 1,000 mm", rod, 2, "#6B7280")
     anvil = cyl(p["anvil_d"] / 2, p["anvil_h"], za) - cyl(rs, p["tap_anvil"] + 1, za - 1) - cyl(rs, p["tap_anvil"] + 1, zt - p["tap_anvil"])
+    anvil -= flats(p["flats_anvil"][0], za + p["flats_anvil_z"], p["flats_anvil"][1], p["anvil_d"] / 2)
     add("anvil", "Anvil and coupler", anvil, 3, "#374151")
 
     # ------------------------------------------------------------ hammer with its magnets
@@ -177,7 +203,16 @@ def build_components(p=PARAMS):
         hammer -= cyl(p["mag_d"] / 2 + 0.1, p["mag_t"] + p["mag_recess"] + 0.5, zt - 1 + 1, x, y)
         m = cyl(p["mag_d"] / 2, p["mag_t"], zt + p["mag_recess"], x, y)
         mags = m if mags is None else mags + m
+    ro = p["hammer_od"] / 2
+    for gz_ in D["groove_z"]:            # grip grooves, square, turned
+        hammer -= cyl(ro + 1, p["groove_w"], zt + gz_ - p["groove_w"] / 2) - cyl(ro - p["groove_d"], p["groove_w"] + 2, zt + gz_ - p["groove_w"] / 2 - 1)
     add("hammer", "Drop hammer, 8 kg", hammer, 4, "#0F766E")
+    lh, la, lt = p["label"]
+    half = math.degrees(la / 2 / ro)
+    sector = Pos(0, 0, zt + D["label_z"] - lh / 2) * Box(ro + 10, 2 * (ro + 10) * math.sin(math.radians(half)), lh,
+                                                      align=(Align.MIN, Align.CENTER, Align.MIN))
+    label = (cyl(ro + lt, lh, zt + D["label_z"] - lh / 2) - cyl(ro, lh + 2, zt + D["label_z"] - lh / 2 - 1)) & (Rot(0, 0, -90) * sector)
+    add("label", "Hammer label, fit the end cap", label, 14, "#F4F4F2")
     add("magnets", "Magnets (16), bonded in pockets", mags, 4, "#B91C1C")
 
     # ------------------------------------------------------------ upper rod, stop collar, T-handle, level
@@ -195,6 +230,14 @@ def build_components(p=PARAMS):
     tube = Pos(0, 0, zh) * Rot(90, 0, 0) * (Cylinder(od / 2, p["handle_w"]) - Cylinder(od / 2 - t, p["handle_w"] + 2))
     tube -= cyl(rr, od + 4, zh - od / 2 - 2)
     add("tube", "T-handle tube", tube, 6, "#111827")
+    gd, gL, ge = p["grip"]
+    grips = None
+    for sgn in (-1, 1):                 # closed-end rubber grips pushed over the tube ends
+        y0 = p["handle_w"] / 2 + ge - gL
+        g = ycyl(gd / 2, gL, 0, y0, zh) - ycyl(od / 2, gL - ge + 1, 0, y0 - 1, zh)
+        grips_s = g if sgn > 0 else Rot(0, 0, 180) * g
+        grips = grips_s if grips is None else grips + grips_s
+    add("grips", "Rubber grips (2), 33 mm", grips, 6, "#2B2F36")
     sd, sh = p["seat"]
     seat = cyl(sd / 2, sh, ztop) - cyl(p["level"][0] / 2, p["level_recess"] + 1, ztop + sh - p["level_recess"])
     add("seat", "Level seat disc", seat, 6, "#374151")
@@ -393,9 +436,9 @@ PART_GROUPS = {
     "cone": ("Hardened cone, 20 mm, 60 degree", ["cone"], 1, "#B45309"),
     "lower_rod": ("Lower drive rod, 16 mm x 1,000 mm", ["lower_rod"], 2, "#6B7280"),
     "anvil": ("Anvil and coupler", ["anvil"], 3, "#374151"),
-    "hammer": ("Drop hammer, 8 kg", ["hammer", "magnets"], 4, "#0F766E"),
+    "hammer": ("Drop hammer, 8 kg", ["hammer", "magnets", "label"], 4, "#0F766E"),
     "upper_rod": ("Upper rod (hammer guide)", ["upper_rod"], 5, "#9CA3AF"),
-    "handle": ("Handle, top stop, bubble level", ["stop", "pin", "tube", "seat", "level"], 6, "#111827"),
+    "handle": ("Handle, top stop, grips, bubble level", ["stop", "pin", "tube", "grips", "seat", "level"], 6, "#111827"),
     "plate": ("Reference plate, slotted", ["plate"], 7, "#94A3B8"),
     "drawwire": ("Draw-wire depth sensor", ["reel_body", "reel_lid", "drum", "shaft", "motor", "magnet", "board",
                                              "eyelet", "wire", "eye_spring", "crimp", "reel_screws", "lid_screws"], 8, "#2563EB"),
@@ -405,6 +448,23 @@ PART_GROUPS = {
     "cable": ("Coiled sensor cable", ["cable"], 12, "#1F2937"),
     "reel_cable": ("Reel-to-logger cable", ["reel_cable", "pclips"], 17, "#334155"),
 }
+
+
+def end_cap(p=PARAMS):
+    """Screw-on end cap on the upper rod's M12 stud, fitted whenever the rod is off the anvil (CNP-DDR-004, A1).
+    Drawn in place on the stud: its top face seats on the rod shoulder, where the anvil top would be, so the
+    hammer rests on it exactly as it rests on the anvil."""
+    from build123d import Align, Cylinder, Pos
+    D = derived(p)
+    BASE = (Align.CENTER, Align.CENTER, Align.MIN)
+    cd, cL, ch = p["end_cap"]
+    zt = D["z_anvil_top"]
+    cap = Pos(0, 0, zt - cL) * Cylinder(cd / 2, cL, align=BASE) - Pos(0, 0, zt - ch) * Cylinder(p["stud_d"] / 2, ch + 1, align=BASE)
+    for k in range(24):                  # knurl-like flutes for a finger grip
+        import math as _m
+        a = 2 * _m.pi * k / 24
+        cap -= Pos(cd / 2 * _m.cos(a), cd / 2 * _m.sin(a), zt - cL + 3) * Cylinder(0.8, cL - 6, align=BASE)
+    return cap
 
 
 def _fuse(shapes):
@@ -531,6 +591,24 @@ def checks(p=PARAMS, C=None):
                 bad.append((a, b, v))
     rows.append(("no two parts overlap (all pairs)", sum(x[2] for x in bad), 0.0, "none",
                  not bad))
+    # spanner flats: wall left at the flats, and the flats clear of the parts round them
+    fc = p["flats_cone"][0] / 2 - 10.2 / 2           # cone: flat to the M12 tapping drill
+    rows.append(("cone wall at the spanner flats, mm", 0.0, fc, ">= 3", fc >= 3.0))
+    fa = D["pad_bot"] - (D["z_anvil"] + p["flats_anvil_z"] + p["flats_anvil"][1])
+    rows.append(("anvil flats below the pad and band, mm", 0.0, fa, ">= 1", fa >= 1.0))
+    fr = (D["z_anvil"] - p["collar_h"]) - (D["z_rod"] + p["flats_rod_z"] + p["flats_rod"][1])
+    rows.append(("lower rod flats below the clamp collar, mm", 0.0, fr, ">= 100", fr >= 100.0))
+    chk("rubber grips on the tube ends", "grips", "tube", "touch")
+    chk("rubber grips clear of the stop collar", "grips", "stop", 10.0)
+    chk("hammer label on the hammer", "label", "hammer", "touch")
+    # end cap, packed state (upper rod off the anvil)
+    cap = end_cap(p)
+    for desc, k, exp in (("end cap on the upper rod stud (packed)", "upper_rod", "touch"),
+                         ("hammer resting on the end cap (packed)", "hammer", "touch")):
+        v, g = _overlap(cap, C[k].shape), cap.distance_to(C[k].shape)
+        rows.append((desc, v, g, exp, v < 1.0 and g < 0.05))
+    ret = p["end_cap"][0] - p["hammer_id"]
+    rows.append(("end cap wider than the hammer bore, mm", 0.0, ret, ">= 8", ret >= 8.0))
     return rows, bad
 
 
@@ -548,7 +626,7 @@ def print_checks():
 
 GROUPS = {
     "conepro-assembly": None,
-    "hammer-assembly": ["hammer", "upper_rod", "handle"],
+    "hammer-assembly": ["hammer", "upper_rod", "handle", "end_cap"],
     "drive-train": ["cone", "lower_rod", "anvil"],
     "sensor-set": ["plate", "drawwire", "clamp", "pad", "logger", "cable", "reel_cable"],
 }
@@ -556,12 +634,13 @@ GROUPS = {
 
 def export(parts=None):
     from build123d import Compound, export_step, export_stl
-    parts = parts or build_parts()
+    parts = dict(parts or build_parts())
+    parts["end_cap"] = ("End cap (packed state)", end_cap(), 14, "#475569")
     out = Path(__file__).resolve().parents[1]
     (out / "step").mkdir(exist_ok=True)
     (out / "stl").mkdir(exist_ok=True)
     for name, keys in GROUPS.items():
-        shapes = [parts[k][1] for k in (keys or parts)]
+        shapes = [parts[k][1] for k in (keys or [k for k in parts if k != "end_cap"])]
         c = Compound(children=shapes)
         export_step(c, str(out / "step" / f"{name}.step"))
         export_stl(c, str(out / "stl" / f"{name}.stl"), tolerance=0.2, angular_tolerance=0.2)

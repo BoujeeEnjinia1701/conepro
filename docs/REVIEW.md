@@ -364,3 +364,62 @@ Raised when the recommendations were written (2026-10-01) and not yet acted on:
 - The value-engineering section compares the kit with both optional accessories (USD 401) against the USD 400 target; the like-for-like figure is the instrument at USD 335, USD 65 under.
 - The build plan applies medium thread locker to joints that must be undone for packing (upper rod to anvil) and for disposable cones, which conflicts with routine disassembly.
 - Renders and appearance model still show the concept clamp, handle, pad and reel position.
+
+## Session 2026-10-02: approved follow-ups carried out
+
+Amish approved on 2026-10-02 that every follow-up action from the open-decision sign-off be carried out ("APPROVED CHANGES, COMPLETE THESE"). Nothing was built or tested; TRL 4 remains on hold.
+
+### Follow-ups
+
+1. Decision 1 (model): done. Spanner flats in `cad/src/model.py`: 17 mm across on the top 10 mm of the cone shoulder (3.4 mm wall left to the tapping drill), 13 mm across and 20 mm long on the lower rod 8 mm above its bottom shoulder, 55 mm across and 17 mm long on the anvil 3 mm above its bottom face (2 mm below the sensor pad). The upper rod has no flats: it is turned by its T-handle. New checks added; 73 checks, 0 failed. STEP and STL regenerated.
+2. Decision 1 (drawings): done. CNP-DWG-001 Rev P6 (flats, no thread locker, grooves, grips, end cap in the notes); CNP-DWG-101, 102 and 104 at Rev P2 with the flats and no thread-locker note (CNP-DWG-103, the clamp, has no rod joint and is unchanged).
+3. Decision 1 (pictures): done. Joints 1 and 2 and steps 1, 3 and 6 redrawn: no thread locker, flats shown and named.
+4. Decision 2 (model): done. `end_cap()` in `cad/src/model.py` (aluminum, 32 mm diameter x 24 mm, tapped M12 21 mm deep, fluted grip); checks for the cap on the stud, the hammer resting on it and the cap 10 mm wider than the hammer bore; `hammer-assembly.step` and `.stl` now show the packed state with the cap. The hammer label is modeled (25 x 50 mm, front face, above the grooves).
+5. Decision 2 (BOM): done. Line 14 adds the end cap (about USD 4) and the label (about USD 1): USD 18 to USD 23.
+6. Decision 2 (calcs): done. End cap 0.045 kg in the packed and heaviest-piece masses (CNP-CAL-001 v0.6, [C1] to [C4]); packed hammer assembly 810 mm long.
+7. Decision 2 (pictures): done. Step 5 shows the end cap going on; a new picture, `docs/05-build-plan/packing-s6.png`, shows it at safety stop S6.
+8. Decision 5 (drawings): done. CNP-DWG-105 Rev P2: three grip grooves 6 mm wide and 2 mm deep, length set at machining to keep 8.00 kg, label position.
+9. Decision 5 (model): done. Grooves in the model; the derived hammer length grows from 136.5 mm to 138.0 mm to keep 8.00 kg, so the upper rod is 778 mm above the anvil (798 mm cut), the stop collar 713.0 mm and the pin hole 722.0 mm above the shoulder, and the instrument 1,875 mm tall. CNP-DWG-106 and 107 Rev P2 carry the new lengths.
+10. Decision 6 (BOM): done. Line 6 adds two closed-end rubber grips about 33 mm across (about USD 3 each): USD 20 to USD 26.
+11. Decision 6 (model): done. Grips (33 mm OD, 100 mm long) on the tube ends in `cad/src/model.py`, with fit checks, and ribbed grips in the appearance model; CNP-DWG-108 Rev P2 and joint 5 show them.
+12. Decision 4 (renders): not done: the photoreal renders, card and social preview are made on Amish's Mac. The appearance model is ready for it (below).
+
+### Appearance model and render scenes
+
+`cad/src/product_model.py` now builds on the constructable parts of `cad/src/model.py`: the one-piece clamp and arm, the pinned stop collar and welded T-handle with the 33 mm grips, the curved pad under its band, the reel at its constructable position (drum edge under the exit), the flanged logger with its glands, the grooved hammer with its label, the spanner flats, and the end cap lying beside the plate. The windows in the reel lid and logger lid stay render-only, as decided. Views kept: hero, exploded, detail. Scenes exported to `/home/claude/renders/conepro` (one .npz and .json per view and `conepro__jobs.json`). No photoreal images, card or social preview were made.
+
+### Key results
+
+- No requirement changed status: 9 met, 2 at risk (R2, R11), 0 not met, 4 not verifiable at TRL 3.
+- R10: carried mass 15.7 kg to 15.8 kg (grips 0.08 kg, end cap 0.04 kg); heaviest piece 9.83 kg to 9.96 kg, **only 0.04 kg under the 10 kg limit**. Any further mass on the hammer assembly breaks R10.
+- R13: value-engineering target: USD 400. Estimated cost of the constructable design: USD 346 (USD 54 under the target). The kit with both optional accessories is USD 412 (USD 12 over).
+- Small knock-on changes in CNP-CAL-001 from the heavier handle: driven mass 5.14 kg, 27.9 J at the cone, isolated pad peak about 542 g.
+
+### Documents changed
+
+- `cad/src/model.py`, `cad/src/sheets.py`, `cad/src/build_plan_media.py`, `cad/src/concept_media.py`, `cad/src/product_model.py`; `cad/step/`, `cad/stl/`
+- `cad/drawings/CNP-DWG-001` Rev P6; `CNP-DWG-101`, `102`, `104`, `105`, `106`, `107`, `108` Rev P2 (others regenerated unchanged)
+- `docs/05-build-plan/`: overview, joints 1, 2 and 5, steps 1, 3, 5, 6 and 13, new `packing-s6.png` (all pictures regenerated)
+- `media/`: hero, concept blueprint, exploded, flow, model.glb
+- `docs/04-calcs/sizing.py` and `docs/04-calcs/01-sizing.md` (CNP-CAL-001 v0.6)
+- `docs/03-requirements.md` (CNP-REQ-001 v0.8)
+- `docs/02-concept.md` (CNP-PRC-001 v0.9)
+- `docs/05-build-plan.md` (CNP-BLD-001 v0.3)
+- `docs/06-design-decisions.md` (CNP-DEC-001 v0.4)
+- `bom/bom.csv`, `bom/bom-notes.md`, `README.md` (not controlled documents)
+
+### Cross-repo actions
+
+None.
+
+### Safety
+
+The end cap and the hammer label carry decision A1 into the design; safety stop S6 now has its own picture. With no thread locker, the joint check before each test (S4) is the only guard against a joint working loose.
+
+### Recommended next step
+
+Render session on Amish's Mac from the exported scenes (hero, exploded, detail), then card and social preview.
+
+## 2026-10-02: photoreal renders redone on the constructable design
+
+Rendered with Blender Cycles on Amish's Mac from the updated appearance model; captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.

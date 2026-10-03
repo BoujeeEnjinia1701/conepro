@@ -3,7 +3,7 @@ doc_id: CNP-DEC-001
 title: ConePro design decisions register
 project: ConePro
 doc_type: Design decisions register
-version: "0.3"
+version: "0.4"
 status: Draft
 date: '2026-10-02'
 author: Amish Chadha
@@ -21,6 +21,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: Amish approved the recommendations for open decisions 1 to 7 (CNP-DDR-004 accepted with the thread-locker exception); moved to decisions made
+  - version: "0.4"
+    date: '2026-10-02'
+    author: Amish Chadha
+    change: Grips, end cap and hammer label priced in the BOM; value-engineering figures updated
 ---
 
 # ConePro design decisions register
@@ -49,11 +53,11 @@ None. All open decisions were decided on 2026-10-02.
 
 ## Value engineering
 
-Value-engineering target: USD 400 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 335 for the instrument (USD 65 under the target); the kit with both optional accessories is USD 401 (USD 1 over the target).
+Value-engineering target: USD 400 (a hypothetical control target, not a limit). Estimated cost of the constructable design: USD 346 (USD 54 under the target). This is the instrument; the kit with both optional accessories is USD 412 (USD 12 over the target).
 
-- **Main cost drivers:** the mechanical penetrometer (items 1 to 7, USD 174), sensing and logging (items 8 to 12 and 17, USD 113), and the carry bag, hardware and consumables (USD 48); the optional lever (USD 50) and extension rod (USD 16) are outside the instrument total. The design for construction added USD 16 (the reel-to-logger cable at USD 6 and USD 10 of welding, fixings and reel parts).
-- **Decided on 2026-10-02 and not yet priced:** rubber grips on the T-handle (BOM line 6, a few dollars) and the end cap for the upper rod (line 14, cents).
-- **Savings worth trying:** trim the price of an optional accessory, which would bring the full kit to the target; and re-price the sensing parts at purchase.
+- **Main cost drivers:** the mechanical penetrometer (items 1 to 7, USD 180), sensing and logging (items 8 to 12 and 17, USD 113), and the carry bag, hardware and consumables (USD 53); the optional lever (USD 50) and extension rod (USD 16) are outside the instrument total. The design for construction added USD 16 (the reel-to-logger cable at USD 6 and USD 10 of welding, fixings and reel parts).
+- **Decided on 2026-10-02 and now priced:** rubber grips on the T-handle (BOM line 6, USD 6, about USD 3 each from a hardware or tool shop) and the end cap for the upper rod with the hammer label (line 14, USD 5: a small lathe part at about USD 4 and a printed label at about USD 1).
+- **Savings worth trying:** trim the price of the optional accessories, which would bring the full kit closer to the target; and re-price the sensing parts at purchase.
 
 ## Decisions made
 

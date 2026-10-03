@@ -14,7 +14,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "cad" / "src"))
-from model import ALU, PARAMS as P, STEEL, build_parts, derived  # noqa: E402
+from model import ALU, PARAMS as P, STEEL, build_components, build_parts, derived, end_cap  # noqa: E402
+
+RUBBER = 1200e-9   # kg/mm^3, handle grips
 
 G = 9.81
 D = derived(P)
@@ -66,8 +68,9 @@ A = {
 # ---------------------------------------------------------------- A. geometry (R1)
 out("A1", f"cone base {P['cone_d']:.0f} mm, included angle {P['cone_angle']:.0f} deg, point height {D['cone_h']:.1f} mm; "
           f"rod {P['rod_d']:.0f} mm")
-parts = build_parts()
-m_hammer = parts["hammer"][1].volume * STEEL
+comps = build_components()
+parts = build_parts(comps=comps)
+m_hammer = (parts["hammer"][1].volume - comps["label"].shape.volume) * STEEL
 out("A2", f"hammer {P['hammer_od']:.0f} OD x {P['hammer_id']:.0f} bore x {D['hammer_L']:.1f} mm, model mass {m_hammer:.2f} kg")
 out("A3", f"free drop from the model: {D['drop_check']:.1f} mm; upper rod {D['upper_L']:.0f} mm; assembled height {D['height']:.0f} mm")
 req("R1", f"8.00 kg, {D['drop_check']:.0f} mm, 16 mm rod, 20 mm 60 deg cone [A1 to A3]",
@@ -80,8 +83,14 @@ dens = {"cone": STEEL, "lower_rod": STEEL, "anvil": STEEL, "hammer": STEEL, "upp
 bag = A["mass_bought"]["13 lightweight roll bag"]
 for k, rho in dens.items():
     masses[f"{parts[k][2]} {parts[k][0]}"] = parts[k][1].volume * rho
+# the grips are rubber and the label is paper, not steel (decided 2026-10-02)
+m_grips = comps["grips"].shape.volume * RUBBER
+masses["6 Handle, top stop, grips, bubble level"] += m_grips - comps["grips"].shape.volume * STEEL
+masses["4 Drop hammer, 8 kg"] = m_hammer
+m_cap = end_cap().volume * ALU
+masses["14 end cap for the upper rod, aluminum"] = m_cap
 masses.update(A["mass_bought"])
-driven = sum(parts[k][1].volume * dens[k] for k in ("cone", "lower_rod", "anvil", "upper_rod", "handle", "clamp")) \
+driven = sum(masses[f"{parts[k][2]} {parts[k][0]}"] for k in ("cone", "lower_rod", "anvil", "upper_rod", "handle", "clamp")) \
     + A["mass_bought"]["10 sensor pad and band"]
 
 # ---------------------------------------------------------------- B. blow energy
@@ -114,21 +123,23 @@ for p_mm in (2, 10, 15, 25):
 # ---------------------------------------------------------------- C. masses continued
 out("C1", "part masses, kg: " + "; ".join(f"{k} {v:.2f}" for k, v in masses.items()))
 total = sum(masses.values())
-heavy = sum(parts[k][1].volume * STEEL for k in ("hammer", "upper_rod", "handle"))
+heavy = m_hammer + masses["5 Upper rod (hammer guide)"] + masses["6 Handle, top stop, grips, bubble level"] + m_cap
 out("C2", f"instrument as carried (items 1 to 14 and 17, bag and cells included): {total:.1f} kg; without the bag {total - bag:.1f} kg")
-out("C3", f"heaviest piece, hammer captive on the upper rod with the handle: {heavy:.2f} kg; hammer alone {m_hammer:.2f} kg")
+out("C3", f"heaviest piece, hammer captive on the upper rod with the handle, grips and end cap: {heavy:.2f} kg; hammer alone {m_hammer:.2f} kg; "
+          f"rubber grips {m_grips:.3f} kg; end cap {m_cap:.3f} kg")
 long_rod = P["lower_rod_L"] + D["z_rod"]
-hammer_asm = D["height"] - D["z_anvil_top"]
-out("C4", f"longest pieces: lower rod with cone {long_rod:.0f} mm; hammer assembly {hammer_asm:.0f} mm; plate {P['plate']:.0f} mm; "
+hammer_asm = D["height"] - D["z_anvil_top"] + P["end_cap"][1]   # packed, with the end cap on the stud
+out("C4", f"longest pieces: lower rod with cone {long_rod:.0f} mm; hammer assembly with its end cap {hammer_asm:.0f} mm; plate {P['plate']:.0f} mm; "
           f"bag about 1,080 mm")
 out("C5", f"optional extraction lever {A['extractor_kg']:.1f} kg, carried separately; kit with lever {total + A['extractor_kg']:.1f} kg")
 clamp_st = parts["clamp"][1].volume * STEEL
 plate8 = masses["7 Reference plate, slotted"] * 8.0 / P["plate_t"]
-before = total + (0.80 - bag) + (clamp_st - masses["9 Anvil clamp and wire arm, aluminum"]) \
+base = total - m_grips - m_cap      # DDR-002 comparison on the design before the 2026-10-02 additions
+before = base + (0.80 - bag) + (clamp_st - masses["9 Anvil clamp and wire arm, aluminum"]) \
     + (plate8 - masses["7 Reference plate, slotted"])
 out("C6", f"DDR-002 mass savings: 0.40 kg bag (was 0.80), aluminum clamp and arm "
           f"{masses['9 Anvil clamp and wire arm, aluminum']:.2f} kg (steel {clamp_st:.2f}), 6 mm plate "
-          f"{masses['7 Reference plate, slotted']:.2f} kg (8 mm {plate8:.2f}); carried mass {before:.1f} kg before, {total:.1f} kg after")
+          f"{masses['7 Reference plate, slotted']:.2f} kg (8 mm {plate8:.2f}); carried mass {before:.1f} kg before, {base:.1f} kg after (before the grips and end cap of 2026-10-02)")
 ext_rod = math.pi / 4 * P["rod_d"] ** 2 * A["ext_rod_L"] * STEEL
 out("C7", f"optional {A['ext_rod_L']:.0f} mm extension rod {ext_rod:.2f} kg, carried separately with the lever (DDR-002); "
           f"instrument plus both accessories {total + ext_rod + A['extractor_kg']:.1f} kg")

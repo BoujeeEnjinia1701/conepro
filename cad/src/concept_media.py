@@ -78,12 +78,12 @@ if __name__ == "__main__":
                      "About 45 J per blow; 16 mm rod, 20 mm 60 deg cone",
                      "About 28 J at the cone (estimate, CNP-CAL-001)",
                      "Draw-wire depth: 0.05 mm resolution; 850 mm per rod",
-                     "About 15.7 kg with bag; about $335 in parts"],
+                     "About 15.8 kg with bag; about $346 in parts"],
         cut=False,
         flow={"title": "energy per blow, J (estimates)", "unit": "J",
-              "stages": [("Hammer at 575 mm", 45.1), ("At impact", 43.8), ("Into rod", 29.5),
-                         ("At cone", 28.0), ("Work on soil", 28.0)],
-              "losses": [(0, "Guide friction (3 %)", 1.4), (1, "Impact, e = 0.4 (33 %)", 14.3),
+              "stages": [("Hammer at 575 mm", 45.1), ("At impact", 43.8), ("Into rod", 29.4),
+                         ("At cone", 27.9), ("Work on soil", 27.9)],
+              "losses": [(0, "Guide friction (3 %)", 1.4), (1, "Impact, e = 0.4 (33 %)", 14.4),
                          (2, "Rod wave, side friction (5 %)", 1.5)]},
     )
     # The kit now places numbered callouts on visible pixels with leaders, so its exploded view is kept

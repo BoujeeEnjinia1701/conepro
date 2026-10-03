@@ -1,4 +1,4 @@
-"""ConePro general arrangement sheet CNP-DWG-001, Rev P5 (TRL 3).
+"""ConePro general arrangement sheet CNP-DWG-001, Rev P6 (TRL 3).
 
 Run from the repo root:  python cad/src/sheets.py
 Writes cad/drawings/CNP-DWG-001.svg, .pdf and .png from the parametric model in
@@ -89,14 +89,15 @@ def main():
     asm = Compound(children=[v[1] for v in parts.values()])
     bb = asm.bounding_box()
     views = views_of(asm, work)
-    s = Sheet(project="ConePro", title="General arrangement", dwg_no="CNP-DWG-001", rev="P5",
-              author="Amish Chadha", date="2026-09-30", scale=1 / 20, theme="technical",
+    s = Sheet(project="ConePro", title="General arrangement", dwg_no="CNP-DWG-001", rev="P6",
+              author="Amish Chadha", date="2026-10-02", scale=1 / 20, theme="technical",
               material="Steel rods, anvil, hammer; aluminum plate and clamp; parts per bom/bom.csv. PRELIMINARY, NOT FOR FABRICATION",
               revisions=[("P1", "Preliminary GA for TRL 3 (from cad/src/model.py)", DATE, "AC"),
                          ("P2", "6 mm plate, aluminum clamp, 15.7 kg (CNP-DDR-002)", DATE, "AC"),
                          ("P3", "Reel housing 72 x 60 x 72 round the 60 mm drum; stroke 928 (CNP-DDR-003)", "2026-09-27", "AC"),
                          ("P4", "Layout and labels tidied", "2026-09-30", "AC"),
-                         ("P5", "Design for construction: joints, clamp, reel, cables (CNP-DDR-004)", "2026-09-30", "AC")])
+                         ("P5", "Design for construction: joints, clamp, reel, cables (CNP-DDR-004)", "2026-09-30", "AC"),
+                         ("P6", "Spanner flats; hammer grooves; grips; end cap (2026-10-02)", "2026-10-02", "AC")])
     s.add_ortho(views, dims=False)
     k = s.scale
     c = ortho_cells(s, views)
@@ -149,7 +150,7 @@ def main():
     L += dim_h(Xd(-P["hammer_od"] / 2), Xd(P["hammer_od"] / 2), Zd(dbb.max.Z) - 3, f"{P['hammer_od']:.0f} hammer, 8.0 kg")
 
     s._layers += L
-    s.add_svg(views["iso"], 282, 44, 134, 76, label="Isometric view", sublabel="Not to scale")
+    s.add_svg(views["iso"], 282, 56, 134, 66, label="Isometric view", sublabel="Not to scale")
     s.add_notes("Main dimensions and interfaces (mm)", [
         f"ASTM D6951: {P['hammer_mass']:.1f} kg hammer, {P['drop']:.0f} drop, {P['rod_d']:.0f} rod, "
         f"{P['cone_d']:.0f} cone at {P['cone_angle']:.0f} deg",
@@ -157,10 +158,14 @@ def main():
         f"Upper rod {D['upper_L']:.0f}; stop collar {P['stop_d']:.0f} x {P['stop_h']:.0f}; T-handle {P['handle_w']:.0f} wide",
         f"Plate {P['plate']:.0f} x {P['plate']:.0f} x {P['plate_t']:.0f} Al; {P['plate_hole']:.0f} hole, {P['slot_w']:.0f} slot",
         f"Draw-wire exit at X {P['reel_xy'][0]:.0f}, Y {P['reel_xy'][1]:.0f}; {P['drum_d']:.0f} grooved drum, single layer",
-        f"One-piece aluminum clamp, {P['collar_d']:.0f} collar against the anvil underside; M12 rod joints",
+        f"One-piece aluminum clamp, {P['collar_d']:.0f} collar against the anvil underside",
+        f"M12 rod joints, no thread locker; spanner flats {P['flats_cone'][0]:.0f} A/F cone, {P['flats_rod'][0]:.0f} A/F rod, "
+        f"{P['flats_anvil'][0]:.0f} A/F anvil",
+        f"Hammer: {P['groove_n']} grip grooves; {P['grip'][0]:.0f} rubber grips on the T-handle",
+        f"End cap {P['end_cap'][0]:.0f} x {P['end_cap'][1]:.0f} on the upper rod stud whenever it is off the anvil",
         f"Sensor pad on a band clamp (50 to 80 anvils), {P['pad_gap']:.0f} below anvil top",
         f"Stroke {D['travel']:.0f}, limited by the {D['travel_by']}",
-        "About 15.7 kg with bag; heaviest piece 9.8 kg (CNP-CAL-001 v0.4)",
+        "About 15.8 kg with bag; heaviest piece 9.96 kg (CNP-CAL-001 v0.6)",
         "Third-angle; front view from -Y; ground at Z 0",
     ], x=282, y=138, width=134)
     out = s.save(ROOT / "cad" / "drawings" / "CNP-DWG-001")
