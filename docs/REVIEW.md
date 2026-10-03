@@ -423,3 +423,9 @@ Render session on Amish's Mac from the exported scenes (hero, exploded, detail),
 ## 2026-10-02: photoreal renders redone on the constructable design
 
 Rendered with Blender Cycles on Amish's Mac from the updated appearance model; captioned with `.kit/photo_caption.py`; `media/card.png` and `media/social-preview.png` regenerated with `.kit/cards.py`. Views: hero, exploded, detail. image_qc passes. Appearance deviations are those logged above as proposed, awaiting Amish.
+
+## 2026-10-03: decisions recorded
+
+Amish decided on 2026-10-03: "TIght Margins - i accept the margins". For ConePro this is the heaviest piece at 9.96 kg against the 10 kg limit of R10 (0.04 kg margin).
+
+- `docs/06-design-decisions.md` (CNP-DEC-001) and `docs/03-requirements.md` (CNP-REQ-001) updated.

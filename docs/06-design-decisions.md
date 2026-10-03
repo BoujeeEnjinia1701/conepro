@@ -3,9 +3,9 @@ doc_id: CNP-DEC-001
 title: ConePro design decisions register
 project: ConePro
 doc_type: Design decisions register
-version: "0.4"
+version: "0.5"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-03'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -25,6 +25,10 @@ revisions:
     date: '2026-10-02'
     author: Amish Chadha
     change: Grips, end cap and hammer label priced in the BOM; value-engineering figures updated
+  - version: "0.5"
+    date: '2026-10-03'
+    author: Amish Chadha
+    change: "Amish accepted the R10 heaviest piece of 9.96 kg against 10 kg on 2026-10-03; row added to decisions made"
 ---
 
 # ConePro design decisions register
@@ -77,3 +81,4 @@ Value-engineering target: USD 400 (a hypothetical control target, not a limit). 
 | 2026-10-02 | Grip grooves on the hammer accepted; the hammer length is set at machining so it still weighs 8.00 kg | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 3 |
 | 2026-10-02 | Rubber grips of about 33 mm diameter added to BOM line 6 | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 4 |
 | 2026-10-02 | The coiled cable path as drawn in the renders accepted | Amish: "i approve your recommendations for all 555 open decisions." | `docs/REVIEW.md`, 2026-09-26, item 5 |
+| 2026-10-03 | R10 heaviest piece of 9.96 kg against the 10 kg limit (0.04 kg margin) accepted | Amish: "TIght Margins - i accept the margins" | CNP-REQ-001, R10; CNP-CAL-001 v0.6; [REVIEW.md](REVIEW.md), session 2026-10-03 |

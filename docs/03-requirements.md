@@ -3,9 +3,9 @@ doc_id: CNP-REQ-001
 title: ConePro requirements
 project: ConePro
 doc_type: Requirements
-version: "0.8"
+version: "0.9"
 status: Draft
-date: '2026-10-02'
+date: '2026-10-03'
 author: Amish Chadha
 license: CERN-OHL-S-2.0
 revisions:
@@ -41,6 +41,10 @@ revisions:
   date: '2026-10-02'
   author: Amish Chadha
   change: "Status from CNP-CAL-001 v0.6 after Amish's decisions of 2026-10-02 (grips, end cap, hammer grooves, spanner flats); R10 15.8 kg, heaviest piece 9.96 kg; R13 $346; no status changes"
+- version: "0.9"
+  date: '2026-10-03'
+  author: Amish Chadha
+  change: "R10 heaviest piece margin of 0.04 kg accepted by Amish on 2026-10-03"
 ---
 
 # ConePro requirements
@@ -62,7 +66,7 @@ These requirements were checked by calculation at TRL 3 in CNP-CAL-001 v0.6 agai
 | R7 | Phone output | Live plot of depth against blows; DCP index per layer; indicative CBR from the ASTM D6951 correlations with the soil type selected; CSV export with time, location and operator notes | Not verifiable at TRL 3 (app specified, not written) | App specification review |
 | R8 | Works offline | No cell signal needed; logger stores 50 or more tests if the phone is absent or disconnects | Met (calculation): about 830 tests in 4 MB | Firmware sketch review |
 | R9 | One-person test time | Reference test, including setup and rod extraction with the optional lever (D2), in 12 min or less by one person | Met (estimate), thin: 8.1 to 11.7 min | Timed trials |
-| R10 | Portability | Total mass as carried in the bag, cells included and the optional lever and extension rod excluded, 16 kg or less; heaviest piece 10 kg or less; packed length 1.1 m or less | Met, thin: 15.8 kg (was 16.7 kg before D9); heaviest piece 9.96 kg with the grips and end cap, 0.04 kg under the limit; packed length about 1.08 m | Mass roll-up; weighing |
+| R10 | Portability | Total mass as carried in the bag, cells included and the optional lever and extension rod excluded, 16 kg or less; heaviest piece 10 kg or less; packed length 1.1 m or less | Met, thin: 15.8 kg (was 16.7 kg before D9); heaviest piece 9.96 kg with the grips and end cap, 0.04 kg under the limit (margin accepted by Amish, 2026-10-03); packed length about 1.08 m | Mass roll-up; weighing |
 | R11 | Rugged electronics | Logger, sensors and connectors IP65; operate at 0 to 45 °C; anvil-mounted parts survive 10,000 blows | **At risk:** about 1,400 to 5,500 g mean at the anvil; about 540 g on the isolated pad against 10,000 g part ratings; cable and connector fatigue not calculated | Drop-count test |
 | R12 | Battery life | 8 h or more of continuous logging on user-replaceable non-lithium cells | Met (calculation): about 40 h, about 20 h at 0 °C | Power measurement |
 | R13 | Cost | Within the $400 value-engineering target (hypothetical control target, not a limit) for one complete instrument in parts (optional lever and extension rod excluded) | Within the value-engineering target: $346, $54 under; $412 with the lever and extension rod, $12 over the target | Priced BOM (`bom/bom.csv`) |
